@@ -87,3 +87,16 @@ export const generateArticleSchema = (
     "url": "https://pianyijichang.world"
   }
 });
+
+export const generateFaqSchema = (faqs: { question: string; answer: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.answer
+    }
+  }))
+});

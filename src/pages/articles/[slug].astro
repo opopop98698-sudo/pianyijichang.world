@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AnswerBlock from '../../components/AnswerBlock.astro';
-import DecisionTree from '../../components/DecisionTree.astro';
+import IntentConversionCard from '../../components/IntentConversionCard.astro';
 import contentMapData from '../../data/content-map.json';
-import { generateBreadcrumbSchema, generateArticleSchema } from '../../lib/structured-data';
+import { generateBreadcrumbSchema, generateArticleSchema, generateFaqSchema } from '../../lib/structured-data';
+import { generateDeepContent } from '../../lib/deepseek-content-generator';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -33,8 +34,22 @@ export async function getStaticPaths() {
 const { article, cluster, topic, pillar, allClusterArticles } = Astro.props;
 
 const canonicalUrl = `/articles/${article.slug}/`;
-const pageTitle = `${article.title}｜便宜机场深度指南`;
-const pageDescription = `针对【${article.primaryIntent}】的专业解答，涵盖${article.type === 'definition' ? '标准定义与计算口径' : article.type === 'condition' ? '适用条件与限制边界' : '实操对比与落地方法'}，提供真实选购依据。`;
+const pageTitle = `${article.title}｜便宜机场深度实测指南`;
+const pageDescription = `针对【${article.primaryIntent}】的专业技术解构，涵盖底层网络协议原理、数学成本模型、四步验收操作与场景选购依据。`;
+
+// 调用 DeepSeek-R1 深度内容推理生成引擎
+const deepContent = generateDeepContent({
+  title: article.title,
+  slug: article.slug,
+  type: article.type,
+  primaryIntent: article.primaryIntent,
+  pillarId: pillar.id,
+  pillarName: pillar.name,
+  topicId: topic.id,
+  topicName: topic.name,
+  clusterId: cluster.id,
+  clusterName: cluster.name
+});
 
 const breadcrumbs = [
   { name: '首页', url: '/' },
@@ -51,29 +66,22 @@ const articleSchema = generateArticleSchema(
   "2026-10-20",
   "2026-10-20"
 );
+const faqSchema = generateFaqSchema(deepContent.faqList);
 
-// 依据文章类型生成定制化答复
 const typeLabel =
   article.type === 'definition' ? '口径/定义类（解决是什么/怎么算）' :
   article.type === 'condition' ? '条件/边界类（解决什么时候不适用/有什么限制）' :
   '对比/使用类（解决怎么用/怎么对比）';
-
-const customAnswer =
-  article.type === 'definition'
-    ? `核心回答：对于【${article.title.replace(/[？。]/g, '')}】，在标准化评测体系中必须坚持统一的量化口径。标称数据与实际到手数据存在实质差异，计算时必须剥离一切隐性附加成本与高倍率折损，以单次真实付款与单倍率基准额度作为第一度量指标。`
-    : article.type === 'condition'
-    ? `核心回答：对于【${article.title.replace(/[？。]/g, '')}】，该方案在以下特定边界条件下坚决不适用：当面临极端晚高峰骨干网拥堵、多设备高并发抢占带宽、或商户运营期不满 3 个月时，切勿盲目采用该模式。必须建立严格的止损与备份机制。`
-    : `核心回答：对于【${article.title.replace(/[？。]/g, '')}】，落地实操的核心在于：不要只看单张跑分截图，而要在相同网络环境（同运营商、同时段、同客户端）下进行多维度 A/B 对比。结合个人真实月消耗曲线，在价格与稳定性之间取得最佳平衡。`;
 ---
 
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
   canonicalUrl={canonicalUrl}
-  schema={[breadcrumbSchema, articleSchema]}
+  schema={[breadcrumbSchema, articleSchema, faqSchema]}
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- 面包屑导航 -->
+    <!-- 顶部全景面包屑导航 (第 1 层内链拓扑) -->
     <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
       <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
       <span>/</span>
@@ -84,17 +92,17 @@ const customAnswer =
       <span class="text-slate-800 font-medium truncate max-w-xs">{article.title}</span>
     </nav>
 
-    <!-- 文章头部 -->
+    <!-- 文章头部元数据 -->
     <header class="border-b border-slate-200 pb-6 mb-8">
       <div class="flex items-center gap-2 mb-3 flex-wrap">
         <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
           {typeLabel}
         </span>
         <span class="text-xs text-slate-500">
-          归属集群：{cluster.name}
+          技术集群：{cluster.name}
         </span>
         <span class="text-xs text-slate-400 font-mono">
-          核验日期：2026-10-20
+          核验基准：2026 年最新监测
         </span>
       </div>
 
@@ -102,123 +110,214 @@ const customAnswer =
         {article.title}
       </h1>
 
-      <div class="bg-slate-100 rounded-lg p-3 text-xs text-slate-700">
-        <strong class="text-slate-900">核心搜索意图 (Primary Intent)：</strong>
-        <span>{article.primaryIntent}</span>
+      <div class="bg-slate-100 rounded-xl p-3.5 text-xs text-slate-700 flex items-start gap-2 border border-slate-200">
+        <span class="font-bold text-slate-900 shrink-0">搜索意图定向：</span>
+        <span class="text-slate-600 leading-relaxed">{article.primaryIntent}</span>
       </div>
     </header>
 
-    <!-- 首屏 30 秒直接答案 (Answer-First) -->
+    <!-- 首屏 Answer-First: 30 秒核心结论直接回答 -->
     <AnswerBlock
       question={article.title}
-      answer={customAnswer}
-      highlight="坚持统一标准、严查边界限制、拒绝虚假低价"
+      answer={deepContent.executiveSummary}
+      highlight="坚持统一标准、严查真实倍率、拒绝盲目长周期预付"
     />
 
-    <!-- 三层深度展开结构 -->
-    <article class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed space-y-6 my-8">
+    <!-- 针对性场景高转化推荐卡 (AI 意图算法匹配，高转化 CTA) -->
+    <IntentConversionCard
+      title={article.title}
+      primaryIntent={article.primaryIntent}
+      pillarId={pillar.id}
+      topicId={topic.id}
+    />
+
+    <!-- DeepSeek-R1 硬核技术长文展开 -->
+    <article class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed space-y-8 my-8">
+      <!-- 模块一：底层网络工程原理与协议剖析 -->
       <section>
-        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
-          一、问题背景与核心概念界定
+        <h2 class="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+          <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+          一、问题背景与底层计算机网络工程原理
         </h2>
         <p>
-          在选择低预算代理网络或便宜机场时，用户经常在【<strong>{article.title}</strong>】这一问题上面临模糊不清的商家宣传话术。
-          很多不良商户利用专业技术术语的不对称性（如混淆 GB 与 GiB、隐瞒双向计费、用年付折算冒充月付），误导消费者做出不理性的采购决策。
+          在讨论【<strong>{article.title}</strong>】这一问题时，绝不能停留在商户表层营销文案上。
+          代理连接本质上是建立在端到端加密、传输层拥塞调度与多跳中继路由器（Hop-by-hop Router）转发之上的分布式网络应用。
+          很多不良商户利用专业术语的不对称性（例如将公网直连伪称为全专线、将单线程限速隐瞒为服务器拥堵、用年付折算冒充真月付），导致用户实际体验与期望存在巨大鸿沟。
         </p>
+        <div set:html={deepContent.deepTechnicalAnalysis} />
+      </section>
+
+      <!-- 模块二：严格量化数学模型与精算公式 (KaTeX 渲染) -->
+      <section>
+        <h2 class="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+          <span class="w-2 h-5 bg-indigo-600 rounded-full inline-block"></span>
+          二、决策量化数学模型与成本核算公式
+        </h2>
         <p>
-          本指南隶属于【<strong>{pillar.name}</strong>】栏目下的【<strong>{topic.name}</strong>】专题，立足于【<strong>{cluster.name}</strong>】的真实技术事实，旨在帮助用户厘清真相，消除知识盲区。
+          为了帮助预算有限的中文用户消除主观臆断，本站引入三项严格的量化数学模型，供您在最终购买与验收时进行测算：
+        </p>
+        <div class="space-y-4 not-prose my-6">
+          {deepContent.mathematicalModels.map((m) => (
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5">
+              <h4 class="text-sm font-bold text-slate-900 mb-2">{m.title}</h4>
+              <div class="bg-white p-3 rounded-xl border border-slate-200 text-center text-sm font-mono overflow-x-auto text-blue-900 my-2">
+                $${m.formula}$$
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed m-0 mt-2">
+                <strong>模型机理解析：</strong>{m.explanation}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 模块三：量化对照基准表 (红线标准) -->
+      <section>
+        <h2 class="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+          <span class="w-2 h-5 bg-emerald-600 rounded-full inline-block"></span>
+          三、核心量化指标质量分级与避坑基准线
+        </h2>
+        <p>
+          对照以下四维量化标准，可以迅速判断当前代理节点或所选套餐是否满足合格要求：
+        </p>
+        <div class="not-prose overflow-x-auto my-4">
+          <table class="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+            <thead class="bg-slate-900 text-white font-semibold">
+              <tr>
+                {deepContent.quantitativeMatrix.headers.map((h) => (
+                  <th class="py-2.5 px-3">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 bg-white">
+              {deepContent.quantitativeMatrix.rows.map((row, idx) => (
+                <tr class={idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}>
+                  <td class="py-2.5 px-3 font-semibold text-slate-900">{row[0]}</td>
+                  <td class="py-2.5 px-3 text-emerald-700 font-medium bg-emerald-50/40">{row[1]}</td>
+                  <td class="py-2.5 px-3 text-slate-600">{row[2]}</td>
+                  <td class="py-2.5 px-3 text-rose-700 font-semibold bg-rose-50/40">{row[3]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 模块四：科学实测与四步验收操作指南 -->
+      <section>
+        <h2 class="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+          <span class="w-2 h-5 bg-amber-600 rounded-full inline-block"></span>
+          四、科学实操实测与四步完整验收流程
+        </h2>
+        <div set:html={deepContent.practicalProtocol} />
+      </section>
+
+      <!-- 模块五：权威结论与行动建议 -->
+      <section>
+        <h2 class="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center gap-2">
+          <span class="w-2 h-5 bg-purple-600 rounded-full inline-block"></span>
+          五、本站权威裁决与决策行动准则
+        </h2>
+        <p class="leading-relaxed">
+          {deepContent.conversionVerdict}
         </p>
       </section>
 
-      <section>
-        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
-          二、专业分析维度与量化核算规范
-        </h2>
-        {article.type === 'definition' ? (
-          <div class="space-y-3">
-            <p>
-              针对指标与口径定义，本站确立以下三项铁律核算标准：
-            </p>
-            <ul class="list-disc pl-5 space-y-1">
-              <li><strong>计费周期对齐</strong>：所有单价必须按自然月（30天）实际需支付金额统一折算，拒绝将不可单月购买的年付分摊列为真月付。</li>
-              <li><strong>容量单位保持原貌</strong>：明确区分商户标称的十进制 GB 与二进制 GiB，不进行无凭据的模糊换算。</li>
-              <li><strong>倍率加权核算</strong>：将常用节点的倍率（0.5x、1.0x、2.0x）作为折损系数计入总额度，还原真实可用容量。</li>
-            </ul>
-          </div>
-        ) : article.type === 'condition' ? (
-          <div class="space-y-3">
-            <p>
-              针对适用边界与风控限制，用户在购买或使用前必须排查以下红线条件：
-            </p>
-            <ul class="list-disc pl-5 space-y-1">
-              <li><strong>网络高峰期容忍度</strong>：晚间 20:00–23:00 骨干网拥塞时，直连线路丢包率可能升高，若从事关键商务谈判坚决不适用低价直连。</li>
-              <li><strong>多设备并发封顶</strong>：部分低价套餐限制单 IP 最大连接数，当全家多设备同时在线时容易触发自动临时阻断。</li>
-              <li><strong>服务终止风险</strong>：新开业不足半年的超低价小机场，坚决不适用于预付半年以上资金。</li>
-            </ul>
-          </div>
-        ) : (
-          <div class="space-y-3">
-            <p>
-              针对实操对比与使用方法，建议按照以下五步执行落地横向评测：
-            </p>
-            <ol class="list-decimal pl-5 space-y-1">
-              <li>在相同时间窗口（如晚 21:00）分别对两组节点执行 HTTP 连通性探测。</li>
-              <li>使用浏览器下载 100MB 标准测试包，记录单线程与多线程的平稳吞吐速率。</li>
-              <li>核对本地抓包消耗与商户后台扣除量，排查有无暗中偷跑或阴阳倍率。</li>
-              <li>在移动端（4G/5G）与家庭 Wi-Fi 环境下分别测试休眠重连响应时间。</li>
-              <li>根据真实月度账单和个人使用感受，决定次月是否继续续费或迁移换站。</li>
-            </ol>
-          </div>
-        )}
-      </section>
-
-      <section>
-        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
-          三、下一步推荐选购与决策建议
-        </h2>
-        <p>
-          如果你当前正在根据【{article.title}】选择适合自己的代理服务，本站建议：
-        </p>
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-xs text-blue-900 space-y-2">
-          <p class="m-0 font-semibold">推荐行动准则：</p>
-          <p class="m-0">• 优先前往【<a href="/cheap/" class="underline font-bold text-blue-700">便宜机场清单</a>】查阅核验过的真月付 5–8 元代表品牌；</p>
-          <p class="m-0">• 若有特定多设备或 AI 使用场景，前往【<a href="/recommend/" class="underline font-bold text-blue-700">机场推荐</a>】查看独立短评与适配建议；</p>
-          <p class="m-0">• 在最终付款前，对照【<a href="/avoid/" class="underline font-bold text-blue-700">机场避坑指南</a>】进行收银台手续费与倍率自检。</p>
+      <!-- 模块六：常见高频技术 FAQ 问答 -->
+      <section class="not-prose mt-8">
+        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span>❓ 关于【{article.title}】的常见高频疑问 (FAQ)</span>
+        </h3>
+        <div class="space-y-3">
+          {deepContent.faqList.map((faq) => (
+            <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+              <h4 class="text-sm font-bold text-slate-900 m-0 mb-1.5 flex items-start gap-2">
+                <span class="text-blue-600 font-mono">Q:</span>
+                <span>{faq.question}</span>
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed m-0 pl-5">
+                {faq.answer}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
     </article>
 
-    <!-- 同集群关联文章推荐 (内链闭环) -->
-    <section class="mt-12 pt-6 border-t border-slate-200">
-      <h3 class="text-sm font-bold text-slate-900 mb-3">
-        所属集群【{cluster.name}】相关三层递进文章：
-      </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        {allClusterArticles.map((sibling: any) => (
-          <a
-            href={`/articles/${sibling.slug}/`}
-            class={`p-3 rounded-xl border text-xs transition-colors flex flex-col justify-between ${
-              sibling.slug === article.slug
-                ? 'bg-blue-50 border-blue-300 text-blue-900 font-bold'
-                : 'bg-white border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-600'
-            }`}
-          >
-            <span class="line-clamp-2 mb-2">{sibling.title}</span>
-            <span class="text-[10px] text-slate-400 font-mono">
-              {sibling.type === 'definition' ? '[口径定义]' : sibling.type === 'condition' ? '[边界限制]' : '[实操对比]'}
-            </span>
-          </a>
-        ))}
+    <!-- 全站 4 层高转化内链拓扑网络 (Internal Linking Mesh) -->
+    <div class="my-10 space-y-6 not-prose">
+      <!-- 层级 3: 同集群三层递进闭环文章 (口径定义 -> 边界限制 -> 实操对比) -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-bold text-slate-900 m-0">
+            所属集群【{cluster.name}】三层递进长尾实测：
+          </h3>
+          <span class="text-[11px] text-slate-400 font-mono">完整知识闭环</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {allClusterArticles.map((sibling: any) => (
+            <a
+              href={`/articles/${sibling.slug}/`}
+              class={`p-3.5 rounded-xl border text-xs transition-all flex flex-col justify-between ${
+                sibling.slug === article.slug
+                  ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-sm'
+                  : 'bg-white border-slate-200 text-slate-700 hover:border-blue-400 hover:shadow-sm'
+              }`}
+            >
+              <span class="line-clamp-2 mb-2 leading-snug">{sibling.title}</span>
+              <span class={`text-[10px] font-mono ${sibling.slug === article.slug ? 'text-blue-100' : 'text-slate-400'}`}>
+                {sibling.type === 'definition' ? '[1.口径与定义]' : sibling.type === 'condition' ? '[2.适用边界]' : '[3.对比与操作]'}
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
-    </section>
 
-    <!-- 底部返回链接 -->
-    <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-      <a href={`/topics/${pillar.id}/${topic.id}/`} class="text-blue-600 hover:underline">
+      <!-- 层级 4: 跨主栏目语义转化高速公路 (Semantic Highway Bridges) -->
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5">
+        <h4 class="text-xs font-bold text-blue-900 uppercase tracking-wider mb-3">
+          🚀 跨业务栏目高转化决策快速通道
+        </h4>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+          <a
+            href="/cheap/"
+            class="bg-white/80 hover:bg-white p-2.5 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
+          >
+            <span>💰 便宜机场清单</span>
+            <span class="text-[10px] text-slate-400 mt-1">查看 7-8 元真月付</span>
+          </a>
+          <a
+            href="/plans/"
+            class="bg-white/80 hover:bg-white p-2.5 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
+          >
+            <span>📦 流量套餐分档</span>
+            <span class="text-[10px] text-slate-400 mt-1">50GB - 1TB+ 全案</span>
+          </a>
+          <a
+            href="/monthly/"
+            class="bg-white/80 hover:bg-white p-2.5 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
+          >
+            <span>🔄 真月付核验库</span>
+            <span class="text-[10px] text-slate-400 mt-1">免预付绑架单月扣</span>
+          </a>
+          <a
+            href="/recommend/#speedtest-evidence-vault"
+            class="bg-white/80 hover:bg-white p-2.5 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
+          >
+            <span>⚡ 测速与解锁凭证</span>
+            <span class="text-[10px] text-slate-400 mt-1">17 家节点实测原图</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部返回与双向导航 -->
+    <div class="mt-8 pt-4 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+      <a href={`/topics/${pillar.id}/${topic.id}/`} class="text-blue-600 hover:underline flex items-center gap-1 font-medium">
         ← 返回所属【{topic.name}】二级专题
       </a>
-      <a href="/" class="hover:text-slate-800">
-        返回便宜机场首页
+      <a href="/" class="hover:text-slate-800 flex items-center gap-1">
+        返回便宜机场资料库首页 →
       </a>
     </div>
   </div>

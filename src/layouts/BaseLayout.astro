@@ -55,6 +55,11 @@ const pageSchemas = schema
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://pianyijichang.world/avatar.jpg" />
 
+    <!-- KaTeX 数学公式样式与轻量渲染器 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
     <!-- 结构化数据 JSON-LD (同源数据直出) -->
     {pageSchemas.map((s) => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />

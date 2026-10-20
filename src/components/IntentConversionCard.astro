@@ -1,0 +1,136 @@
+---
+import { matchRecommendedBrands } from '../lib/intent-recommender';
+
+interface Props {
+  title: string;
+  primaryIntent: string;
+  pillarId: string;
+  topicId?: string;
+  class?: string;
+}
+
+const { title, primaryIntent, pillarId, topicId, class: className = '' } = Astro.props;
+const matches = matchRecommendedBrands(title, primaryIntent, pillarId, topicId);
+---
+
+<aside class={`my-8 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-700/60 relative overflow-hidden not-prose ${className}`}>
+  <!-- 装饰光晕背景 -->
+  <div class="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- 头部：场景匹配标题 -->
+  <div class="relative z-10 flex flex-wrap items-center justify-between gap-3 pb-5 mb-6 border-b border-slate-700/80">
+    <div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30 mb-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        AI 意图算法严选 ｜ 真实数据匹配
+      </div>
+      <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white m-0">
+        解决该问题的落地推荐方案
+      </h3>
+    </div>
+    <span class="text-xs text-slate-400 font-mono">
+      核验更新：2026 年资料库
+    </span>
+  </div>
+
+  <!-- 匹配的品牌推荐卡片流 -->
+  <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+    {matches.map(({ brand, reason, matchedHook }) => (
+      <div class="bg-slate-800/90 hover:bg-slate-800 rounded-2xl border border-slate-700/80 p-5 flex flex-col justify-between transition-all hover:border-blue-400/50 shadow-sm">
+        <div>
+          <!-- 顶部品牌基本信息 -->
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-blue-600 text-white text-xs font-bold font-mono">
+                #{brand.rank}
+              </span>
+              <h4 class="text-base font-bold text-white m-0">
+                {brand.name}
+              </h4>
+            </div>
+            <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-400/30 font-medium">
+              {matchedHook}
+            </span>
+          </div>
+
+          <!-- 价格与起步门槛 -->
+          <div class="flex items-baseline justify-between mb-3 bg-slate-900/60 rounded-xl px-3.5 py-2 border border-slate-800">
+            <div>
+              <span class="text-[11px] text-slate-400 block">实际起步成本</span>
+              <span class="text-lg font-extrabold text-emerald-400 font-mono">{brand.priceFrom}</span>
+            </div>
+            {brand.promoCode && (
+              <div class="text-right">
+                <span class="text-[10px] text-slate-400 block">优惠码 (结算输入)</span>
+                <span class="text-xs font-mono font-bold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                  {brand.promoCode}
+                </span>
+              </div>
+            )}
+          </div>
+
+          <!-- 为什么匹配本意图 -->
+          <div class="text-xs text-slate-300 leading-relaxed mb-3.5 bg-slate-900/40 rounded-xl p-3 border border-slate-800/80">
+            <strong class="text-blue-300 block mb-1">【针对性选购理由】</strong>
+            {reason}
+          </div>
+
+          <!-- 核心硬件与协议参数 -->
+          <div class="flex flex-wrap gap-1.5 mb-4 text-[11px]">
+            {brand.lineType.map((lt: string) => (
+              <span class="px-2 py-0.5 rounded bg-slate-700/70 text-slate-200">
+                {lt}
+              </span>
+            ))}
+            {brand.protocols.map((p: string) => (
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-mono">
+                {p}
+              </span>
+            ))}
+            {brand.speedtest?.hasImage && (
+              <a
+                href={`/recommend/#brand-evidence-${brand.id}`}
+                class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800/60 font-medium hover:underline flex items-center gap-1"
+              >
+                ● 查看测速实测图
+              </a>
+            )}
+          </div>
+        </div>
+
+        <!-- 注册直达 CTA -->
+        <div class="pt-3 border-t border-slate-700/60">
+          <a
+            href={brand.registerUrl}
+            target="_blank"
+            rel="nofollow sponsored noopener"
+            class="block w-full text-center py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md hover:shadow-lg transition-all"
+          >
+            直达 {brand.name} 官网选购 →
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- 购买前 30 秒自检与合规披露 -->
+  <div class="relative z-10 bg-slate-900/70 border border-slate-700/80 rounded-2xl p-4 text-xs text-slate-400 space-y-2">
+    <div class="flex items-center gap-1.5 text-slate-200 font-semibold">
+      <span class="text-emerald-400">✓</span> 购买前 30 秒避坑自检清单：
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] text-slate-300">
+      <div class="flex items-center gap-1">
+        <span class="text-blue-400">1.</span> 优先选购月付小额试用，拒绝初次预付整年。
+      </div>
+      <div class="flex items-center gap-1">
+        <span class="text-blue-400">2.</span> 确认客户端（Clash/Sing-box）支持对应协议。
+      </div>
+      <div class="flex items-center gap-1">
+        <span class="text-blue-400">3.</span> 在晚高峰（20-23点）实测常用流媒体与 AI。
+      </div>
+    </div>
+    <p class="text-[10px] text-slate-500 text-center m-0 pt-1 border-t border-slate-800">
+      * 商业披露：含推广链接，通过链接注册可能为本站带来佣金，不影响用户支付价格与中立核验原则。
+    </p>
+  </div>
+</aside>
