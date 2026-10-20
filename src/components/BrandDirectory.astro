@@ -1,0 +1,181 @@
+---
+import brandsData from '../data/brands.json';
+import BrandCard from './BrandCard.astro';
+
+// 分组逻辑
+const primaryIds = ['gsy', 'feimao', 'weifeng', 'dalaoyun', 'wuyou', 'firefly'];
+const primaryBrands = brandsData.filter((b) => primaryIds.includes(b.id));
+
+const midTierIds = ['muguang', 'ermao', 'u1s1', 'lingmao', 'jilian', 'guangnian', 'yifan', 'sogo', 'kexin', 'sujie', 'shanyue', 'quanqiu', 'yinxingren'];
+const midTierBrands = brandsData.filter((b) => midTierIds.includes(b.id));
+
+const remainingBrands = brandsData.filter((b) => !primaryIds.includes(b.id) && !midTierIds.includes(b.id));
+---
+
+<div class="my-12">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <div class="flex items-center gap-2 mb-1">
+        <span class="w-2.5 h-6 bg-blue-600 rounded-full inline-block"></span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight m-0">
+          42 家真实品牌核验资料库概览
+        </h2>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-500 m-0">
+        所有品牌均已建档核验，按“首推高性价比”、“进阶专线中端”与“大流量品质”结构化分层呈现：
+      </p>
+    </div>
+    <span class="hidden sm:inline-block text-xs font-mono text-slate-500 bg-slate-100 px-3 py-1 rounded-lg border border-slate-200">
+      已核验 42 个品牌源
+    </span>
+  </div>
+
+  <!-- 分层 1: 核心首推与高性价比代表 (标准卡片流) -->
+  <div class="mb-10">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-600 text-white">
+          梯队 01
+        </span>
+        <h3 class="text-base font-bold text-slate-800 m-0">
+          核心首推与高性价比代表（单月 5.6 - 8 元）
+        </h3>
+      </div>
+      <span class="text-xs text-slate-400">含商业推广链接</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {primaryBrands.map((b) => (
+        <BrandCard brandId={b.id} />
+      ))}
+    </div>
+  </div>
+
+  <!-- 分层 2: 进阶专线与品质中端代表 (紧凑型卡片矩阵) -->
+  <div class="mb-10 bg-slate-50/70 border border-slate-200 rounded-2xl p-6">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white">
+          梯队 02
+        </span>
+        <h3 class="text-base font-bold text-slate-800 m-0">
+          进阶中端与专线品牌（14 - 25 元/月）
+        </h3>
+      </div>
+      <span class="text-xs text-slate-400">兼顾大流量与多节点地区</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {midTierBrands.map((b) => (
+        <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:border-indigo-300 hover:shadow transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-1.5">
+                <span class="text-[11px] font-mono text-slate-400 font-bold">#{b.rank}</span>
+                <h4 class="text-sm font-bold text-slate-900 m-0">{b.name}</h4>
+              </div>
+              <span class="text-xs font-mono font-extrabold text-blue-600">{b.priceFrom}</span>
+            </div>
+
+            <div class="flex flex-wrap gap-1 mb-2.5">
+              {b.lineType.map((lt) => (
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
+                  {lt}
+                </span>
+              ))}
+              {b.protocols.map((p) => (
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100 font-mono">
+                  {p}
+                </span>
+              ))}
+            </div>
+
+            <ul class="text-[11px] text-slate-500 space-y-0.5 list-disc list-inside mb-3">
+              {b.highlights.map((hl) => (
+                <li class="truncate">品牌资料显示：{hl}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[10px] text-slate-400">
+              {b.promoCode ? `券码: ${b.promoCode}` : "无优惠码"}
+            </span>
+            <a
+              href={b.registerUrl}
+              target="_blank"
+              rel="nofollow sponsored noopener"
+              class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-blue-600 text-white text-[11px] font-semibold transition-colors"
+            >
+              访问官网 →
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- 分层 3: 大流量、不限时与商务高端代表 (结构化横评表) -->
+  <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded text-xs font-bold bg-slate-800 text-white">
+          梯队 03
+        </span>
+        <h3 class="text-base font-bold text-slate-800 m-0">
+          大流量、不限时套餐与商务品牌（季付/年付/按量包）
+        </h3>
+      </div>
+      <span class="text-xs text-slate-400">左右滑动查看完整信息</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs text-slate-600 border-collapse min-w-[650px]">
+        <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+          <tr>
+            <th class="py-2.5 px-3">序号</th>
+            <th class="py-2.5 px-3">品牌名称</th>
+            <th class="py-2.5 px-3">起步付款</th>
+            <th class="py-2.5 px-3">物理线路</th>
+            <th class="py-2.5 px-3">支持协议</th>
+            <th class="py-2.5 px-3">宣称亮点 (品牌资料显示)</th>
+            <th class="py-2.5 px-3 text-right">商户链接</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {remainingBrands.map((b) => (
+            <tr class="hover:bg-slate-50 transition-colors">
+              <td class="py-2.5 px-3 font-mono text-slate-400 font-bold">#{b.rank}</td>
+              <td class="py-2.5 px-3 font-semibold text-slate-900">{b.name}</td>
+              <td class="py-2.5 px-3 font-mono font-bold text-blue-600">{b.priceFrom}</td>
+              <td class="py-2.5 px-3">
+                <span class="px-1.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-600">
+                  {b.lineType.join(' / ')}
+                </span>
+              </td>
+              <td class="py-2.5 px-3 font-mono text-slate-500">{b.protocols.join(', ')}</td>
+              <td class="py-2.5 px-3 text-slate-500 truncate max-w-xs">{b.highlights.join('；')}</td>
+              <td class="py-2.5 px-3 text-right">
+                {b.registerUrl !== '#' ? (
+                  <a
+                    href={b.registerUrl}
+                    target="_blank"
+                    rel="nofollow sponsored noopener"
+                    class="inline-block px-2 py-1 rounded bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white transition-colors text-[11px] font-semibold"
+                  >
+                    注册 →
+                  </a>
+                ) : (
+                  <span class="text-[10px] text-slate-400">待镜像更新</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="text-[11px] text-slate-400 mt-3 m-0">
+      * 商业披露声明：含推广链接，通过链接注册可能为本站带来佣金，不影响用户支付价格。未知字段已做诚实缺口标记。
+    </p>
+  </div>
+</div>

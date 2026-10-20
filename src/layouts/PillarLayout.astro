@@ -72,8 +72,8 @@ const collectionSchema = generateCollectionPageSchema(
       </p>
     </div>
 
-    <!-- 首屏推荐品牌网格 (真实品牌卡片) -->
-    {frontmatter.brandRefs && frontmatter.brandRefs.length > 0 && (
+    <!-- 首屏推荐品牌网格 (其他栏目展示；首页由专门的 BrandDirectory 结构化呈现) -->
+    {frontmatter.id !== 'page-home' && frontmatter.brandRefs && frontmatter.brandRefs.length > 0 && (
       <section class="mb-10" aria-label="相关代表品牌推荐">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">

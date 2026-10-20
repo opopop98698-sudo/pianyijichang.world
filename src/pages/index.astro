@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import PillarLayout from '../layouts/PillarLayout.astro';
+import NavigationGrid from '../components/NavigationGrid.astro';
+import BrandDirectory from '../components/BrandDirectory.astro';
 
 const allPages = await getCollection('pages');
 const page = allPages.find((p) => p.slug === 'home' || p.data.id === 'page-home');
@@ -12,5 +14,12 @@ const { Content } = await page.render();
 ---
 
 <PillarLayout frontmatter={page.data}>
+  <!-- 八大核心选购路径交互式卡片网格 (替代旧版黑底终端与文本块) -->
+  <NavigationGrid />
+
+  <!-- 42 家真实品牌阶梯化全景资料库 (替代旧版纯文本列表) -->
+  <BrandDirectory />
+
+  <!-- 深度分析与核验规范正文 -->
   <Content />
 </PillarLayout>
