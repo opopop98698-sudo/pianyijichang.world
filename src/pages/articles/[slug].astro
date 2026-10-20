@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AnswerBlock from '../../components/AnswerBlock.astro';
+import DecisionTree from '../../components/DecisionTree.astro';
+import contentMapData from '../../data/content-map.json';
+import { generateBreadcrumbSchema, generateArticleSchema } from '../../lib/structured-data';
+
+export async function getStaticPaths() {
+  const paths = [];
+  for (const pillar of contentMapData) {
+    for (const topic of pillar.topics) {
+      for (const cluster of topic.clusters) {
+        for (const article of cluster.articles) {
+          paths.push({
+            params: {
+              slug: article.slug
+            },
+            props: {
+              article,
+              cluster,
+              topic,
+              pillar,
+              allClusterArticles: cluster.articles
+            }
+          });
+        }
+      }
+    }
+  }
+  return paths;
+}
+
+const { article, cluster, topic, pillar, allClusterArticles } = Astro.props;
+
+const canonicalUrl = `/articles/${article.slug}/`;
+const pageTitle = `${article.title}｜便宜机场深度指南`;
+const pageDescription = `针对【${article.primaryIntent}】的专业解答，涵盖${article.type === 'definition' ? '标准定义与计算口径' : article.type === 'condition' ? '适用条件与限制边界' : '实操对比与落地方法'}，提供真实选购依据。`;
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: pillar.name, url: `/${pillar.id}/` },
+  { name: topic.name, url: `/topics/${pillar.id}/${topic.id}/` },
+  { name: article.title, url: canonicalUrl }
+];
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+const articleSchema = generateArticleSchema(
+  article.title,
+  pageDescription,
+  canonicalUrl,
+  "2026-10-20",
+  "2026-10-20"
+);
+
+// 依据文章类型生成定制化答复
+const typeLabel =
+  article.type === 'definition' ? '口径/定义类（解决是什么/怎么算）' :
+  article.type === 'condition' ? '条件/边界类（解决什么时候不适用/有什么限制）' :
+  '对比/使用类（解决怎么用/怎么对比）';
+
+const customAnswer =
+  article.type === 'definition'
+    ? `核心回答：对于【${article.title.replace(/[？。]/g, '')}】，在标准化评测体系中必须坚持统一的量化口径。标称数据与实际到手数据存在实质差异，计算时必须剥离一切隐性附加成本与高倍率折损，以单次真实付款与单倍率基准额度作为第一度量指标。`
+    : article.type === 'condition'
+    ? `核心回答：对于【${article.title.replace(/[？。]/g, '')}】，该方案在以下特定边界条件下坚决不适用：当面临极端晚高峰骨干网拥堵、多设备高并发抢占带宽、或商户运营期不满 3 个月时，切勿盲目采用该模式。必须建立严格的止损与备份机制。`
+    : `核心回答：对于【${article.title.replace(/[？。]/g, '')}】，落地实操的核心在于：不要只看单张跑分截图，而要在相同网络环境（同运营商、同时段、同客户端）下进行多维度 A/B 对比。结合个人真实月消耗曲线，在价格与稳定性之间取得最佳平衡。`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  schema={[breadcrumbSchema, articleSchema]}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 面包屑导航 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <a href={`/${pillar.id}/`} class="hover:text-blue-600 transition-colors">{pillar.name}</a>
+      <span>/</span>
+      <a href={`/topics/${pillar.id}/${topic.id}/`} class="hover:text-blue-600 transition-colors">{topic.name}</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium truncate max-w-xs">{article.title}</span>
+    </nav>
+
+    <!-- 文章头部 -->
+    <header class="border-b border-slate-200 pb-6 mb-8">
+      <div class="flex items-center gap-2 mb-3 flex-wrap">
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+          {typeLabel}
+        </span>
+        <span class="text-xs text-slate-500">
+          归属集群：{cluster.name}
+        </span>
+        <span class="text-xs text-slate-400 font-mono">
+          核验日期：2026-10-20
+        </span>
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug mb-3">
+        {article.title}
+      </h1>
+
+      <div class="bg-slate-100 rounded-lg p-3 text-xs text-slate-700">
+        <strong class="text-slate-900">核心搜索意图 (Primary Intent)：</strong>
+        <span>{article.primaryIntent}</span>
+      </div>
+    </header>
+
+    <!-- 首屏 30 秒直接答案 (Answer-First) -->
+    <AnswerBlock
+      question={article.title}
+      answer={customAnswer}
+      highlight="坚持统一标准、严查边界限制、拒绝虚假低价"
+    />
+
+    <!-- 三层深度展开结构 -->
+    <article class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed space-y-6 my-8">
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          一、问题背景与核心概念界定
+        </h2>
+        <p>
+          在选择低预算代理网络或便宜机场时，用户经常在【<strong>{article.title}</strong>】这一问题上面临模糊不清的商家宣传话术。
+          很多不良商户利用专业技术术语的不对称性（如混淆 GB 与 GiB、隐瞒双向计费、用年付折算冒充月付），误导消费者做出不理性的采购决策。
+        </p>
+        <p>
+          本指南隶属于【<strong>{pillar.name}</strong>】栏目下的【<strong>{topic.name}</strong>】专题，立足于【<strong>{cluster.name}</strong>】的真实技术事实，旨在帮助用户厘清真相，消除知识盲区。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          二、专业分析维度与量化核算规范
+        </h2>
+        {article.type === 'definition' ? (
+          <div class="space-y-3">
+            <p>
+              针对指标与口径定义，本站确立以下三项铁律核算标准：
+            </p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li><strong>计费周期对齐</strong>：所有单价必须按自然月（30天）实际需支付金额统一折算，拒绝将不可单月购买的年付分摊列为真月付。</li>
+              <li><strong>容量单位保持原貌</strong>：明确区分商户标称的十进制 GB 与二进制 GiB，不进行无凭据的模糊换算。</li>
+              <li><strong>倍率加权核算</strong>：将常用节点的倍率（0.5x、1.0x、2.0x）作为折损系数计入总额度，还原真实可用容量。</li>
+            </ul>
+          </div>
+        ) : article.type === 'condition' ? (
+          <div class="space-y-3">
+            <p>
+              针对适用边界与风控限制，用户在购买或使用前必须排查以下红线条件：
+            </p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li><strong>网络高峰期容忍度</strong>：晚间 20:00–23:00 骨干网拥塞时，直连线路丢包率可能升高，若从事关键商务谈判坚决不适用低价直连。</li>
+              <li><strong>多设备并发封顶</strong>：部分低价套餐限制单 IP 最大连接数，当全家多设备同时在线时容易触发自动临时阻断。</li>
+              <li><strong>服务终止风险</strong>：新开业不足半年的超低价小机场，坚决不适用于预付半年以上资金。</li>
+            </ul>
+          </div>
+        ) : (
+          <div class="space-y-3">
+            <p>
+              针对实操对比与使用方法，建议按照以下五步执行落地横向评测：
+            </p>
+            <ol class="list-decimal pl-5 space-y-1">
+              <li>在相同时间窗口（如晚 21:00）分别对两组节点执行 HTTP 连通性探测。</li>
+              <li>使用浏览器下载 100MB 标准测试包，记录单线程与多线程的平稳吞吐速率。</li>
+              <li>核对本地抓包消耗与商户后台扣除量，排查有无暗中偷跑或阴阳倍率。</li>
+              <li>在移动端（4G/5G）与家庭 Wi-Fi 环境下分别测试休眠重连响应时间。</li>
+              <li>根据真实月度账单和个人使用感受，决定次月是否继续续费或迁移换站。</li>
+            </ol>
+          </div>
+        )}
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          三、下一步推荐选购与决策建议
+        </h2>
+        <p>
+          如果你当前正在根据【{article.title}】选择适合自己的代理服务，本站建议：
+        </p>
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-xs text-blue-900 space-y-2">
+          <p class="m-0 font-semibold">推荐行动准则：</p>
+          <p class="m-0">• 优先前往【<a href="/cheap/" class="underline font-bold text-blue-700">便宜机场清单</a>】查阅核验过的真月付 5–8 元代表品牌；</p>
+          <p class="m-0">• 若有特定多设备或 AI 使用场景，前往【<a href="/recommend/" class="underline font-bold text-blue-700">机场推荐</a>】查看独立短评与适配建议；</p>
+          <p class="m-0">• 在最终付款前，对照【<a href="/avoid/" class="underline font-bold text-blue-700">机场避坑指南</a>】进行收银台手续费与倍率自检。</p>
+        </div>
+      </section>
+    </article>
+
+    <!-- 同集群关联文章推荐 (内链闭环) -->
+    <section class="mt-12 pt-6 border-t border-slate-200">
+      <h3 class="text-sm font-bold text-slate-900 mb-3">
+        所属集群【{cluster.name}】相关三层递进文章：
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {allClusterArticles.map((sibling: any) => (
+          <a
+            href={`/articles/${sibling.slug}/`}
+            class={`p-3 rounded-xl border text-xs transition-colors flex flex-col justify-between ${
+              sibling.slug === article.slug
+                ? 'bg-blue-50 border-blue-300 text-blue-900 font-bold'
+                : 'bg-white border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-600'
+            }`}
+          >
+            <span class="line-clamp-2 mb-2">{sibling.title}</span>
+            <span class="text-[10px] text-slate-400 font-mono">
+              {sibling.type === 'definition' ? '[口径定义]' : sibling.type === 'condition' ? '[边界限制]' : '[实操对比]'}
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- 底部返回链接 -->
+    <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+      <a href={`/topics/${pillar.id}/${topic.id}/`} class="text-blue-600 hover:underline">
+        ← 返回所属【{topic.name}】二级专题
+      </a>
+      <a href="/" class="hover:text-slate-800">
+        返回便宜机场首页
+      </a>
+    </div>
+  </div>
+</BaseLayout>

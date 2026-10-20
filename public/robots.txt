@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /draft/
+Disallow: /search/
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://pianyijichang.world/sitemap-index.xml

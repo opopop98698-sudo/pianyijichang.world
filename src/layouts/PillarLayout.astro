@@ -1,0 +1,127 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import BrandCard from '../components/BrandCard.astro';
+import TopicLinks from '../components/TopicLinks.astro';
+import SourceNote from '../components/SourceNote.astro';
+import { generateBreadcrumbSchema, generateCollectionPageSchema } from '../lib/structured-data';
+
+interface Props {
+  frontmatter: {
+    id: string;
+    title: string;
+    description: string;
+    h1: string;
+    permalink: string;
+    primaryIntent: string;
+    topicId?: string | null;
+    brandRefs?: string[];
+    publishedAt: string;
+    modifiedAt: string;
+    verifiedAt: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: frontmatter.h1.split('：')[0].split('｜')[0], url: frontmatter.permalink }
+];
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+const collectionSchema = generateCollectionPageSchema(
+  frontmatter.title,
+  frontmatter.description,
+  frontmatter.permalink,
+  (frontmatter.brandRefs || []).map((id) => ({
+    name: id,
+    url: `${frontmatter.permalink}#brand-${id}`
+  }))
+);
+---
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  canonicalUrl={frontmatter.permalink}
+  schema={[breadcrumbSchema, collectionSchema]}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 面包屑导航 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">{frontmatter.h1.split('：')[0].split('｜')[0]}</span>
+    </nav>
+
+    <!-- 头部 H1 与导读 -->
+    <div class="mb-8 border-b border-slate-200 pb-6">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+          核心权威栏目
+        </span>
+        <span class="text-xs text-slate-500">
+          核验基准：{frontmatter.verifiedAt}
+        </span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3">
+        {frontmatter.h1}
+      </h1>
+      <p class="text-base text-slate-600 max-w-4xl leading-relaxed m-0">
+        {frontmatter.description}
+      </p>
+    </div>
+
+    <!-- 首屏推荐品牌网格 (真实品牌卡片) -->
+    {frontmatter.brandRefs && frontmatter.brandRefs.length > 0 && (
+      <section class="mb-10" aria-label="相关代表品牌推荐">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
+            <h2 class="text-lg font-bold text-slate-900 m-0">该栏目核验代表品牌</h2>
+          </div>
+          <span class="text-xs text-slate-500">含商业推广链接</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {frontmatter.brandRefs.map((brandId) => (
+            <BrandCard brandId={brandId} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- 正文内容 (Markdown / MDX 渲染) -->
+    <article class="prose prose-slate max-w-none prose-headings:font-bold prose-h2:text-xl prose-h2:border-b prose-h2:border-slate-200 prose-h2:pb-2 prose-h2:mt-8 prose-h3:text-lg prose-table:text-xs prose-a:text-blue-600 hover:prose-a:underline">
+      <slot />
+    </article>
+
+    <!-- 下辖二级专题与已规划集群文章导读 -->
+    {frontmatter.topicId && (
+      <section class="mt-12">
+        <TopicLinks pillarId={frontmatter.topicId} />
+      </section>
+    )}
+
+    <!-- 来源凭证与核验记录 -->
+    <SourceNote
+      sources={[
+        {
+          id: 'src-official',
+          sourceType: 'official_website',
+          urlOrPath: '各大机场品牌官方主页与收银台结算系统',
+          publishedAt: '2026-10-20',
+          accessedAt: '2026-10-20',
+          notes: '实测结账划扣与协议输出'
+        },
+        {
+          id: 'src-lab',
+          sourceType: 'internal_measurement',
+          urlOrPath: '便宜机场数据实验室自动化探活日志',
+          publishedAt: '2026-10-20',
+          accessedAt: '2026-10-20',
+          notes: '晚高峰延迟与丢包抽检'
+        }
+      ]}
+    />
+  </div>
+</BaseLayout>

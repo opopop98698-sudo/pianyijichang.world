@@ -1,0 +1,1633 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Definition of 8 pillars and their 8 topics, 2 clusters each, and 3 article templates following the strict generation rules:
+// Art 1: 口径/定义类 ("是什么/怎么算"，包含具体维度)
+// Art 2: 条件/边界类 ("什么时候不适用/有什么限制"，包含条件判断)
+// Art 3: 对比/使用类 ("怎么用/怎么对比"，包含对比或操作)
+
+const pillars = [
+  {
+    id: "recommend",
+    name: "机场推荐",
+    topics: [
+      {
+        id: "first-time-buying",
+        name: "第一次购买机场",
+        clusters: [
+          {
+            id: "newbie-mindset",
+            name: "新手选购心理与认知校准",
+            articles: [
+              { title: "新手初次购买机场预算怎么算？真实月付与一次性投入的计价口径", intent: "新手选购预算口径与认知建立", type: "definition" },
+              { title: "免费试用或一折活动什么时候不适用？初次选购时的商家运营边界判断", intent: "新手低价引流陷阱排查", type: "condition" },
+              { title: "第一次买机场怎么验证基础可用性？从首月连接到基础测速的操作流程", intent: "新手初次到手验证与对比指南", type: "comparison" }
+            ]
+          },
+          {
+            id: "protocol-client-readiness",
+            name: "客户端与通用协议准备",
+            articles: [
+              { title: "通用协议订阅链接是什么？Shadowsocks、VLESS与Trojan的格式标准口径", intent: "协议标准与通用客户端基础定义", type: "definition" },
+              { title: "专有客户端在什么系统环境下无法运行？第三方开源客户端替代的兼容边界", intent: "专属客户端受限环境与协议边界", type: "condition" },
+              { title: "多平台客户端导入订阅怎么对比？Clash、Sing-box与Shadowrocket配置流程差异", intent: "多客户端导入与配置实操对照", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "daily-primary",
+        name: "低价日常主力",
+        clusters: [
+          {
+            id: "daily-flow-baseline",
+            name: "日常稳定性基准线",
+            articles: [
+              { title: "主力机场可用率基准线怎么算？月均SLA与掉线时长的量化统计口径", intent: "主力机场可用率指标定义", type: "definition" },
+              { title: "低价主力套餐在什么网络环境下容易断连？本地运营商与QoS限制的边界", intent: "本地ISP与专线/直连边界排查", type: "condition" },
+              { title: "主力机场日常浏览与高清视频怎么搭配？按时段分配主备线路的使用方法", intent: "主力线路日常负载分配对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "peak-hours-experience",
+            name: "晚高峰冗余与丢包容忍度",
+            articles: [
+              { title: "晚高峰拥堵延迟指标怎么看？晚上八点到十一点的丢包率测试口径", intent: "晚高峰网络表现量化口径", type: "definition" },
+              { title: "标称大带宽在晚高峰什么时候会严重缩水？上游骨干网拥塞与限速条件", intent: "峰值带宽缩水边界条件", type: "condition" },
+              { title: "专线与普通公网直连在晚高峰怎么对比？不同预算下的高峰延迟平稳度实测", intent: "晚高峰专线与直连真实对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "backup-service",
+        name: "备用机场",
+        clusters: [
+          {
+            id: "standby-cost-control",
+            name: "备用线路持有成本控制",
+            articles: [
+              { title: "备用机场年均持有成本怎么算？不限时流量包与极低月付的摊薄口径", intent: "备用线路沉没成本量化定义", type: "definition" },
+              { title: "长周期未使用的备用账号什么时候会失效？静默期清退与到期规则限制", intent: "备用账号长周期休眠失效边界", type: "condition" },
+              { title: "不限时按量计费与小额月付当备用怎么对比？根据突发频次选择最佳方案", intent: "按量包与微月付备用方案对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "cold-standby-switching",
+            name: "故障应急冷备切换策略",
+            articles: [
+              { title: "冷备与热备切换时间差指标是什么？客户端故障自动转移的阈值定义", intent: "故障切换响应指标规范", type: "definition" },
+              { title: "主力机场完全失联时备用线路什么时候会同步瘫痪？同源上游机房故障边界", intent: "上游同源供应商依赖边界识别", type: "condition" },
+              { title: "主力出现故障时怎么一键切换备用节点？客户端分流策略与配置管理指南", intent: "应急倒换具体操作与路由对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "mobile-users",
+        name: "手机用户选机场",
+        clusters: [
+          {
+            id: "mobile-battery-traffic",
+            name: "移动网络流量消耗与保活功耗",
+            articles: [
+              { title: "移动端后台代理耗电量怎么测量？协议握手与保活心跳包的资源统计口径", intent: "手机后台功耗与流量测量口径", type: "definition" },
+              { title: "手机锁屏休眠时代理连接什么时候会被杀后台？系统电池优化策略的限制条件", intent: "移动操作系统后台保活边界", type: "condition" },
+              { title: "iOS与Android端代理客户端耗电怎么对比？不同核心对电量与发热的影响", intent: "主流移动平台客户端能耗实测对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "cellular-wifi-handover",
+            name: "蜂窝与Wi-Fi切换适应度",
+            articles: [
+              { title: "网络切换重连延迟指标怎么算？从4G/5G切换至Wi-Fi的重协商时间口径", intent: "移动网络基站漫游切换时间定义", type: "definition" },
+              { title: "公共Wi-Fi强制登录页在什么情况下导致代理挂死？Captive Portal探测限制", intent: "网络认证跳转与代理死锁边界", type: "condition" },
+              { title: "蜂窝移动数据与家庭宽带怎么配置分流？针对流量配额的客户端路由分流", intent: "多网络环境分流策略设置与使用", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "desktop-users",
+        name: "电脑用户选机场",
+        clusters: [
+          {
+            id: "desktop-multitasking",
+            name: "桌面端多任务与高并发连接",
+            articles: [
+              { title: "桌面端并发连接数上限怎么统计？多标签页与多应用并发下的套接字口径", intent: "桌面端并发连接数指标定义", type: "definition" },
+              { title: "机场节点连接数满载时什么时候会阻断新请求？单账号并发IP限制条件", intent: "多并发受限与节点熔断边界", type: "condition" },
+              { title: "浏览器多开与后台下载怎么分配带宽？基于进程规则的本地分流操作", intent: "桌面多任务带宽调度与配置对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "system-proxy-rules",
+            name: "系统代理模式与TUN虚拟网卡",
+            articles: [
+              { title: "TUN虚拟网卡模式接管流量口径是什么？网络层代理与应用层代理的技术界定", intent: "系统全局代理与TUN模式定义", type: "definition" },
+              { title: "UWP应用与局部软件在什么条件下无法走系统代理？Loopback回环限制边界", intent: "Windows回环与系统代理边界排查", type: "condition" },
+              { title: "纯系统代理与TUN模式怎么对比？针对开发终端与非代理软件的兼容性操作", intent: "系统代理模式实测优劣与切换方法", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "multi-device-family",
+        name: "家庭多设备选购",
+        clusters: [
+          {
+            id: "device-concurrency-limits",
+            name: "节点同时在线设备数限制",
+            articles: [
+              { title: "同时在线设备数怎么界定？按连接公网IP判定与按活跃客户端判定口径", intent: "多设备并发数统计口径标准", type: "definition" },
+              { title: "家庭设备超过并发上限时什么时候会触发封禁？商户防火墙封控阈值条件", intent: "超量并发触发临时封锁的边界", type: "condition" },
+              { title: "限制设备数与限制总带宽的套餐怎么对比？家庭多口人共享预算核算实操", intent: "不同并发计费规则方案对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "router-gateway-deployment",
+            name: "软路由与旁路由局域网共享",
+            articles: [
+              { title: "局域网透明网关代理流量怎么核算？路由器中央分流对总额度的消耗口径", intent: "旁路由代理全屋流量核算口径", type: "definition" },
+              { title: "智能家居和电视盒子在什么情况下无法穿透代理？组播与局域网发现协议边界", intent: "全屋代理环境下局域网互通边界", type: "condition" },
+              { title: "全屋旁路由配置与单机独立客户端怎么对比？维护成本与全家便利性折中", intent: "软路由网关与单机独立客户端对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "academic-search",
+        name: "学习与资料检索",
+        clusters: [
+          {
+            id: "scholar-paper-access",
+            name: "学术文献数据库访问连续性",
+            articles: [
+              { title: "学术数据库代理访问延迟指标怎么衡量？首字节时间TTFB与长连接保持口径", intent: "学术研究文献检索时延定义", type: "definition" },
+              { title: "下载百兆PDF论文时什么时候会被限速？大文件持续单线程传输的限制条件", intent: "文献下载大流量触发降速边界", type: "condition" },
+              { title: "Google Scholar与IEEE Xplore访问怎么优化？选用稳定静态IP节点的配置方法", intent: "高校学术资源访问节点调度对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "clean-ip-for-research",
+            name: "干净IP与防爬虫验证识别",
+            articles: [
+              { title: "出口IP黑名单与信誉分怎么查询？Cloudflare风险评分与欺诈度量化口径", intent: "出口节点IP纯净度指标定义", type: "definition" },
+              { title: "频繁弹出人机验证验证码在什么条件下发生？多人共用公网出口的判定边界", intent: "频繁风控验证码触发边界", type: "condition" },
+              { title: "数据机房原生IP与广播IP查资料怎么对比？人机验证频次与页面打开效率实测", intent: "不同IP类型在学术检索中的实操对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "office-ai-needs",
+        name: "轻办公与 AI 需求",
+        clusters: [
+          {
+            id: "ai-service-ip-risk",
+            name: "ChatGPT等AI接口封锁风控识别",
+            articles: [
+              { title: "AI服务区域支持口径怎么查？OpenAI与Claude官方允许访问的地区清单标准", intent: "AI合规接入地区与接口标准定义", type: "definition" },
+              { title: "注册或登录AI账号时什么时候会弹出Access Denied？高风险机房ASN封锁边界", intent: "机房ASN封禁触发边界排查", type: "condition" },
+              { title: "原生住宅节点与优质专线节点调用AI怎么对比？首字生成延迟与账号安全权衡", intent: "不同节点类型调用大模型体验对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "remote-work-security",
+            name: "远程协作数据隐私与长连接",
+            articles: [
+              { title: "办公即时通讯长连接心跳保活口径是什么？Slack与Teams断线重连阈值定义", intent: "办公协作网络长连接标准口径", type: "definition" },
+              { title: "公司内网VPN与第三方代理在什么条件下发生路由冲突？子网掩码重叠边界", intent: "企业VPN与商业代理子网冲突边界", type: "condition" },
+              { title: "轻办公选低价专线还是便宜直连？文件传输与视频会议体验横向比对", intent: "日常轻办公网络方案选购对比", type: "comparison" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "cheap",
+    name: "便宜机场",
+    topics: [
+      {
+        id: "true-monthly-under-10",
+        name: "真月付 10 元以下",
+        clusters: [
+          {
+            id: "under-10-payment-model",
+            name: "10元以下真实月付扣费模型",
+            articles: [
+              { title: "真月付10元以下套餐计价口径是什么？单月实际结算与无年付绑定的认定标准", intent: "十元内极低月付核算口径", type: "definition" },
+              { title: "个位数月付在什么情况下会暗含初装费？首次支付附加开户费的限制条件", intent: "低价初装附加费边界排查", type: "condition" },
+              { title: "5元档与9元档真实月付怎么对比？流量配额与节点可用线路数量差异", intent: "10元内不同价位真实月付方案横比", type: "comparison" }
+            ]
+          },
+          {
+            id: "under-10-service-boundaries",
+            name: "极低单价下的带宽与节点边界",
+            articles: [
+              { title: "10元以下机场峰值带宽口径怎么看？共享带宽池与单连接硬限速标准", intent: "十元内带宽与配额量化定义", type: "definition" },
+              { title: "低价节点在晚间高峰期什么时候会出现大面积超时？资源超售率临界边界", intent: "极低价晚高峰崩盘临界点判断", type: "condition" },
+              { title: "超低价机场如何作为应急备用接入？搭配轻量客户端的参数设置对比", intent: "极低价套餐应急配置与操作指引", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "true-monthly-10-to-20",
+        name: "真月付 10–20 元",
+        clusters: [
+          {
+            id: "sweet-spot-value",
+            name: "10-20元甜品级预算配比",
+            articles: [
+              { title: "10到20元甜品档单位流量成本怎么算？百G月付套餐的真实单价折算口径", intent: "甜品级月付单位成本标准口径", type: "definition" },
+              { title: "甜品档位标称专线什么时候仅是直连中转？隧道混入公网线路的鉴别边界", intent: "假专线与真内网隧道边界条件", type: "condition" },
+              { title: "15元100G与20元150G月付怎么选？根据日常月消耗曲线的对比选购", intent: "甜品区间不同流量档位实操决策", type: "comparison" }
+            ]
+          },
+          {
+            id: "sla-and-line-types",
+            name: "进阶专线与直连混用辨析",
+            articles: [
+              { title: "IEPL企业专线与直连节点混用比例口径是什么？入口路由探测标准定义", intent: "专线混合路由技术口径解析", type: "definition" },
+              { title: "专线节点在什么网络故障下会切换至降级备用链路？跨境海缆中断边界", intent: "专线容灾降级切换边界排查", type: "condition" },
+              { title: "纯直连优化与混合专线在20元档怎么对比？高峰延迟波动与丢包率实测", intent: "同价位直连与专线真实表现比对", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "first-time-payment",
+        name: "首次实际付款",
+        clusters: [
+          {
+            id: "checkout-hidden-fees",
+            name: "结账收银台附加手续费防坑",
+            articles: [
+              { title: "实际到手付款金额怎么计算？标价、汇率转换与收银台通道手续费口径", intent: "结账实付综合税费标准口径", type: "definition" },
+              { title: "支付网关什么时候会额外收取货币转换费？境外第三方商户收款结算限制", intent: "非本币跨境结算手续费边界", type: "condition" },
+              { title: "支付宝直连、微信第三方代收与USDT结算怎么对比？最终实付总额差价实操", intent: "主流收银台支付通道真实到手价对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "setup-fee-and-deposit",
+            name: "首次开卡费与账户充值门槛",
+            articles: [
+              { title: "账户最低充值额度门槛口径是什么？余额制与直接订单支付的技术机制", intent: "平台资金结算门槛指标规范", type: "definition" },
+              { title: "首付低价什么时候包含不可退的账户押金？商家条款中的资金保留边界", intent: "押金不可退与余额沉淀限制条件", type: "condition" },
+              { title: "直接购买月付套餐与按固定金额充值扣费怎么对比？资金闲置成本量化", intent: "充值余额制与直接付订单方式对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "annual-discount-breakdown",
+        name: "年付折算低价",
+        clusters: [
+          {
+            id: "annual-amortization-math",
+            name: "年付折合月均计算误区",
+            articles: [
+              { title: "年付折合月均价格怎么科学折算？实付总额除以12个月与资金机会成本口径", intent: "年付分摊计算与财务折现定义", type: "definition" },
+              { title: "年付超低折算什么时候不能作为性价比依据？商家年中停业与跑路风险边界", intent: "长期预付面临违约的边界判断", type: "condition" },
+              { title: "月付连续交一年与年付一次性交款怎么对比？现金流灵活性与折扣差额实操", intent: "按月连续支出与年付现值对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "sunk-cost-risk-appraisal",
+            name: "预付全年沉没成本风险评估",
+            articles: [
+              { title: "年付沉没成本风险系数怎么定义？运营年限、历史工单与信誉指标口径", intent: "商家生命周期与预付风险指标定义", type: "definition" },
+              { title: "新开业不满半年的机场在什么情况下坚决不碰年付？运营资金链断裂特征", intent: "短期投机型机场年付拒选边界", type: "condition" },
+              { title: "三年付巨幅折扣与单年付怎么对比？沉没成本损失概率与边际收益分析", intent: "超长周期预付与单年付风险对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "low-traffic-entry",
+        name: "小流量低成本入门",
+        clusters: [
+          {
+            id: "micro-quota-economics",
+            name: "微额度流量单价折算与适用场景",
+            articles: [
+              { title: "小额度套餐每GB真实成本怎么算？月均20GB及以下套餐的溢价口径", intent: "微流量额度定价结构解析", type: "definition" },
+              { title: "小流量套餐在什么使用场景下会瞬间见底？系统静默更新与视频自动播放限制", intent: "后台意外吞噬微额度的边界条件", type: "condition" },
+              { title: "20G微月付与100G常规月付怎么对比？单纯查资料用户按需购买实操", intent: "轻量用量与标准用量套餐对比决策", type: "comparison" }
+            ]
+          },
+          {
+            id: "dormant-account-expiration",
+            name: "低配套餐休眠与重置清零规则",
+            articles: [
+              { title: "流量清零周期的标准口径是什么？自然月第一天与账单日重置的认定区分", intent: "配额重置周期与有效时间定义", type: "definition" },
+              { title: "未用完的配额什么时候可以结转至次月？大多数商家不可结转条款边界", intent: "流量结转功能支持与否的边界", type: "condition" },
+              { title: "月末清零前如何合理消耗或监控流量？客户端额度提醒与自动断网配置", intent: "流量阈值报警设置与多客户端对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "promo-first-order",
+        name: "促销与首购低价",
+        clusters: [
+          {
+            id: "first-order-discount-truth",
+            name: "首单优惠券与次月原价续费",
+            articles: [
+              { title: "首月特惠折扣率怎么核算？促销码立减金额与次月原价续费对比口径", intent: "首购营销让利真实比率计算", type: "definition" },
+              { title: "一折首单优惠在什么条件下无法续费？仅限首购账户与老用户排除条款", intent: "促销排他性限制与活动边界", type: "condition" },
+              { title: "首月促销体验后次月原价续订怎么评估？以次月真实付款作为选购决策依据", intent: "营销低价与长期原价对比决策", type: "comparison" }
+            ]
+          },
+          {
+            id: "promotional-line-divergence",
+            name: "促销专属临时节点与主力节点差异",
+            articles: [
+              { title: "促销引流节点与商业主力节点分流口径是什么？不同用户组权限隔离标准", intent: "服务分级与特惠节点权限定义", type: "definition" },
+              { title: "特惠用户在什么网络拥挤期会被降权？QoS多级队列调度优先级限制", intent: "促销用户被降级排队边界排查", type: "condition" },
+              { title: "促销节点与正价节点延迟怎么对比？使用相同服务器测速验证分级差异", intent: "特惠节点性能差异实测对照", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "renewal-budget",
+        name: "续费价格与预算",
+        clusters: [
+          {
+            id: "renewal-inflation-monitoring",
+            name: "续费涨价与套餐版本单向迁移",
+            articles: [
+              { title: "续费通胀率指标怎么衡量？老用户原价续费承诺与套餐强制升级口径", intent: "续约价格变动与套餐版本定义", type: "definition" },
+              { title: "商户下架老套餐时老用户什么时候必须加价？强制迁移新版产品条款边界", intent: "老套餐退市强推高价套餐边界", type: "condition" },
+              { title: "同价位续费与换新机场首单优惠怎么对比？迁移配置成本与资金节省差额", intent: "留存续费与迁移新站成本收益比对", type: "comparison" }
+            ]
+          },
+          {
+            id: "long-term-spending-ceiling",
+            name: "长期年度总体支出上限管理",
+            articles: [
+              { title: "代理服务年度支出总成本TCO怎么核算？基础套餐加备用线路及工具综合口径", intent: "长期总拥有成本TCO指标计算", type: "definition" },
+              { title: "预算严格控制在每年100元以内在什么条件下可行？低配月付与冷备组合边界", intent: "百元年度极限预算可行性边界", type: "condition" },
+              { title: "单一全能高价机场与两个廉价互补机场怎么对比？年总预算相同下的稳定性", intent: "单高配方案与双低配冗余方案对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "onetime-low-threshold",
+        name: "一次性低门槛流量",
+        clusters: [
+          {
+            id: "non-expiring-pack-cost",
+            name: "不限时流量包单位容量计价",
+            articles: [
+              { title: "一次性流量包单价怎么折算？不设月租与长期有效特性的容量折现口径", intent: "无期限流量单价核算规范", type: "definition" },
+              { title: "不限时流量在什么运营状况下会提前归零？服务条款中不可抗力与变更边界", intent: "流量包提前失效法律与条款风险", type: "condition" },
+              { title: "50元200G不限时与每月10元30G怎么对比？根据季度实际消耗曲线实操", intent: "不限时大包与低额月付划算度对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "account-maintenance-period",
+            name: "零月租流量包账户生命周期",
+            articles: [
+              { title: "零月租账户生命周期怎么定义？长期无活动连接的保号与销户机制口径", intent: "零月租账户存续技术口径标准", type: "definition" },
+              { title: "半年未登录的流量包账号什么时候会被系统回收？数据库清理不活跃规则", intent: "沉睡账户被回收清退条件边界", type: "condition" },
+              { title: "长期存放流量包怎么做节点存活检测？定期自动轻量握手脚本配置指引", intent: "长期账户健康度监控方法对比", type: "comparison" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "free",
+    name: "免费机场",
+    topics: [
+      {
+        id: "persistent-free",
+        name: "持续免费资源",
+        clusters: [
+          {
+            id: "free-tier-sustainability",
+            name: "持续免费商业模式与广告置换",
+            articles: [
+              { title: "永久免费机场商业存续逻辑怎么辨析？广告展示与流量变现收益核算口径", intent: "免费商业模式与成本支撑定义", type: "definition" },
+              { title: "宣称不限速免费的机场在什么条件下必然崩盘？带宽与服务器刚性成本边界", intent: "免费零收益无法长期覆盖硬件边界", type: "condition" },
+              { title: "广告推广型免费与公益赞助型节点怎么对比？长期可用性与安全性核验", intent: "不同类型免费资源真实表现比对", type: "comparison" }
+            ]
+          },
+          {
+            id: "public-bandwidth-congestion",
+            name: "公共免费节点拥堵与排队机制",
+            articles: [
+              { title: "公共免费节点争抢拥堵指数怎么定义？并发用户数与节点总出口带宽比例口径", intent: "公共节点拥塞度量化标准", type: "definition" },
+              { title: "免费节点在晚间高峰期什么时候会彻底断流？TCP重传率达到100%的边界", intent: "公共节点严重过载熔断边界", type: "condition" },
+              { title: "免费节点测速百兆与打开网页超时怎么对比？ICMP欺骗与真实HTTP吞吐对照", intent: "假测速表现与真网页加载对比操作", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "free-trial",
+        name: "免费试用",
+        clusters: [
+          {
+            id: "trial-qualification-checks",
+            name: "试用资格手机/邮箱验证门槛",
+            articles: [
+              { title: "免费试用资格判定标准是什么？一次性临时邮箱过滤与实名手机验证口径", intent: "试用门槛与防羊毛风控标准定义", type: "definition" },
+              { title: "需要绑定国际信用卡才能领取的试用什么时候有扣费风险？自动订阅续约边界", intent: "绑定扣款渠道衍生自动续订边界", type: "condition" },
+              { title: "零门槛免注册试用与需邮箱验证试用怎么对比？节点速度与隐私暴露程度", intent: "不同注册门槛试用资源实操权衡", type: "comparison" }
+            ]
+          },
+          {
+            id: "trial-quota-validity-window",
+            name: "试用额度倒计时与功能封锁",
+            articles: [
+              { title: "试用期倒计时怎么计算？自注册激活起算与自然日结束的有效时间口径", intent: "试用窗口时间标准与配额规则", type: "definition" },
+              { title: "试用套餐在什么情况下无法解锁流媒体与AI？特惠专属降配受限边界", intent: "试用账号功能阉割与限制边界", type: "condition" },
+              { title: "2小时短时试用与3天长期试用怎么对比？针对网络高峰期的验证策略", intent: "不同时长试用在高峰期的检验对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "registration-bonus",
+        name: "注册赠送流量",
+        clusters: [
+          {
+            id: "signup-gift-consumption",
+            name: "初始赠送流量真实抵扣与限制",
+            articles: [
+              { title: "注册送流量的真实单价怎么核定？首登礼包与单日消耗速率的匹配口径", intent: "注册礼包额度与生命周期定义", type: "definition" },
+              { title: "送的10G流量什么时候无法使用？必须充值激活或达到最低提现门槛边界", intent: "虚假赠送套路与激活限制条件", type: "condition" },
+              { title: "送流量后直接跑路与送流量引导长期月付怎么对比？商家靠谱度筛选实操", intent: "赠送流量型商家真实口碑对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "invitation-referral-math",
+            name: "签到与邀请返利流量提现规则",
+            articles: [
+              { title: "每日签到赠送流量统计口径是什么？随机抽奖机制与固定底仓的期望值计算", intent: "每日签到机制长期期望值计算", type: "definition" },
+              { title: "邀请好友返还的流量在什么情况下无法兑换？阶梯门槛与防作弊风控边界", intent: "推广返利兑现失效限制边界", type: "condition" },
+              { title: "靠签到白嫖与直接买几元入门月付怎么对比？时间成本与可用性账目核算", intent: "签到耗费精力与极低单价购买对照", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "limited-time-event",
+        name: "限时免费活动",
+        clusters: [
+          {
+            id: "event-surge-performance",
+            name: "节日免费放水期间的节点可用率",
+            articles: [
+              { title: "限时免费活动期间可用率指标怎么算？涌入大量羊毛党时的连通率统计口径", intent: "突发流量涌入下的可用率指标", type: "definition" },
+              { title: "全网公开限免活动在什么时间段体验最差？晚高峰并发雪崩边界条件", intent: "限免节点资源耗尽与崩溃边界", type: "condition" },
+              { title: "常规付费节点与限免公开节点怎么对比？同时段同运营商下的延迟丢包实测", intent: "限免节点与正价节点体验对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "expiration-transition-rules",
+            name: "限时活动结束后自动扣费防范",
+            articles: [
+              { title: "限免转付费扣款协议认定口径是什么？静默授权与预授权扣款的技术标准", intent: "自动转付费条款与技术判定标准", type: "definition" },
+              { title: "限免到期前什么时候必须手动取消解绑？各支付平台预授权关闭时间限制", intent: "防自动扣费取消授权的时间边界", type: "condition" },
+              { title: "手动充值型限免与免密签约型限免怎么对比？用户资金安全防御实操", intent: "两种限免模式下的安全性权衡对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "public-free-nodes",
+        name: "公开免费节点",
+        clusters: [
+          {
+            id: "node-scraping-freshness",
+            name: "爬虫聚合免费节点存活半衰期",
+            articles: [
+              { title: "公开抓取节点存活半衰期指标怎么定义？GitHub开源池节点的失效率统计口径", intent: "公开池节点生命周期衰减指标", type: "definition" },
+              { title: "免费批量订阅在什么情况下会全部失效？统一被防火墙特征阻断边界", intent: "开源大池被批量指纹封锁边界", type: "condition" },
+              { title: "自建爬虫清洗节点与直接使用聚合订阅怎么对比？可用节点筛选操作指南", intent: "免费节点批量清洗与测速对比实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "mitm-traffic-inspection",
+            name: "明文传输与中间人流量嗅探风险",
+            articles: [
+              { title: "公开节点中间人窃听风险指标怎么定义？未加密SNI与DNS明文泄露口径", intent: "中间人攻击与明文泄露定义规范", type: "definition" },
+              { title: "使用公共免费节点登录银行或邮箱在什么条件下必定被劫持？自签证书边界", intent: "敏感账户在公共节点操作的红线边界", type: "condition" },
+              { title: "HTTPS端到端加密与公共节点日志记录怎么对比？隐私泄露边界防范实操", intent: "公共节点安全威胁与防御措施对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "free-quota-limits",
+        name: "免费流量与限制",
+        clusters: [
+          {
+            id: "free-plan-throttling",
+            name: "免费套餐峰值QoS限速与协议屏蔽",
+            articles: [
+              { title: "免费套餐限速限频指标怎么界定？带宽封顶Mbps与单连接请求速率口径", intent: "免费层级QoS流控标准定义", type: "definition" },
+              { title: "免费节点在什么流量阈值下会触发硬关断？单日消耗超出立即阻断边界", intent: "免费配额瞬间耗尽关断边界", type: "condition" },
+              { title: "限制2Mbps免费与无限制超低价套餐怎么对比？打开网页渲染耗时实测", intent: "硬限速免费与入门低价流畅度对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "concurrent-connection-caps",
+            name: "免费账号并发线程与IP数限制",
+            articles: [
+              { title: "免费账号并发连接数上限怎么统计？单IP同时在线TCP连接数限制口径", intent: "并发限制与连接池指标定义", type: "definition" },
+              { title: "打开复杂网页时免费节点什么时候会假死？连接池满溢导致DNS解析失败边界", intent: "多并发触发节点拒绝响应边界", type: "condition" },
+              { title: "单线程下载与多线程并发在免费节点怎么对比？吞吐量与连接存活对比", intent: "免费节点不同传输模式稳定性比对", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "verification-and-safety",
+        name: "资源核验与安全",
+        clusters: [
+          {
+            id: "node-health-audit-method",
+            name: "免费节点健康度自动化探测规范",
+            articles: [
+              { title: "免费节点真实可用性探测口径怎么定？HTTP状态码与真实握手延迟口径", intent: "免费节点自动化探活与健康度指标", type: "definition" },
+              { title: "自动化脚本探活在什么情况下会误判为有效？假握手欺骗页面的识别边界", intent: "节点虚假响应与真实通网判断边界", type: "condition" },
+              { title: "客户端自带ping与真延迟测速怎么对比？排查节点假活虚标的操作指南", intent: "探针工具与客户端连通性测试对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "credential-leak-prevention",
+            name: "避免在不可信节点使用敏感账号",
+            articles: [
+              { title: "节点出口流量脱敏标准是什么？端到端TLS协议与本地DNS防护口径", intent: "流量泄露风险等级与防范标准", type: "definition" },
+              { title: "哪些在线业务在任何条件下都严禁走免费节点？支付与双重认证红线边界", intent: "高危业务场景绝对隔离边界", type: "condition" },
+              { title: "为免费节点配置独立无痕浏览器环境怎么操作？与日常生产环境隔离对比", intent: "沙箱隔离与环境安全配置对比指南", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "free-vs-cheap",
+        name: "免费与低价替代",
+        clusters: [
+          {
+            id: "opportunity-cost-of-free",
+            name: "折腾免费节点的时间成本量化",
+            articles: [
+              { title: "折腾免费节点的时间成本怎么折现？每小时时间价值与找节点耗时核算口径", intent: "沉没时间成本与精力核算模型", type: "definition" },
+              { title: "免费节点在紧急工作会议时什么时候会造成灾难？突发中断不可预测边界", intent: "关键任务使用不可靠资源的红线边界", type: "condition" },
+              { title: "每天花半小时找免费节点与花5元买月付怎么对比？综合ROI账目核算", intent: "免费时间损耗与低价购买ROI对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "entry-level-paid-migration",
+            name: "几元低价入门套餐相对免费的质变",
+            articles: [
+              { title: "入门付费套餐的SLA保障指标是什么？客服工单支持与节点在线率标准口径", intent: "微小付费带来的服务契约指标定义", type: "definition" },
+              { title: "几块钱的机场在什么情况下依然无法替代高品质网络？轻量专线性能边界", intent: "极低价付费产品的自身局限性边界", type: "condition" },
+              { title: "从全免费迁移至5元月付怎么平滑过渡？双轨并行验证稳定性的实操指南", intent: "免费转低价方案的具体迁移步骤对比", type: "comparison" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "value",
+    name: "性价比机场",
+    topics: [
+      {
+        id: "unit-traffic-cost",
+        name: "单位流量成本",
+        clusters: [
+          {
+            id: "cost-per-gigabyte-formula",
+            name: "每GB标称单价与真实有效单价",
+            articles: [
+              { title: "标称每GB成本怎么计算？套餐价格除以标称配额的标准核算口径", intent: "每GB标称价格标准定义与计算公式", type: "definition" },
+              { title: "标称单价极低什么时候并不等于划算？总额度过大且期限太短的浪费边界", intent: "名义低单价与超额浪费边界判断", type: "condition" },
+              { title: "大容量低单价与小容量高单价套餐怎么对比？基于个人月耗的损益临界点", intent: "不同容量单价格局横向对照", type: "comparison" }
+            ]
+          },
+          {
+            id: "overselling-ratio-impact",
+            name: "超售率对名义带宽单价的稀释",
+            articles: [
+              { title: "机场服务器超售率指标怎么理解？带宽总储备与销售总配额的折算口径", intent: "超售比例指标与有效承载力定义", type: "definition" },
+              { title: "高超售机场在什么并发场景下会严重劣化？大型体育赛事与晚高峰拥堵边界", intent: "超售崩溃的并发触发边界", type: "condition" },
+              { title: "适度超售廉价方案与低超售轻奢方案怎么对比？单位有效带宽真实单价分析", intent: "超售率对真实性价比的摊薄对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "unused-traffic-value",
+        name: "未用流量与实际价值",
+        clusters: [
+          {
+            id: "unutilized-quota-waste",
+            name: "月末剩余作废流量造成的成本膨胀",
+            articles: [
+              { title: "有效利用率单价怎么计算？实际消耗流量与月实付金额的折算口径", intent: "实际消耗单价与利用率指标核算", type: "definition" },
+              { title: "月耗不足30%时大套餐什么时候会变成高价产品？未用流量清零惩罚边界", intent: "配额过剩导致的单位成本飙升边界", type: "condition" },
+              { title: "每月剩一半流量与买小套餐偶尔加购怎么对比？年度真实总支出精算", intent: "包月过量与按需增补方案对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "just-in-time-tier-matching",
+            name: "动态按需降档与阶梯式买量",
+            articles: [
+              { title: "阶梯式套餐匹配标准是什么？用量波动区间的方差统计与档位界定口径", intent: "用量波动与档位精准匹配模型", type: "definition" },
+              { title: "月中调低套餐档位在什么条款下不可行？商户降档限制与次月生效边界", intent: "套餐变更限制与生效时间边界", type: "condition" },
+              { title: "精准定额与宽松冗余套餐怎么对比？为防断网溢价付费的合算度实操", intent: "紧平衡与宽冗余方案的性价权衡", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "multiplier-adjusted-value",
+        name: "计费倍率后的价值",
+        clusters: [
+          {
+            id: "multiplier-conversion-rate",
+            name: "高倍率专线对真实流量额度的侵蚀",
+            articles: [
+              { title: "折算倍率后的真实可用容量怎么算？标称额度除以节点倍率的标准口径", intent: "倍率折算容量与真实配额核算", type: "definition" },
+              { title: "三倍甚至五倍率节点在什么场景下会瞬间榨干套餐？4K高码率视频消耗边界", intent: "高倍率结合大吞吐引发的断网边界", type: "condition" },
+              { title: "100G单倍率专线与300G三倍率专线怎么对比？实际可用时长与额度对比", intent: "等效容量方案横向实测对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "effective-gigabyte-recalculation",
+            name: "综合有效GB单价重估模型",
+            articles: [
+              { title: "综合有效GB成本公式是什么？考虑各倍率节点使用权重的加权单价口径", intent: "加权有效单价与综合模型定义", type: "definition" },
+              { title: "低倍率普通节点全部瘫痪时高倍率套餐在什么条件下性价比归零？强制使用边界", intent: "被迫全走高倍率带来的成本失控边界", type: "condition" },
+              { title: "低倍直连浏览加高倍专线关键任务怎么搭配？客户端分流策略优化性价比", intent: "混合倍率节点分流配置实操对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "price-vs-performance",
+        name: "价格与实际性能",
+        clusters: [
+          {
+            id: "benchmark-reality-gap",
+            name: "纯测速峰值与网页真实加载延迟",
+            articles: [
+              { title: "测速带宽与网页加载首屏延迟转化口径是什么？TCP慢启动与握手耗时指标", intent: "测速吞吐量与真实体验换算标准", type: "definition" },
+              { title: "跑满千兆但在日常浏览时什么时候依然卡顿？DNS解析迟缓与高延迟边界", intent: "峰值高却响应迟缓的矛盾边界", type: "condition" },
+              { title: "300Mbps极速低价与50Mbps平稳专线怎么对比？真实网页秒开率对比", intent: "大带宽直连与低延迟专线对比实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "packet-loss-penalty",
+            name: "丢包率对TCP传输吞吐量的非线性杀伤",
+            articles: [
+              { title: "丢包率与吞吐量衰减模型口径是什么？Mathis公式量化TCP传输速率指标", intent: "丢包率对有效吞吐杀伤力数学口径", type: "definition" },
+              { title: "丢包率超过5%时在什么业务下会发生严重卡顿？远程桌面与语音通话边界", intent: "高丢包对实时交互业务的杀伤边界", type: "condition" },
+              { title: "0丢包专线与3%丢包廉价直连怎么对比？不同预算下的单位顺畅体验价值", intent: "无损专线与轻微丢包直连性价比对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "reliability-longterm-cost",
+        name: "可靠性与长期使用成本",
+        clusters: [
+          {
+            id: "downtime-cost-quantification",
+            name: "掉线频次导致的工作中断损失",
+            articles: [
+              { title: "网络故障中断成本怎么折算？每小时停工损失与月均故障时长的量化口径", intent: "掉线停工损失折现指标体系", type: "definition" },
+              { title: "便宜机场频繁维护在什么工作场景下坚决不能接受？线上交易与考试边界", intent: "低SLA不可接受的高危业务边界", type: "condition" },
+              { title: "月付10元经常维护与月付25元稳定运行怎么对比？计入生产力损失的综合账", intent: "低价常断与稍贵长稳方案财务对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "customer-support-response-cost",
+            name: "工单响应迟缓与运维排障成本",
+            articles: [
+              { title: "工单平均解决时长MTTR指标是什么？从提交故障到恢复通信的量化统计口径", intent: "运维响应时效MTTR指标定义", type: "definition" },
+              { title: "无客服或纯机器人回复在什么突发故障下会导致长期失联？封锁大排查边界", intent: "缺乏人工支持导致完全失联的边界", type: "condition" },
+              { title: "社区Telegram互助与专业工单支持怎么对比？排障效率与个人折腾时间权衡", intent: "不同售后支持模式对性价比的影响比对", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "client-software-cost",
+        name: "客户端与使用成本",
+        clusters: [
+          {
+            id: "paid-client-overhead",
+            name: "闭源商业客户端订阅费对总支出的增加",
+            articles: [
+              { title: "客户端软件授权分摊成本怎么算？买断制与订阅制在年度网络预算中的口径", intent: "客户端工具成本分摊计算口径", type: "definition" },
+              { title: "付费客户端在什么系统升级后会失效？跨大版本更新需重新付费的限制边界", intent: "客户端授权版本过期失效边界", type: "condition" },
+              { title: "免费开源客户端与收费专属客户端怎么对比？年度总体支出与易用性权衡", intent: "开源免费与商业买断工具全寿命成本对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "open-source-config-learning",
+            name: "开源配置维护的技术门槛折现",
+            articles: [
+              { title: "开源规则配置维护时间折现口径是什么？分流规则订阅与本地排障耗时核算", intent: "规则维护隐性时间成本指标", type: "definition" },
+              { title: "小白用户在什么情况下配置开源核心容易出错？YAML缩进与分流语法边界", intent: "技术门槛导致配置崩溃的边界", type: "condition" },
+              { title: "一键导入托管配置与手动定制规则链怎么对比？维护精力与分流精准度权衡", intent: "开箱即用与深度定制体验对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "multi-device-total-value",
+        name: "多设备综合价值",
+        clusters: [
+          {
+            id: "cost-per-active-terminal",
+            name: "单设备摊薄月成本计算模型",
+            articles: [
+              { title: "单设备月度摊薄成本公式是什么？套餐总价除以实际并发终端数的核算口径", intent: "多设备平摊成本计算口径定义", type: "definition" },
+              { title: "单账号多设备在什么情况下会触发商户限流？总带宽被多端抢占压垮的边界", intent: "并发超负荷引发服务降级边界", type: "condition" },
+              { title: "3设备套餐与无限制设备套餐怎么对比？个人多终端与家庭共享的真实单价", intent: "不同终端限制套餐性价比对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "household-token-sharing",
+            name: "多人合租与流量共享争抢风险",
+            articles: [
+              { title: "合租流量分配模型怎么设计？各人带宽占用权重与按头分摊账目口径", intent: "多用户合租资金与额度分配口径", type: "definition" },
+              { title: "合租室友跑BT下载时在什么条件下会导致全员封号？违规流量触发风控边界", intent: "连带责任导致账号连坐封禁边界", type: "condition" },
+              { title: "多人合租大套餐与各自买小套餐怎么对比？隐私、稳定性与费用节省比对", intent: "合租与独立购买优缺点深度对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "service-scope-tradeoffs",
+        name: "服务范围与综合取舍",
+        clusters: [
+          {
+            id: "media-unlocking-premium",
+            name: "流媒体与AI解锁所带来的溢价权衡",
+            articles: [
+              { title: "流媒体解锁溢价率指标怎么计算？纯直连翻墙与原生IP解锁的价差核算口径", intent: "解锁增值服务溢价度量化标准", type: "definition" },
+              { title: "宣称全解锁的节点在什么风控大封锁下会瞬间失效？机房IP段被批量拉黑边界", intent: "流媒体风控升级导致解锁失效边界", type: "condition" },
+              { title: "不含解锁的低价节点搭配独立DNS与全包套餐怎么对比？综合性价比实操", intent: "外部解锁辅助与原生解锁套餐对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "niche-region-utility",
+            name: "冷门国家节点对一般用户的低利用率",
+            articles: [
+              { title: "节点有效利用率指标怎么定义？常用亚太节点与冷门小众节点的成本占比口径", intent: "节点地域冗余与成本利用率指标", type: "definition" },
+              { title: "拥有80个冷门国家的机场在什么情况下纯属营销噱头？高延迟与低带宽边界", intent: "冷门节点华而不实的判定边界", type: "condition" },
+              { title: "精简10国优质专线与庞大100国杂牌节点怎么对比？日常使用真实体验横评", intent: "少而精与多而杂节点方案对比", type: "comparison" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "plans",
+    name: "流量套餐",
+    topics: [
+      {
+        id: "tier-50gb-below",
+        name: "50GB 及以下",
+        clusters: [
+          {
+            id: "minimal-usage-profile",
+            name: "极轻量文本与邮件用量匹配",
+            articles: [
+              { title: "50GB以下轻量套餐用量怎么规划？日常纯网页浏览与文字通讯的消耗口径", intent: "极轻量流量消耗模型标准定义", type: "definition" },
+              { title: "50GB配额在什么操作下会在一天内消耗殆尽？后台自动同步与网盘更新边界", intent: "轻量额度意外爆仓边界排查", type: "condition" },
+              { title: "20GB极低档与50GB轻量档怎么对比？满足文字办公需求下的性价比选购", intent: "轻量区间不同档位对比实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "buffer-safety-margin",
+            name: "50G以下突发后台更新防爆仓",
+            articles: [
+              { title: "安全冗余缓冲带指标怎么设定？月末断网预警阈值的流量百分比核算口径", intent: "流量告警缓冲指标标准设定", type: "definition" },
+              { title: "小额度套餐在剩余5%流量时在什么网络请求下会彻底掐断？长连接重试边界", intent: "临界状态完全熔断的技术边界", type: "condition" },
+              { title: "通过客户端屏蔽系统更新流量怎么配置？小额度套餐防跑量实操指南", intent: "规则拦截大流量域名与实测对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "tier-50-to-100gb",
+        name: "50–100GB",
+        clusters: [
+          {
+            id: "standard-browsing-fit",
+            name: "标准图文与社交媒体月耗估算",
+            articles: [
+              { title: "百G以内标准图文月消耗怎么算？推特、Instagram与图文网页加载口径", intent: "中轻量社交媒体流量标准核算模型", type: "definition" },
+              { title: "100GB套餐在什么高频场景下月末会吃紧？短视频沉浸式刷取的时间边界", intent: "短视频大流量吞噬百G额度边界", type: "condition" },
+              { title: "60GB与100GB套餐怎么对比？普通上班族非重度用户的月度开支对照", intent: "中轻量区间主流档位实用度比对", type: "comparison" }
+            ]
+          },
+          {
+            id: "video-streaming-hours",
+            name: "标清与高清视频可观看时长换算",
+            articles: [
+              { title: "视频流媒体每小时流量消耗口径是什么？1080P与720P码率的真实数据消耗", intent: "视频清晰度与流量换算标准定义", type: "definition" },
+              { title: "在100GB月配额下每天看高清视频在什么时长内安全？月末断流临界边界", intent: "视频观看安全时长边界排查", type: "condition" },
+              { title: "自动分辨率与锁死1080P在流量消耗上怎么对比？画质与额度节省权衡操作", intent: "客户端视频画质限制与节省流量对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "tier-100-to-200gb",
+        name: "100–200GB",
+        clusters: [
+          {
+            id: "heavy-media-sweet-spot",
+            name: "影音重度与远程协作均衡档位",
+            articles: [
+              { title: "100到200GB主流甜品档核算口径是什么？高清视频、音乐流与办公综合消耗", intent: "重度日常主力档位核算标准", type: "definition" },
+              { title: "200GB套餐在什么重度下载任务下依然不足？大型游戏补丁与RAW素材边界", intent: "甜品档面对大文件下载的局限边界", type: "condition" },
+              { title: "150GB专线套餐与300GB直连套餐怎么对比？同等花费下的速度与额度取舍", intent: "中大容量专线与超大直连对比实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "family-dual-user-split",
+            name: "双人共享百G套餐用量分流",
+            articles: [
+              { title: "双人合用流量配额分配指标怎么定？设备并发与峰值时段错峰的统计口径", intent: "双人合用流量平摊指标模型", type: "definition" },
+              { title: "一人看4K视频时另一人在什么条件下会遭遇卡顿？单节点总带宽争抢边界", intent: "局域网并发带宽挤占的边界判断", type: "condition" },
+              { title: "给两台设备设置分流限速规则怎么操作？客户端本地QoS调控对比", intent: "多设备限流与分流实操方案对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "tier-200-to-500gb",
+        name: "200–500GB",
+        clusters: [
+          {
+            id: "high-bandwidth-workloads",
+            name: "4K视频与大文件频繁同步档位",
+            articles: [
+              { title: "4K高码率视频每小时数据吞吐口径是什么？Netflix与YouTube 4K码率规范", intent: "超高清视频流量吞吐标准定义", type: "definition" },
+              { title: "500GB大套餐在什么连续高负载下会触发公平使用限制？运营商单日阈值边界", intent: "超大额度触发单日FUP封顶边界", type: "condition" },
+              { title: "200GB高品质专线与500GB普通BGP怎么对比？针对画质追求者的选购横评", intent: "大容量不同线路档位体验对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "burst-transfer-resilience",
+            name: "高带宽套餐在流量高峰期的冗余",
+            articles: [
+              { title: "突发峰值传输速率冗余度指标怎么衡量？突发文件同步与并发下载口径", intent: "突发传输吞吐冗余度指标定义", type: "definition" },
+              { title: "套餐标称500G但在晚高峰什么时候跑不满带宽？单线程连接受限边界", intent: "大容量套餐单线程限速边界条件", type: "condition" },
+              { title: "单机大流量与网关级共享分流怎么对比？针对多设备高吞吐环境的配置", intent: "大容量套餐在不同接入架构下的对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "tier-500gb-to-1tb",
+        name: "500GB 以上至不足 1TB",
+        clusters: [
+          {
+            id: "studio-and-small-team",
+            name: "小型工作室与数据抓取用量区间",
+            articles: [
+              { title: "小型团队共享流量池计算口径是什么？团队人均消耗与公用网关的叠加模型", intent: "团队流量池规划与核算口径", type: "definition" },
+              { title: "接近1TB套餐在什么频繁爬虫作业下会被封禁？高频HTTP请求触发风控边界", intent: "数据采集触发商户滥用封锁边界", type: "condition" },
+              { title: "团队合买1TB商业大包与成员各买200G怎么对比？管理权限与总费用实操", intent: "企业合采与个人独立报销方案对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "fair-use-policy-checks",
+            name: "超大流量套餐公平使用原则限制",
+            articles: [
+              { title: "公平使用原则FUP具体条款口径是什么？单日峰值限额与全天总量的协议界定", intent: "公平使用原则FUP核心指标定义", type: "definition" },
+              { title: "月配额充足时为什么在连续下载后被限速至1Mbps？商户动态QoS降级边界", intent: "短时超量触发隐性流控边界", type: "condition" },
+              { title: "标榜不限量套餐与明码标价800G套餐怎么对比？真实可用额度与限制对比", intent: "虚假无限量与真实大容量方案对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "tier-1tb-above",
+        name: "1TB 及以上",
+        clusters: [
+          {
+            id: "enterprise-level-traffic",
+            name: "企业级团队与网关级聚合分流",
+            articles: [
+              { title: "TB级企业出口流量吞吐计算口径是什么？千兆局域网满载与上行并发核算", intent: "企业级海量吞吐指标标准定义", type: "definition" },
+              { title: "超大TB套餐在什么网络环境下单端口会成为瓶颈？服务器网卡与硬件转发边界", intent: "硬件吞吐与端口速率瓶颈边界", type: "condition" },
+              { title: "多条500G专线负载均衡与单条2TB大套餐怎么对比？冗余安全性与管理难度", intent: "多线聚合与单线大包架构对比实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "bandwidth-saturation-limits",
+            name: "带宽饱和度与实际可用吞吐瓶颈",
+            articles: [
+              { title: "企业级带宽饱和度指标怎么定义？长期满载率与突发容限统计口径", intent: "带宽饱和度量化指标定义", type: "definition" },
+              { title: "TB级流量在什么跨境协议下会被运营商主动丢包？UDP协议被QoS限流边界", intent: "UDP/TCP在大吞吐下的运营商限制", type: "condition" },
+              { title: "TB级大流量如何进行协议分流以规避限速？TCP与Hysteria2协议调度对比", intent: "大流量抗封锁与抗限速协议配置对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "non-expiring-traffic",
+        name: "不限时与一次性流量",
+        clusters: [
+          {
+            id: "timeless-pool-mechanics",
+            name: "永不过期流量包扣费与重置机制",
+            articles: [
+              { title: "永不过期流量包计费机制口径是什么？零月租按量抵扣与永久有效契约界定", intent: "不限时无期限流量核算标准", type: "definition" },
+              { title: "宣称不限时的流量包在什么服务终止下会作废？商户跑路与节点更迭边界", intent: "不可抗力导致长期流量包终止边界", type: "condition" },
+              { title: "不限时流量包与包年重置套餐怎么对比？针对低频出差者的真实年开支对照", intent: "低频长周期使用两种计费方案对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "hybrid-backup-strategy",
+            name: "周期套餐搭配不限时备用包方案",
+            articles: [
+              { title: "主备混合容灾双保险模型口径是什么？主套餐耗尽自动切流量包的判定标准", intent: "混合计费自动容灾指标规范", type: "definition" },
+              { title: "备用不限时节点在什么情况下无法自动唤醒？客户端分流回落规则缺失边界", intent: "故障转移规则失效的边界排查", type: "condition" },
+              { title: "日常小月付加永不过期流量包怎么搭配？兼顾低成本与不限流操作指引", intent: "小月付配按量包双订阅实操配置对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "reset-and-topup",
+        name: "流量重置与加购",
+        clusters: [
+          {
+            id: "cycle-reset-timing-rules",
+            name: "账单日重置与自然月1号重置差异",
+            articles: [
+              { title: "流量重置时间戳计算口径是什么？UTC时区判定与本地账单周期的换算标准", intent: "配额重置时间戳与时区认定标准", type: "definition" },
+              { title: "月中购买的套餐在自然月1号重置时什么时候会吃亏？计费天数不足折损边界", intent: "自然月对非月初购入者的折损边界", type: "condition" },
+              { title: "动态账单日重置与固定自然月重置怎么对比？根据发薪日和用量规划选购", intent: "两种重置机制的灵活性与坑点比对", type: "comparison" }
+            ]
+          },
+          {
+            id: "addon-traffic-pricing-premium",
+            name: "月中流量加购包溢价与清零规则",
+            articles: [
+              { title: "月中加购临时流量单价溢价率口径怎么算？加购包单价与基础套餐单价之比", intent: "应急增量流量包溢价计算口径", type: "definition" },
+              { title: "加购的临时流量在账单周期结束时什么时候会清零？不可结转条款边界", intent: "临时补充包跟随主周期清零边界", type: "condition" },
+              { title: "临时加购流量与直接提前重置套餐怎么对比？商户重置费与加购单价精算", intent: "加购流量与提前重置方案划算度对比", type: "comparison" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "monthly",
+    name: "月付机场",
+    topics: [
+      {
+        id: "true-monthly-verification",
+        name: "真实月付识别",
+        clusters: [
+          {
+            id: "recurring-charge-transparency",
+            name: "区分单月购买与自动续订绑卡",
+            articles: [
+              { title: "单月一次性支付与持续自动扣款口径是什么？收银台授权模式的区分标准", intent: "自主单月与强制续费识别标准", type: "definition" },
+              { title: "勾选月付在什么付款方式下会默认签署自动代扣协议？第三方支付授权边界", intent: "隐形免密代扣签约边界排查", type: "condition" },
+              { title: "单次手动付款与开启自动续费怎么对比？安全性与防断网便利性权衡", intent: "手动单月付与自动扣款利弊对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "annual-installment-trap",
+            name: "警惕分期年付冒充无合约月付",
+            articles: [
+              { title: "分期年付与真实无合约月付的判定口径是什么？总债务与单期违约金定义", intent: "分期假月付与真月付鉴别指标", type: "definition" },
+              { title: "分期月付在什么时候想退订会面临高额违约金？合同期未满强退条款边界", intent: "提前解约违约金陷阱限制边界", type: "condition" },
+              { title: "假月付分期协议与纯粹按月结算怎么对比？在收银台页面识别合同条款", intent: "真假月付合同文本识别与比对实操", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "one-month-usage",
+        name: "只使用一个月",
+        clusters: [
+          {
+            id: "short-term-project-needs",
+            name: "短期出差与突发任务临时采购",
+            articles: [
+              { title: "单月临时需求成本核算口径是什么？短期溢价与无后续沉没成本的标准界定", intent: "短期单月采购成本效益指标", type: "definition" },
+              { title: "买一个月用于海外出差在什么情况下可能刚落地就失效？境外IP被锁边界", intent: "异地登录触发安全风控锁号边界", type: "condition" },
+              { title: "买大容量单月套餐与买不限时小包怎么对比？短期高强度用网最佳方案", intent: "短期出差不同套餐类型实操对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "cancellation-deadlines",
+            name: "到期前关闭续费以防自动扣款",
+            articles: [
+              { title: "关闭自动续费倒计时口径是什么？提前扣款时间窗口与账单生成日标准", intent: "扣款周期与关闭窗口期指标定义", type: "definition" },
+              { title: "在到期前几个小时关闭续费在什么情况下依然会被扣款？支付通道批处理边界", intent: "临期取消遭遇延迟扣款的边界", type: "condition" },
+              { title: "支付网关后台关闭扣款与机场面板点击取消怎么对比？双重解约防扣实操", intent: "多渠道彻底关闭自动扣款对比指南", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "first-month-audit",
+        name: "首月体验验收",
+        clusters: [
+          {
+            id: "first-week-honeymoon-test",
+            name: "首周蜜月期节点稳定性跟踪",
+            articles: [
+              { title: "首周稳定性追踪指标怎么算？前7天平均掉线频次与真实延迟记录口径", intent: "新购首周质量验收指标体系", type: "definition" },
+              { title: "首周体验极佳的机场在什么时候可能迅速变慢？用户大量涌入后的超售边界", intent: "蜜月期过后性能衰减的边界判断", type: "condition" },
+              { title: "首月建立本地网络日志与凭感觉评估怎么对比？科学验收续费依据操作", intent: "量化日志记录与主观感受对比实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "rush-hour-quality-logging",
+            name: "晚间高峰段持续丢包与延时日志",
+            articles: [
+              { title: "晚高峰质检抽样统计口径是什么？连续30天晚间8点Ping与下载速率记录", intent: "整月晚高峰质检抽样规范", type: "definition" },
+              { title: "单日晚高峰严重卡顿在什么情况下属于偶然偶发？骨干光缆故障边界排除", intent: "偶发事故与常态劣化的区分边界", type: "condition" },
+              { title: "首月合格率超过80%才续费的标准怎么操作？决定是否次月续费的评估树", intent: "首月验收通过与换站决策树对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "renewal-and-cancellation",
+        name: "续费与停止续费",
+        clusters: [
+          {
+            id: "manual-vs-auto-renewal",
+            name: "手动付款与自动扣费策略优劣",
+            articles: [
+              { title: "主动续费与被动扣款风险收益指标口径是什么？资金安全与服务连续性权重", intent: "续约机制主动与被动指标定义", type: "definition" },
+              { title: "手动续费在什么断网临界期会导致配置被清除？节点订阅链接重置边界", intent: "欠费断服引发配置注销的时间边界", type: "condition" },
+              { title: "手动按月支付与提前3天设置日历提醒怎么对比？无痛月付管理实操指南", intent: "手动续费提醒机制与自动扣款对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "grace-period-handling",
+            name: "宽限期保留节点与彻底销户清退",
+            articles: [
+              { title: "到期宽限期保留时长口径怎么算？各商户停机保留与彻底释放端口的标准", intent: "服务到期宽限保留期技术指标", type: "definition" },
+              { title: "宽限期内的账号在什么情况下依然可以接收低速配置？软断网服务降级边界", intent: "宽限期低权限维持通信的边界", type: "condition" },
+              { title: "宽限期内补缴续费与重新购买新账号怎么对比？历史配置继承与重新配置", intent: "宽限续费与重新注册新单成本对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "mid-cycle-tier-change",
+        name: "月中升级与降档",
+        clusters: [
+          {
+            id: "prorated-billing-rules",
+            name: "折算天数补差价与直接覆盖原套餐",
+            articles: [
+              { title: "月中升级补差价计算公式是什么？剩余有效天数折算与新套餐现价口径", intent: "升降档折算天数财务计算模型", type: "definition" },
+              { title: "升级操作在什么恶劣条款下会直接抹平未用流量？非折算覆盖型条款边界", intent: "升级直接吞没旧额度的陷阱边界", type: "condition" },
+              { title: "按天折算补差价升级与等到下月再升怎么对比？资金支出与迫切需求权衡", intent: "立即按天补差与下月升级成本对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "downgrade-effective-date",
+            name: "降档生效时间与剩余流量结算",
+            articles: [
+              { title: "降档生效机制标准口径是什么？当前周期履约完毕与立即生效的差异界定", intent: "套餐降级生效时间节点标准", type: "definition" },
+              { title: "月中申请降档在什么情况下可能无法退还差价？大多数商户不支持退款边界", intent: "降档不退差价条款的合法合规边界", type: "condition" },
+              { title: "直接降档与取消续费重新购买低配怎么对比？操作流程与资金结算对比", intent: "系统内降档与重新下单路径比对", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "non-continuous-months",
+        name: "非连续月份使用",
+        clusters: [
+          {
+            id: "intermittent-subscription",
+            name: "隔月购买账号保留与配置失效",
+            articles: [
+              { title: "间歇性停机保号指标口径是什么？账户资产留存与节点配置持久化标准", intent: "非连续订阅账户保留周期指标", type: "definition" },
+              { title: "停用两个月后重新充值什么时候会发现订阅链接变更？后台端口重构边界", intent: "长期间断后历史配置失效边界", type: "condition" },
+              { title: "用一个月停一个月与长期持有一个微额度低价怎么对比？总体资金与省心度", intent: "断续使用与低价长持方案全面比对", type: "comparison" }
+            ]
+          },
+          {
+            id: "re-subscription-node-update",
+            name: "重新订阅后的节点链接刷新",
+            articles: [
+              { title: "重新激活订阅令牌更新口径是什么？用户UUID重置与节点列表同步机制", intent: "重新订阅凭证刷新技术机制", type: "definition" },
+              { title: "重新付款后客户端为什么依然提示节点不可用？本地缓存未清除边界排查", intent: "续订后本地节点同步失败边界", type: "condition" },
+              { title: "手动更新订阅与删除后重新导入怎么对比？快速恢复通网的操作排障指南", intent: "重新激活后多客户端配置恢复对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "monthly-rights-changes",
+        name: "月付权益变更",
+        clusters: [
+          {
+            id: "unannounced-node-pruning",
+            name: "运营方月中下架特定节点应对",
+            articles: [
+              { title: "节点列表变动率指标怎么定义？月中悄悄下架或替换线路的比例核算口径", intent: "服务期内节点变动率量化指标", type: "definition" },
+              { title: "主力节点在没有通知下突然移除在什么条件下属于严重违约？SLA承诺边界", intent: "静默砍线路构成违约的判定边界", type: "condition" },
+              { title: "遭遇节点下架后月付用户维权与直接下月换站怎么对比？止损策略抉择", intent: "申诉补偿与潇洒弃坑方案对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "tos-terms-modification-audit",
+            name: "协议变更与月付用户自主退出权",
+            articles: [
+              { title: "服务条款TOS单向修改认定口径是什么？用户权益受损时的契约有效性标准", intent: "TOS单向变更与用户退出权标准", type: "definition" },
+              { title: "商家更改限速与倍率规则什么时候立即对当月生效？免责条款边界条件", intent: "霸王条款侵害月付用户权益边界", type: "condition" },
+              { title: "月付用户的退出自由度与年付用户被套牢怎么对比？灵活性带来的安全溢价", intent: "月付与年付在权益受损时的抗风险对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "expiration-migration",
+        name: "到期换服务与迁移",
+        clusters: [
+          {
+            id: "seamless-client-handoff",
+            name: "切换机场时的客户端配置快速导入",
+            articles: [
+              { title: "无缝迁移时间成本指标口径是什么？新旧订阅交替与分流规则继承耗时标准", intent: "跨服务迁移平滑度与耗时指标", type: "definition" },
+              { title: "多订阅同时导入客户端在什么情况下会发生节点名称冲突？重名覆盖边界", intent: "多订阅混编命名冲突边界排查", type: "condition" },
+              { title: "在Clash与Sing-box中新建配置与直接覆盖旧配置怎么对比？配置备份实操", intent: "平滑替换订阅配置操作对比指南", type: "comparison" }
+            ]
+          },
+          {
+            id: "dual-subscription-overlap",
+            name: "新旧交接期无缝过渡的双订阅方案",
+            articles: [
+              { title: "新旧交接重叠期成本计算公式是什么？提前两三天购买新服务重叠天数口径", intent: "重叠测试期资金成本与冗余模型", type: "definition" },
+              { title: "老服务还有3天到期时在什么情况下坚决提前买新？老站彻底跑路前兆边界", intent: "前兆频发必须提前切站的临界边界", type: "condition" },
+              { title: "单月换一家尝鲜与固定一家长期月付怎么对比？探索新商家与沉淀习惯比对", intent: "频繁换站与长稳复购的利弊对比", type: "comparison" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "compare",
+    name: "价格对比",
+    topics: [
+      {
+        id: "brand-head-to-head",
+        name: "两个品牌直接对比",
+        clusters: [
+          {
+            id: "same-price-feature-clash",
+            name: "同等价格档位下的线路与协议较量",
+            articles: [
+              { title: "同价位两品牌直接对比模型口径是什么？带宽、流量、协议与节点数核算", intent: "双品牌直接对决指标体系建立", type: "definition" },
+              { title: "纸面参数完全一致时在什么实际指标下高下立判？晚高峰真实吞吐边界", intent: "虚标参数在实际测量下的破防边界", type: "condition" },
+              { title: "两家热门月付15元机场怎么对比？从延迟、流媒体解锁到稳定性的全景横评", intent: "具体对决案例横向评测操作", type: "comparison" }
+            ]
+          },
+          {
+            id: "line-quality-vs-traffic-pool",
+            name: "专线小流量与直连大流量抉择",
+            articles: [
+              { title: "专线品质系数与大流量池折现口径是什么？速度平稳度与总容量的乘积模型", intent: "专线小额与直连海量指标折算模型", type: "definition" },
+              { title: "小流量专线在什么使用场景下绝不能选？全家大流量重度下载边界", intent: "专线虽好但额度不够的限制边界", type: "condition" },
+              { title: "20元买50G纯专线与20元买300G直连怎么对比？不同用户画像的精准匹配", intent: "专线质感与直连海量针对性对比选购", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "same-budget-comparison",
+        name: "同预算横向比较",
+        clusters: [
+          {
+            id: "fixed-monthly-budget-matrix",
+            name: "固定每月10/20元预算横评矩阵",
+            articles: [
+              { title: "固定预算收益最大化评估口径是什么？单位金钱换取有效流量与SLA指标", intent: "固定预算约束下的价值最大化指标", type: "definition" },
+              { title: "在10元固定月预算下什么时候必须牺牲流媒体解锁？基础通网优先边界", intent: "极限预算必须割舍次要特性的边界", type: "condition" },
+              { title: "全网10元档与20元档代表性套餐怎么横向对比？多维度打分矩阵实操", intent: "同预算多品牌矩阵式横向对照", type: "comparison" }
+            ]
+          },
+          {
+            id: "hidden-cost-normalization",
+            name: "计入支付手续费后的等效实付比对",
+            articles: [
+              { title: "归一化实付金额计算公式是什么？标价加上各通道手续费后的真实总支出", intent: "综合实付归一化计算标准", type: "definition" },
+              { title: "标价便宜但手续费高达15%时在什么条件下会反超标价贵的品牌？总成本逆转边界", intent: "通道税费导致实际价格倒挂边界", type: "condition" },
+              { title: "两家机场到手实付只差1元时怎么对比？从节点冗余度看细微差价的超值度", intent: "消除手续费杂音后的精确对比实操", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "same-traffic-tier-compare",
+        name: "同流量档对比",
+        clusters: [
+          {
+            id: "fixed-quota-price-spread",
+            name: "100GB标准档在各家的标价极差",
+            articles: [
+              { title: "100GB基准档价格离散度指标怎么衡量？全行业百G月付价格极差与中位数口径", intent: "行业基准档位价格离散指标", type: "definition" },
+              { title: "百G套餐卖到40元以上在什么线路支撑下才算合理？金融级专线与独享带宽边界", intent: "超高溢价所需的技术支撑边界", type: "condition" },
+              { title: "8元100G与25元100G套餐怎么对比？便宜与高价背后的线路资源真相", intent: "巨大差价下的底层网络对比分析", type: "comparison" }
+            ]
+          },
+          {
+            id: "effective-bandwidth-parity",
+            name: "相同流量下的并发连接与峰值速率",
+            articles: [
+              { title: "同等容量下的带宽配额指标口径是什么？百兆共享与千兆独享的价值界定", intent: "额度相同下的速率指标量化规范", type: "definition" },
+              { title: "同样是100G流量在什么时候下载速度相差十倍？单线程与多线程端口限制边界", intent: "速率硬限速导致的体验断层边界", type: "condition" },
+              { title: "同流量套餐的在线测速与BT下载限制怎么对比？商家条款对速度影响实测", intent: "同容量产品在不同网络任务下的比对", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "cycle-duration-comparison",
+        name: "月付季付年付成本",
+        clusters: [
+          {
+            id: "discount-vs-runaway-risk",
+            name: "周期折扣率与跑路风险的精算平衡",
+            articles: [
+              { title: "周期折扣风险调整收益率口径怎么算？月均折扣差额与存活概率的精算模型", intent: "长周期折扣与存活风险精算指标", type: "definition" },
+              { title: "年付打5折但在运营不到3个月时跑路在什么条件下必定亏损？回本周期边界", intent: "预付亏损回本临界点数学判断", type: "condition" },
+              { title: "季付9折、半年付8折与年付7折怎么对比？根据运营年限选择最佳周期", intent: "不同付款周期的折现与风险对比实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "cash-flow-flexibility-value",
+            name: "月付带来的资金流动性价值评估",
+            articles: [
+              { title: "无合约资金流动性价值指标怎么量化？随时弃坑权力的期权价值折现口径", intent: "随时切换权力的资金灵活性价值定义", type: "definition" },
+              { title: "年付省几十块钱在什么时候会变成巨大负担？中途搬迁或换更好产品限制边界", intent: "沉没资金造成决策锁死边界", type: "condition" },
+              { title: "月月掏钱的麻烦与年付一次性交款的焦虑怎么对比？心态与账面双重对比", intent: "月付心智负担与年付风险全面横评", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "pack-vs-subscription",
+        name: "流量包与周期订阅",
+        clusters: [
+          {
+            id: "breakeven-utilization-curve",
+            name: "流量包与月付套餐损益平衡点曲线",
+            articles: [
+              { title: "周期订阅与按量流量包损益平衡点公式是什么？月均消耗阈值的计算口径", intent: "包月与流量包临界平衡点数学口径", type: "definition" },
+              { title: "流量包在什么月消耗量以上会导致成本远超按月订阅？高消耗下的溢价边界", intent: "大消耗强用流量包导致的成本失控边界", type: "condition" },
+              { title: "月耗15G用户买流量包还是买月付怎么对比？一年真实支出曲线对比实操", intent: "临界点用户的具体费用曲线对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "low-frequency-user-savings",
+            name: "低频用户采用一次性流量包的省钱账",
+            articles: [
+              { title: "低频用网用户省钱率指标怎么算？按年统计实际用量与常年月租浪费之比", intent: "低频用户节省比率核算模型", type: "definition" },
+              { title: "仅在周末偶尔查资料在什么情况下买包月最亏？30天清零带来的纯浪费边界", intent: "低频包月纯亏损的判定边界", type: "condition" },
+              { title: "100元500G不限时用两年与每月10元连续买两年怎么对比？账目全览", intent: "跨年度使用模式的真实花费对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "post-discount-actual-cost",
+        name: "优惠后实际付款",
+        clusters: [
+          {
+            id: "coupon-code-validation",
+            name: "优惠码真实扣减金额与使用限制",
+            articles: [
+              { title: "优惠券真实让利净值指标怎么算？满减门槛与折上折限制扣减口径", intent: "优惠码净让利计算标准规范", type: "definition" },
+              { title: "8折优惠码在什么情况下结算时无法生效？仅限年付或特定高价套餐边界", intent: "优惠码生效门槛与适用范围边界", type: "condition" },
+              { title: "无优惠码纯净实价与带假打折码抬价怎么对比？识别真实让利的验算步骤", intent: "虚假先涨后降与真实让利对比识别", type: "comparison" }
+            ]
+          },
+          {
+            id: "affiliate-rebate-neutrality",
+            name: "推荐返利对终端价格无影响的核算",
+            articles: [
+              { title: "推广返利佣金机制口径是什么？商家推广预算与终端用户付价中立性认定", intent: "推广佣金与买家支付价格独立性标准", type: "definition" },
+              { title: "推广链接在什么异常情况下会导致买家支付价格虚高？个别黑心加价渠道边界", intent: "恶意加价反向欺诈通道边界", type: "condition" },
+              { title: "直接官网注册与通过披露合规链接注册怎么对比？价格、权益与售后一致性", intent: "官网直达与推广注册全流程一致性比对", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "billing-rules-comparison",
+        name: "不同计费规则对照",
+        clusters: [
+          {
+            id: "upload-download-accounting",
+            name: "单向计费与双向计费的实际流量损耗",
+            articles: [
+              { title: "单向计费与双向计费流量损耗口径怎么定？上行请求数据是否计入总配额标准", intent: "单双向计费技术标准与配额损耗定义", type: "definition" },
+              { title: "双向计费在什么大文件上传场景下会造成流量翻倍？网盘同步与视频推流边界", intent: "上传大任务导致双向计费爆仓边界", type: "condition" },
+              { title: "单向计费100G与双向计费150G怎么对比？实际可用下载净容量换算", intent: "不同计费方向规则下的真实容量对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "sliding-window-vs-calendar",
+            name: "滑动窗口计费与自然日计费差别",
+            articles: [
+              { title: "滑动30天计费与自然月计费认定口径是什么？滚动周期与日历周期的差异标准", intent: "滑动计费与日历计费时间戳模型", type: "definition" },
+              { title: "大小月份切换时自然月计费在什么时候会导致使用天数缩水？2月28天扣费边界", intent: "自然月天数差异带来的扣费边界", type: "condition" },
+              { title: "动态滚动账期与固定自然月账期怎么对比？记账与充值习惯的选择对照", intent: "不同计费周期对用户习惯影响比对", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "standalone-vs-bundle",
+        name: "单套餐与组合方案",
+        clusters: [
+          {
+            id: "dual-provider-redundancy",
+            name: "主力大流量+冷备低价双套餐性价比",
+            articles: [
+              { title: "主备双服务冗余度ROI指标怎么计算？提高一个9的可用性所需边际成本口径", intent: "双订阅容灾性价比指标定义", type: "definition" },
+              { title: "双机场方案在什么上游故障下依然会同时瘫痪？国际海缆物理中断边界", intent: "外部不可抗力引发全盘瘫痪的边界", type: "condition" },
+              { title: "月付30元单高级机场与月付15+5元双机场怎么对比？综合可用性与支出横评", intent: "单高配方案与双低配互备方案对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "shared-account-vs-independent",
+            name: "多人合租套餐与独立小套餐利弊",
+            articles: [
+              { title: "多用户合买大套餐边际效益口径是什么？人均支出与总流量池富余度计算", intent: "合租规模效应边际收益模型", type: "definition" },
+              { title: "合租账号在什么违规操作下会导致连坐全员失效？一人违规被拉黑节点边界", intent: "合租连带责任导致服务归零边界", type: "condition" },
+              { title: "4人合买1TB大套餐与各买150G怎么对比？人均费用、隐私权与管理复杂度", intent: "合租与独立建号全方位多维比对", type: "comparison" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "avoid",
+    name: "机场避坑",
+    topics: [
+      {
+        id: "fake-cheap-and-promos",
+        name: "虚假低价与促销陷阱",
+        clusters: [
+          {
+            id: "headline-price-deception",
+            name: "标价1元实付需年付的文字游戏识别",
+            articles: [
+              { title: "虚假标价欺诈判定口径是什么？月均1元但强制年付且不可单月购买标准", intent: "低价文字游戏与欺诈标价定义", type: "definition" },
+              { title: "超低标价在结账跳转后什么时候会强制捆绑其他收费？隐藏开卡费边界", intent: "收银台二次绑售附加费边界排查", type: "condition" },
+              { title: "标题1元机场与真实到手实付账单怎么对比？一眼识破虚假宣传的操作流程", intent: "虚假宣传文案与真实结账比对实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "temporary-bait-nodes",
+            name: "开业低价引流后续断崖式降速排查",
+            articles: [
+              { title: "引流诱饵节点降速周期指标怎么算？开业首周与满月后带宽衰减率口径", intent: "引流期到收割期性能衰减指标", type: "definition" },
+              { title: "新机场疯狂大放水低价促销在什么条件下预示资金链即将断裂？超售跑路前兆", intent: "甩卖型降价预示卷款跑路边界", type: "condition" },
+              { title: "开业巨惠期跑分与三个月后常态测速怎么对比？历史老客户评价溯源方法", intent: "开业初期数据与长期稳定数据对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "multiplier-and-reset-traps",
+        name: "流量倍率与重置争议",
+        clusters: [
+          {
+            id: "shadow-multiplier-inflation",
+            name: "节点名称不标倍率后台偷跑扣量",
+            articles: [
+              { title: "暗倍率与扣量行为判定口径是什么？客户端统计与商户后台扣除差异标准", intent: "暗中扣量与阴阳倍率技术判定标准", type: "definition" },
+              { title: "后台扣费倍率在什么悄无声息的系统更新中会被上调？未发公告篡改规则边界", intent: "单向修改倍率不告知的违规边界", type: "condition" },
+              { title: "使用本地网络抓包核算与后台账单怎么对比？抓出机场暗中扣量的实操指南", intent: "本地流量监测与商户扣量比对实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "early-cycle-reset-disputes",
+            name: "提前重置与未通知清零案例拆解",
+            articles: [
+              { title: "提前清零违约认定口径是什么？服务周期尚未过完流量被强行截断的证据链", intent: "提前清零违约事实认定指标", type: "definition" },
+              { title: "商户在系统维护时什么时候会意外触发全体重置？数据库故障回滚边界", intent: "系统故障导致配额异常清空的边界", type: "condition" },
+              { title: "遭遇恶意清零时工单维权与外部曝光怎么对比？保存证据与挽回损失实操", intent: "异常清零申诉与止损策略比对", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "hidden-usage-limits",
+        name: "隐藏使用限制",
+        clusters: [
+          {
+            id: "connection-throttling-policy",
+            name: "偷偷限制单IP并发线程与连接池",
+            articles: [
+              { title: "隐性连接数硬截断指标怎么测？单IP并发TCP连接数上限的技术检测口径", intent: "隐性连接数限制指标量化定义", type: "definition" },
+              { title: "单并发连接在达到多少线程时会被节点直接RST重置？防火墙限流策略边界", intent: "触发防火墙硬阻断的并发阈值边界", type: "condition" },
+              { title: "标榜不限设备但在实测中被掐断怎么对比？使用多端测试揭穿假宣传", intent: "宣传不限设备与实测并发封顶对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "protocol-filtering-censorship",
+            name: "屏蔽BT下载与特定端口协议审查",
+            articles: [
+              { title: "特定端口审查与屏蔽规则口径是什么？BitTorrent、邮件25端口封禁界定", intent: "节点协议审查与端口封锁定义规范", type: "definition" },
+              { title: "误开P2P下载在什么条件下会导致账号被立即无退款封禁？商户滥用规则边界", intent: "违规下载触发极刑封号的边界判断", type: "condition" },
+              { title: "完全无审查节点与严管滥用节点怎么对比？速度稳定性与被封号风险权衡", intent: "严管节点与无管节点优缺点深度对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "long-term-prepay-risks",
+        name: "长期预付风险",
+        clusters: [
+          {
+            id: "three-year-plan-fatality",
+            name: "三年付/永久套餐背后的跑路概率模型",
+            articles: [
+              { title: "终身/永久套餐庞氏骗局模型口径是什么？后续新客资金填补老客带宽亏损", intent: "永久套餐庞氏模型精算判定口径", type: "definition" },
+              { title: "推出三年付甚至永久套餐的机场在什么时间窗口极大概率关网跑路？半年周期边界", intent: "大促收割后失联时间窗口边界", type: "condition" },
+              { title: "永久套餐省钱幻想与按月买真实支出怎么对比？血泪教训历史数据复盘", intent: "永久买断幻想与月付理性支出对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "domain-hijacking-and-loss",
+            name: "域名被封失联后客户寻路无门",
+            articles: [
+              { title: "官网域名被污染失联指标口径是什么？DNS污染、证书吊销与入口失效判定", intent: "域名被墙与官方入口失联指标", type: "definition" },
+              { title: "官网打不开且无备用发布页在什么情况下意味着彻底跑路？电报群解散边界", intent: "临时换域名与彻底失联跑路边界", type: "condition" },
+              { title: "依赖单一域名与保存发布页渠道怎么对比？防失联应急通信录建立实操", intent: "防失联渠道储备与单点失效对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "refund-and-after-sales",
+        name: "退款与售后条款",
+        clusters: [
+          {
+            id: "no-refund-clause-dissection",
+            name: "霸王条款与不可用时申诉维权通道",
+            articles: [
+              { title: "售出不退免责声明合法性口径怎么定？虚拟商品不适用无理由退货的适用标准", intent: "虚拟网络服务退款条款法律界定", type: "definition" },
+              { title: "购买后完全无法连接在什么条件下可以强制发起支付争议？未履约申诉边界", intent: "服务完全不可用发起争议的边界", type: "condition" },
+              { title: "商家无理由拒绝与通过支付网关调解怎么对比？成功追回款项的操作流程", intent: "平台内工单沟通与渠道申诉对比实操", type: "comparison" }
+            ]
+          },
+          {
+            id: "ticket-ghosting-warning",
+            name: "购买前即时响应购买后工单装死现象",
+            articles: [
+              { title: "售前售后响应反差比指标怎么算？售前咨询回复秒数与售后故障工单等待时长口径", intent: "售后客服响应反差指标体系", type: "definition" },
+              { title: "工单超过72小时未响应在什么情况下说明技术人员已弃盘？系统瘫痪边界", intent: "工单装死与事实弃盘的临界边界", type: "condition" },
+              { title: "买前先发测试工单探虚实与直接付款怎么对比？筛选可靠商家的避坑技巧", intent: "售前探针测试与盲目下单风险对比", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "entry-and-sub-security",
+        name: "入口客户端与订阅安全",
+        clusters: [
+          {
+            id: "custom-client-trojan-risk",
+            name: "强推专有exe/apk客户端的安全隐患",
+            articles: [
+              { title: "专有定制客户端安全隐患认定口径是什么？加壳木马、后门与证书篡改标准", intent: "定制专有客户端木马与隐私风险定义", type: "definition" },
+              { title: "专有客户端在什么杀毒软件报毒下坚决不要运行？木马注入与键盘记录边界", intent: "定制客户端报毒红线安全边界", type: "condition" },
+              { title: "使用机场专有客户端与开源内核通用客户端怎么对比？安全风险与使用成本", intent: "定制客户端与标准开源客户端对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "subscription-token-exposure",
+            name: "订阅链接明文泄露被盗刷流量防御",
+            articles: [
+              { title: "订阅Token泄露盗刷口径怎么判定？异常IP请求日志与流量非正常消耗口径", intent: "订阅凭据泄露与盗刷流量标准定义", type: "definition" },
+              { title: "公开截图在什么情况下会导致订阅URL直接暴露？二维码与完整链接泄露边界", intent: "信息无意泄露被爬取盗刷边界", type: "condition" },
+              { title: "明文订阅链接直连与通过本地订阅转换加密怎么对比？安全防盗刷实操", intent: "明文暴露与私有化加密转换对比指南", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "speedtest-and-unlock-hype",
+        name: "线路测速与解锁宣传",
+        clusters: [
+          {
+            id: "speedtest-whitelist-cheat",
+            name: "仅对测速节点放行千兆虚假跑分",
+            articles: [
+              { title: "测速节点白名单欺骗口径怎么判定？Speedtest放行千兆而真实下载限速标准", intent: "虚假跑分与白名单欺诈技术定义", type: "definition" },
+              { title: "跑分图极其绚丽在什么真实业务下会立刻原形毕露？大文件直链下载与4K播放边界", intent: "假测速无法支撑真实大流量的边界", type: "condition" },
+              { title: "单一Speedtest测速与Fast/YouTube真实吞吐怎么对比？撕开虚标假面具", intent: "专业测速工具与真实场景吞吐对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "transient-streaming-unlock",
+            name: "宣称永久解锁奈飞实则频繁失效",
+            articles: [
+              { title: "流媒体解锁有效率计算口径是什么？检测脚本结果与真实客户端播放标准", intent: "流媒体解锁有效率与时效指标定义", type: "definition" },
+              { title: "原生解锁节点在流媒体平台大规模更新IP库时什么时候必然失效？封锁周期边界", intent: "平台封控反制导致失效的规律边界", type: "condition" },
+              { title: "商家宣传全解锁与真实自备测试脚本验证怎么对比？实操自测排坑指南", intent: "宣传文案与自动化检测工具对比实操", type: "comparison" }
+            ]
+          }
+        ]
+      },
+      {
+        id: "abnormal-status-timeline",
+        name: "异常状态与风险记录",
+        clusters: [
+          {
+            id: "maintenance-window-frequency",
+            name: "异常高频维护背后的上游欠费征兆",
+            articles: [
+              { title: "异常维护频率红线指标怎么界定？单月无预警维护超过3次与总停机时间口径", intent: "异常维护频次与跑路风险关联指标", type: "definition" },
+              { title: "频繁声称'被DDoS攻击'或'上游拔线'在什么情况下属于跑路借口？演戏跑路边界", intent: "虚构故障与卷款跑路借口识别边界", type: "condition" },
+              { title: "正常技术升级维护与异常跑路前兆怎么对比？通过节点存活与通告透明度鉴别", intent: "真实技术运维与跑路前戏特征对比", type: "comparison" }
+            ]
+          },
+          {
+            id: "community-sentiment-tracking",
+            name: "电报群全员禁言与舆情恶化预警",
+            articles: [
+              { title: "社群舆情恶化度指标怎么统计？官方交流群全员禁言与大量踢人封禁口径", intent: "社区封嘴与舆情崩溃指标规范", type: "definition" },
+              { title: "官方群突然开启全员禁言在什么情况下意味着已卷款跑路？管理团队失联边界", intent: "禁言封群作为跑路既成事实的边界", type: "condition" },
+              { title: "观察官方社群活跃度与只看官网公告怎么对比？最快速感知风险的操作指南", intent: "社群风向与被动公告的敏锐度对比", type: "comparison" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
+
+let totalTopics = 0;
+let totalClusters = 0;
+let totalArticles = 0;
+
+for (const p of pillars) {
+  totalTopics += p.topics.length;
+  for (const t of p.topics) {
+    totalClusters += t.clusters.length;
+    for (const c of t.clusters) {
+      totalArticles += c.articles.length;
+      for (const a of c.articles) {
+        a.clusterId = c.id;
+        a.topicId = t.id;
+        a.pillarId = p.id;
+        a.primaryIntent = a.intent;
+        a.status = "planned";
+        // Create clean slug
+        const slug = a.title
+          .replace(/%/g, '百分之')
+          .replace(/\+/g, '加')
+          .replace(/[？。，、！\s\/\\#&=]/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '');
+        a.slug = slug;
+      }
+    }
+  }
+}
+
+console.log(`Pillars: ${pillars.length}, Topics: ${totalTopics}, Clusters: ${totalClusters}, Articles: ${totalArticles}`);
+
+const outDir = path.resolve('src/data');
+if (!fs.existsSync(outDir)) {
+  fs.mkdirSync(outDir, { recursive: true });
+}
+
+fs.writeFileSync(path.join(outDir, 'content-map.json'), JSON.stringify(pillars, null, 2), 'utf-8');
+console.log('Successfully wrote src/data/content-map.json');

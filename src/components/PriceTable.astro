@@ -1,0 +1,105 @@
+---
+interface PlanRow {
+  name: string;
+  brandName?: string;
+  actualPayment: string | number;
+  billingCycle: string;
+  monthlyEquivalent: string | number;
+  isTrueMonthly: boolean;
+  quota: string | number;
+  unit: string;
+  resetRule: string;
+  multiplier: string;
+  deviceLimit: string | number;
+  verifiedAt: string;
+}
+
+interface Props {
+  caption?: string;
+  plans: PlanRow[];
+  class?: string;
+}
+
+const { caption = "真实套餐价格与使用限制对比表", plans, class: className = "" } = Astro.props;
+---
+
+<div class={`my-6 ${className}`}>
+  {caption && (
+    <div class="mb-2 text-sm font-semibold text-slate-800 flex items-center justify-between">
+      <span>{caption}</span>
+      <span class="text-xs font-normal text-slate-500">左右滑动查看完整参数</span>
+    </div>
+  )}
+
+  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+    <table class="w-full text-left text-xs text-slate-600 border-collapse min-w-[700px]">
+      <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+        <tr>
+          <th class="py-3 px-3">套餐名称</th>
+          <th class="py-3 px-3">实付金额</th>
+          <th class="py-3 px-3">付款周期</th>
+          <th class="py-3 px-3">月均折算</th>
+          <th class="py-3 px-3">流量额度</th>
+          <th class="py-3 px-3">重置机制</th>
+          <th class="py-3 px-3">倍率区间</th>
+          <th class="py-3 px-3">在线设备</th>
+          <th class="py-3 px-3">核验时间</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        {plans.length === 0 ? (
+          <tr>
+            <td colspan="9" class="py-6 text-center text-slate-400">
+              暂无符合条件的核验套餐记录（资料核验中）
+            </td>
+          </tr>
+        ) : (
+          plans.map((p) => (
+            <tr class="hover:bg-slate-50 transition-colors">
+              <td class="py-3 px-3 font-medium text-slate-900">
+                {p.brandName ? <span class="text-slate-500 mr-1">[{p.brandName}]</span> : null}
+                {p.name}
+              </td>
+              <td class="py-3 px-3 font-semibold text-slate-900 font-mono">
+                {typeof p.actualPayment === 'number' ? `¥${p.actualPayment}` : p.actualPayment}
+              </td>
+              <td class="py-3 px-3">
+                <span class={`inline-block px-2 py-0.5 rounded text-[11px] ${
+                  p.isTrueMonthly
+                    ? 'bg-emerald-50 text-emerald-700 font-medium border border-emerald-200'
+                    : 'bg-amber-50 text-amber-700 border border-amber-200'
+                }`}>
+                  {p.billingCycle}
+                </span>
+              </td>
+              <td class="py-3 px-3 font-mono text-slate-700">
+                {typeof p.monthlyEquivalent === 'number' ? `¥${p.monthlyEquivalent}/月` : p.monthlyEquivalent}
+                {!p.isTrueMonthly && (
+                  <span class="block text-[10px] text-slate-400">折算非真月付</span>
+                )}
+              </td>
+              <td class="py-3 px-3 font-mono">
+                {p.quota} {p.unit}
+              </td>
+              <td class="py-3 px-3 text-slate-500">
+                {p.resetRule}
+              </td>
+              <td class="py-3 px-3 font-mono text-slate-700">
+                {p.multiplier}
+              </td>
+              <td class="py-3 px-3 text-slate-700">
+                {p.deviceLimit}
+              </td>
+              <td class="py-3 px-3 text-slate-400 text-[11px] font-mono">
+                {p.verifiedAt}
+              </td>
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+  <p class="text-[11px] text-slate-400 mt-2">
+    * 注：真月付代表单月独立扣费无合约绑定；年付折算仅为数学平均，非真月付。未知字段统一标识为待核实。
+  </p>
+</div>

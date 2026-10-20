@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="站内全量资料与知识库检索｜便宜机场"
+  description="通过 Pagefind 离线静态全文索引，快速检索 42 家机场品牌、评测数据、流量规则与避坑指南。"
+  canonicalUrl="/search/"
+  robots="noindex, follow"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="border-b border-slate-200 pb-6 mb-8">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        全站静态资料检索与知识库搜索
+      </h1>
+      <p class="text-slate-600 text-sm m-0">
+        输入品牌名称（如“光速云”）、协议（如“VLESS”）、预算区间（如“真月付”）或避坑关键词进行瞬时检索。
+      </p>
+    </div>
+
+    <!-- Pagefind 静态搜索容器 -->
+    <div id="search-container" class="my-6">
+      <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+      <script src="/pagefind/pagefind-ui.js" is:inline></script>
+      <div id="pagefind-search"></div>
+      <script is:inline>
+        window.addEventListener('DOMContentLoaded', () => {
+          if (window.PagefindUI) {
+            new PagefindUI({
+              element: "#pagefind-search",
+              showSubResults: true,
+              showImages: false,
+              translations: {
+                placeholder: "输入关键词检索真实品牌、价格或规则...",
+                clear_search: "清除",
+                load_more: "加载更多结果",
+                search_label: "搜索本站",
+                filters_label: "筛选",
+                zero_results: "未找到与 [SEARCH_TERM] 相关的资料",
+                many_results: "找到 [COUNT] 条相关资料",
+                one_result: "找到 [COUNT] 条相关资料",
+                alt_search: "未找到结果，正在尝试近似词检索...",
+                search_suggestion: "建议尝试更简短的词汇或核心品牌名"
+              }
+            });
+          }
+        });
+      </script>
+    </div>
+
+    <div class="mt-12 bg-slate-50 border border-slate-200 rounded-xl p-5 text-xs text-slate-500">
+      <h3 class="font-semibold text-slate-700 mb-2 text-sm">热门检索建议：</h3>
+      <div class="flex flex-wrap gap-2">
+        <a href="/cheap/" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700 hover:text-blue-600">真月付 10 元以下</a>
+        <a href="/recommend/" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700 hover:text-blue-600">新手第一款机场</a>
+        <a href="/plans/" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700 hover:text-blue-600">100G 流量套餐</a>
+        <a href="/avoid/" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700 hover:text-blue-600">暗扣流量抓包排查</a>
+        <a href="/compare/" class="px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700 hover:text-blue-600">双品牌横向对比</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

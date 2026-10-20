@@ -1,0 +1,67 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { generateWebsiteSchema, generateOrganizationSchema } from '../lib/structured-data';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  schema?: any;
+  robots?: string;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href.replace(/\/+$/, '/'),
+  schema,
+  robots = "index, follow",
+  class: className = ""
+} = Astro.props;
+
+// 确保 canonicalUrl 使用 https://pianyijichang.world 域名前缀与结尾斜杠
+const siteOrigin = "https://pianyijichang.world";
+const normalizedCanonical = canonicalUrl.startsWith("http")
+  ? canonicalUrl
+  : `${siteOrigin}${canonicalUrl.startsWith('/') ? '' : '/'}${canonicalUrl}`;
+
+const defaultSchemas = [generateWebsiteSchema(), generateOrganizationSchema()];
+const pageSchemas = schema
+  ? (Array.isArray(schema) ? [...defaultSchemas, ...schema] : [...defaultSchemas, schema])
+  : defaultSchemas;
+---
+
+<!doctype html>
+<html lang="zh-CN" class="h-full scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={normalizedCanonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / 社交元标签 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={normalizedCanonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="便宜机场" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- 结构化数据 JSON-LD (同源数据直出) -->
+    {pageSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+  </head>
+  <body class="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
+    <Header />
+    <main class={`flex-grow ${className}`} data-pagefind-body>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

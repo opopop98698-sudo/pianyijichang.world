@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 - 页面未找到｜便宜机场"
+  description="抱歉，您访问的页面不存在或已被移除。请返回便宜机场首页或使用导航继续查找。"
+  canonicalUrl="/404.html"
+  robots="noindex, nofollow"
+>
+  <div class="max-w-3xl mx-auto px-4 py-20 text-center">
+    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-50 text-blue-600 font-extrabold text-3xl font-mono mb-6">
+      404
+    </div>
+    <h1 class="text-3xl font-bold text-slate-900 mb-4">
+      抱歉，您访问的页面未找到
+    </h1>
+    <p class="text-slate-600 text-sm max-w-md mx-auto mb-8 leading-relaxed">
+      该页面可能已被迁移、重命名，或者您输入的网址有误。请使用下方导航返回各个核心栏目。
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/"
+        class="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-colors shadow-sm"
+      >
+        返回网站首页
+      </a>
+      <a
+        href="/cheap/"
+        class="px-5 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-semibold text-sm hover:bg-slate-200 transition-colors"
+      >
+        查看便宜机场清单
+      </a>
+      <a
+        href="/recommend/"
+        class="px-5 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-semibold text-sm hover:bg-slate-200 transition-colors"
+      >
+        新手选购推荐
+      </a>
+      <a
+        href="/search/"
+        class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors"
+      >
+        站内全文搜索
+      </a>
+    </div>
+  </div>
+</BaseLayout>

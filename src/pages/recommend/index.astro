@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import PillarLayout from '../../layouts/PillarLayout.astro';
+
+const allPages = await getCollection('pages');
+const page = allPages.find((p) => p.slug === 'recommend' || p.data.id === 'page-recommend');
+if (!page) {
+  throw new Error('Could not find recommend page entry in pages collection');
+}
+
+const { Content } = await page.render();
+---
+
+<PillarLayout frontmatter={page.data}>
+  <Content />
+</PillarLayout>

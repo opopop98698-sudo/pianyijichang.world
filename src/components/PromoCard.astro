@@ -1,0 +1,56 @@
+---
+import brandsData from '../data/brands.json';
+
+interface Props {
+  brandId: string;
+  title?: string;
+  description?: string;
+  class?: string;
+}
+
+const { brandId, title, description, class: className = "" } = Astro.props;
+const brand = brandsData.find((b) => b.id === brandId);
+
+if (!brand) {
+  throw new Error(`PromoCard: Brand with ID "${brandId}" not found in brands.json`);
+}
+
+const displayCode = brand.promoCode || "无需优惠码";
+---
+
+<div class={`bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-4 my-4 ${className}`}>
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-white uppercase tracking-wider">
+          优惠活动
+        </span>
+        <h4 class="font-bold text-amber-950 text-sm m-0">
+          {title || `${brand.name} 专属优惠折扣码`}
+        </h4>
+      </div>
+      <p class="text-xs text-amber-800/80 mt-1 mb-0">
+        {description || `在收银台结账时填入官方核验代码，享受官方直接让利减免。`}
+      </p>
+    </div>
+
+    <div class="flex items-center gap-2 self-start sm:self-auto">
+      <div class="bg-white border border-amber-300 rounded-lg px-3 py-1.5 flex items-center gap-2 shadow-inner">
+        <span class="text-xs text-slate-400 font-sans">优惠码:</span>
+        <code class="font-mono font-bold text-amber-900 text-sm select-all">{displayCode}</code>
+      </div>
+
+      <a
+        href={brand.registerUrl}
+        target="_blank"
+        rel="nofollow sponsored noopener"
+        class="inline-flex items-center px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold shadow-sm transition-colors whitespace-nowrap"
+      >
+        去激活优惠
+      </a>
+    </div>
+  </div>
+  <p class="text-[10px] text-amber-700/70 mt-2 mb-0">
+    含推广链接，通过链接注册可能为本站带来佣金，不影响用户支付价格。优惠码真实有效期以商户收银台实时校验为准。
+  </p>
+</div>

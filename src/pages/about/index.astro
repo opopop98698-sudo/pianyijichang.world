@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateBreadcrumbSchema } from '../../lib/structured-data';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '关于我们与独立性声明', url: '/about/' }
+];
+
+const schema = generateBreadcrumbSchema(breadcrumbs);
+---
+
+<BaseLayout
+  title="关于本站：独立第三方声明、商业披露与评测准则｜便宜机场"
+  description="便宜机场为独立第三方代理信息与选购核验资料库，声明与任何机场品牌无隶属关系，公开透明披露商业化机制与测试方法。"
+  canonicalUrl="/about/"
+  schema={schema}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- 面包屑 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">关于我们</span>
+    </nav>
+
+    <div class="border-b border-slate-200 pb-6 mb-8">
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-3">
+        关于本站：独立性声明、商业披露与数据诚实性原则
+      </h1>
+      <p class="text-slate-600 text-sm leading-relaxed m-0">
+        最后修订与核验时间：2026年10月20日 ｜ 便宜机场编辑评测组
+      </p>
+    </div>
+
+    <div class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed space-y-6">
+      <section class="bg-blue-50/60 border border-blue-200 rounded-2xl p-6">
+        <h2 class="text-lg font-bold text-blue-950 mt-0 mb-3 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+          一、独立第三方机构地位声明
+        </h2>
+        <p class="mb-2">
+          <strong>便宜机场（域名：<code>https://pianyijichang.world</code>）</strong>是一个完全由技术爱好者、网络工程师与独立内容分析师维护的第三方信息与技术资料库。
+        </p>
+        <p class="m-0">
+          <strong>我们郑重声明：本站与任何被列出、评测、对比或收录的机场品牌、服务提供商或其关联企业，不存在任何股权隶属、管理雇佣、联合运营或排他性代理关系。</strong> 本站的所有排名位次与评测结论均基于公开数据采集、协议抓包测试以及客观数学公式推导，不受任何商户公关或付费操控。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          二、合规商业化与推广佣金披露 (Affiliate Disclosure)
+        </h2>
+        <p>
+          为了覆盖本站全天候自动化服务器测速探针、域名持有、CDN 流量以及高质量内容研发的硬性成本，本站参与了部分商户的公开推荐合作计划（Affiliate Program）：
+        </p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>
+            <strong>链接属性合规</strong>：所有指向第三方机场官网或收银台的注册跳转链接，均在 HTML 源代码中严格标记 <code>target="_blank" rel="nofollow sponsored noopener"</code>，完全符合主流搜索引擎（Google、Bing）关于付费推广链接的抓取与权重传递规范。
+          </li>
+          <li>
+            <strong>用户支付价格零影响</strong>：通过本站推广链接注册或使用专属优惠码，<strong>绝对不会增加用户的支付价格</strong>，相反部分商户为本站读者提供了专属折扣优惠。本站收到的佣金均由商户自身的市场营销预算支出。
+          </li>
+          <li>
+            <strong>醒目提示要求</strong>：全站所有放置推广注册按钮或优惠码的区域，均强制常驻披露文案：<em>“含推广链接，通过链接注册可能为本站带来佣金，不影响用户支付价格”</em>。
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          三、数据诚实性与透明度红线
+        </h2>
+        <p>
+          代理服务属于高动态变动领域。针对信息不透明的行业痼疾，本站恪守以下 5 条数据诚实底线：
+        </p>
+        <ol class="list-decimal pl-5 space-y-2">
+          <li><strong>绝不编造数据</strong>：对于未测试的带宽不编造测速跑分，对于未公开的节点协议一律如实标注为「待核实」，严禁将未知显示为“0”、“支持”或“完美可用”。</li>
+          <li><strong>品牌声明严格前缀</strong>：所有未经本站实验室实测复现的商户宣传点（如“1小时极速工单”、“晚高峰千兆不限速”），在前端展示时必须统一附加「品牌资料显示」前缀。</li>
+          <li><strong>年付折算严禁冒充月付</strong>：年付 120 元折合约 10 元/月，必须明确标注为“年付折算”，绝不放入“真月付”筛选组。</li>
+          <li><strong>客观记录负面与争议</strong>：对出现暗扣流量、阴阳倍率或跑路前兆的商户，在避坑专栏真实收录，不因商务合作而下架负面记录。</li>
+          <li><strong>不作不切实际的承诺</strong>：本站不承诺任何代理服务“永久稳定、绝对不封锁”，不保证任何商户能永久运营，时刻提醒用户坚持单月低额付款以规避风险。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          四、法律与合规底线
+        </h2>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-amber-900 text-xs">
+          <p class="font-bold mb-1">【法律与网络安全合规警示】</p>
+          <p class="m-0 leading-relaxed">
+            本站坚决禁止提供翻越防火长城、绕过国家网络审查的具体操作步骤；坚决禁止提供任何真实可用节点 IP、端口、密码或可直接导入的订阅链接。用户浏览本站内容应遵守国家法律法规，将网络代理技术仅用于正规的跨国技术开发、学术文献检索、外贸跨境电商沟通与经批准的合规通信用途。
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,74 @@
+---
+import contentMapData from '../data/content-map.json';
+
+interface Props {
+  pillarId?: string;
+  topicId?: string;
+  title?: string;
+  class?: string;
+}
+
+const { pillarId, topicId, title, class: className = "" } = Astro.props;
+
+// Find topics to display
+let topics: any[] = [];
+if (pillarId) {
+  const p = contentMapData.find((item) => item.id === pillarId);
+  if (p) topics = p.topics;
+} else if (topicId) {
+  for (const p of contentMapData) {
+    const t = p.topics.find((item) => item.id === topicId);
+    if (t) {
+      topics = [t];
+      break;
+    }
+  }
+}
+---
+
+<div class={`my-8 bg-slate-50/80 rounded-2xl border border-slate-200 p-6 ${className}`}>
+  <div class="flex items-center gap-2 mb-4">
+    <span class="w-1.5 h-5 bg-blue-600 rounded-full inline-block"></span>
+    <h3 class="text-base font-bold text-slate-900 m-0">
+      {title || (topicId ? "下辖内容集群与已规划深度指南" : "下辖二级专题与研究导读")}
+    </h3>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {topics.map((top) => (
+      <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <h4 class="font-bold text-slate-800 text-sm m-0">
+            {top.name}
+          </h4>
+          <span class="text-[11px] font-mono text-slate-400">
+            {top.clusters.length} 集群 / {top.clusters.reduce((acc: number, c: any) => acc + c.articles.length, 0)} 篇
+          </span>
+        </div>
+
+        <div class="space-y-3 mt-3">
+          {top.clusters.map((c: any) => (
+            <div class="text-xs">
+              <span class="font-semibold text-slate-700 block mb-1">
+                • {c.name}
+              </span>
+              <ul class="list-none p-0 m-0 space-y-1 pl-3 text-slate-500">
+                {c.articles.map((art: any) => (
+                  <li class="flex items-baseline gap-1.5 line-clamp-1 hover:text-blue-600 transition-colors">
+                    <span class={`inline-block w-1.5 h-1.5 rounded-full ${
+                      art.type === 'definition' ? 'bg-blue-400' :
+                      art.type === 'condition' ? 'bg-amber-400' : 'bg-emerald-400'
+                    }`}></span>
+                    <a href={`/articles/${art.slug}/`} class="hover:underline">
+                      {art.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

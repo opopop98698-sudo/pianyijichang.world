@@ -1,0 +1,54 @@
+---
+interface SourceItem {
+  id: string;
+  sourceType: string;
+  urlOrPath: string;
+  publishedAt?: string;
+  accessedAt: string;
+  notes?: string;
+}
+
+interface Props {
+  sources: SourceItem[];
+  class?: string;
+}
+
+const { sources = [], class: className = "" } = Astro.props;
+
+const formatType = (type: string) => {
+  switch (type) {
+    case 'official_website': return '品牌官方网站公开资料';
+    case 'vendor_announcement': return '商户官方公告/工单沟通记录';
+    case 'third_party_test': return '第三方独立网络观测平台';
+    case 'internal_measurement': return '本站实验室客观测速复核';
+    default: return type;
+  }
+};
+---
+
+{sources.length > 0 && (
+  <aside class={`mt-8 pt-4 border-t border-slate-200 text-xs text-slate-500 bg-slate-50 rounded-xl p-4 ${className}`}>
+    <div class="flex items-center gap-1.5 font-semibold text-slate-700 mb-2">
+      <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+      </svg>
+      <span>数据来源与核验凭据声明</span>
+    </div>
+    <ul class="space-y-1.5 list-none p-0 m-0">
+      {sources.map((s, idx) => (
+        <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 text-[11px] leading-relaxed">
+          <span class="font-mono text-slate-400">[{idx + 1}]</span>
+          <span class="font-medium text-slate-700">{formatType(s.sourceType)}：</span>
+          <span class="font-mono text-slate-600 truncate max-w-md">{s.urlOrPath}</span>
+          <span class="text-slate-400">
+            {s.publishedAt && `(发布于 ${s.publishedAt})`} (核验于 {s.accessedAt})
+          </span>
+          {s.notes && <span class="text-amber-600">[{s.notes}]</span>}
+        </li>
+      ))}
+    </ul>
+    <p class="text-[10px] text-slate-400 mt-2 m-0">
+      本站坚持数据诚实性，若第三方信息或品牌发生价格、线路变更，欢迎通过工单反馈核实更新。
+    </p>
+  </aside>
+)}

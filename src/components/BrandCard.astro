@@ -1,0 +1,107 @@
+---
+import brandsData from '../data/brands.json';
+
+interface Props {
+  brandId: string;
+  class?: string;
+}
+
+const { brandId, class: className = '' } = Astro.props;
+const brand = brandsData.find((b) => b.id === brandId);
+
+if (!brand) {
+  throw new Error(`BrandCard: Brand with ID "${brandId}" not found in brands.json`);
+}
+
+const isVendor = brand.dataStatus === 'vendor';
+const displayHighlights = (brand.highlights || []).map((h) =>
+  isVendor && !h.startsWith('品牌资料显示') ? `品牌资料显示：${h}` : h
+);
+---
+
+<div class={`bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col justify-between relative ${className}`}>
+  <!-- 顶部状态与商业推广徽章 -->
+  <div class="flex items-center justify-between gap-2 mb-3">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-slate-700 text-xs font-bold font-mono">
+        #{brand.rank}
+      </span>
+      <h3 class="text-lg font-bold text-slate-900 m-0">
+        {brand.name}
+      </h3>
+      {brand.isPrimary && (
+        <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+          核心推荐
+        </span>
+      )}
+    </div>
+    <span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
+      商业推广
+    </span>
+  </div>
+
+  <!-- 价格与基本属性 -->
+  <div class="mb-4">
+    <div class="flex items-baseline gap-2 mb-2">
+      <span class="text-xs text-slate-500">起步价格</span>
+      <span class="text-xl font-extrabold text-blue-600 font-mono">{brand.priceFrom}</span>
+    </div>
+
+    <!-- 线路与协议标签 -->
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      {brand.lineType.map((lt) => (
+        <span class="px-2 py-0.5 rounded text-xs bg-blue-50 text-blue-700 border border-blue-100">
+          {lt}
+        </span>
+      ))}
+      {brand.protocols.map((p) => (
+        <span class="px-2 py-0.5 rounded text-xs bg-emerald-50 text-emerald-700 border border-emerald-100 font-mono">
+          {p}
+        </span>
+      ))}
+      {brand.since && (
+        <span class="px-2 py-0.5 rounded text-xs bg-slate-50 text-slate-600 border border-slate-200">
+          {brand.since}年运营
+        </span>
+      )}
+    </div>
+
+    <!-- 宣称亮点 (遵从合规前缀) -->
+    <ul class="text-xs text-slate-600 space-y-1 mb-2 list-disc list-inside">
+      {displayHighlights.map((hl) => (
+        <li class="line-clamp-1">{hl}</li>
+      ))}
+    </ul>
+
+    {brand.promoCode && (
+      <div class="mt-2 text-xs bg-amber-50 border border-amber-200 rounded p-1.5 text-amber-900 flex items-center justify-between">
+        <span>优惠码：<strong class="font-mono text-amber-800">{brand.promoCode}</strong></span>
+        <span class="text-[10px] text-amber-700">结算时输入</span>
+      </div>
+    )}
+  </div>
+
+  <!-- 底部操作与合规披露 -->
+  <div class="pt-3 border-t border-slate-100">
+    <div class="flex items-center gap-2 mb-2">
+      <a
+        href={`/recommend/#brand-${brand.id}`}
+        class="flex-1 text-center py-2 px-3 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+      >
+        查看详情
+      </a>
+      <a
+        href={brand.registerUrl}
+        target="_blank"
+        rel="nofollow sponsored noopener"
+        class="flex-1 text-center py-2 px-3 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+      >
+        立即注册
+      </a>
+    </div>
+    <!-- 商业披露法定义务文案 -->
+    <p class="text-[10px] text-slate-400 leading-tight m-0 text-center">
+      含推广链接，通过链接注册可能为本站带来佣金，不影响用户支付价格
+    </p>
+  </div>
+</div>

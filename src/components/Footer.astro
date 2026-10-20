@@ -1,0 +1,94 @@
+---
+const currentYear = new Date().getFullYear();
+
+const pillars = [
+  { name: '机场推荐', href: '/recommend/' },
+  { name: '便宜机场', href: '/cheap/' },
+  { name: '免费机场', href: '/free/' },
+  { name: '性价比机场', href: '/value/' },
+  { name: '流量套餐', href: '/plans/' },
+  { name: '月付机场', href: '/monthly/' },
+  { name: '价格对比', href: '/compare/' },
+  { name: '机场避坑', href: '/avoid/' }
+];
+---
+
+<footer class="bg-slate-900 text-slate-300 pt-12 pb-8 border-t border-slate-800 text-xs">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-slate-800">
+      <!-- 品牌与独立第三方声明 -->
+      <div class="md:col-span-2 space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-extrabold flex items-center justify-center text-sm">
+            便
+          </span>
+          <span class="font-bold text-white text-base">便宜机场 (pianyijichang.world)</span>
+        </div>
+        <p class="text-slate-400 leading-relaxed text-xs">
+          面向预算有限、初次购买代理或寻找稳定日常备用路线的中文用户，提供真实机场价格、套餐对比、流量规则、使用限制与科学选购依据。
+        </p>
+        <div class="bg-slate-800/80 rounded-lg p-3 border border-slate-700/80 text-[11px] text-slate-300">
+          <strong class="text-emerald-400 block mb-1">【独立第三方中立声明】</strong>
+          本站为完全独立的第三方代理技术信息与选购核验资料库，与任何被列出之机场品牌不存在股权隶属、从属运营或联合控制关系。全站数据严格依据公开商户信息、第三方监测与本站客观测试日志采信。
+        </div>
+      </div>
+
+      <!-- 栏目导航 -->
+      <div>
+        <h4 class="text-white font-semibold mb-3 text-xs tracking-wider uppercase">主业务栏目</h4>
+        <ul class="space-y-2 list-none p-0 m-0 text-slate-400">
+          {pillars.map((p) => (
+            <li>
+              <a href={p.href} class="hover:text-white transition-colors">
+                {p.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- 合规指南与免责条款 -->
+      <div>
+        <h4 class="text-white font-semibold mb-3 text-xs tracking-wider uppercase">合规规范与透明度</h4>
+        <ul class="space-y-2 list-none p-0 m-0 text-slate-400">
+          <li>
+            <a href="/about/" class="text-blue-400 hover:text-blue-300">
+              关于本站、商业披露与评测方法
+            </a>
+          </li>
+          <li>
+            <a href="/search/" class="hover:text-white">
+              Pagefind 静态检索库
+            </a>
+          </li>
+          <li>
+            <a href="/avoid/" class="hover:text-white">
+              跑路预警与争议黑名单
+            </a>
+          </li>
+          <li>
+            <a href="/sitemap-index.xml" class="hover:text-white">
+              Sitemap 站点地图
+            </a>
+          </li>
+        </ul>
+        <div class="mt-4 text-[11px] text-slate-400 border-t border-slate-800 pt-3">
+          <p class="mb-1 text-amber-300">合规底线警示：</p>
+          <p class="m-0 leading-tight">
+            本站坚决禁止提供翻越防火长城/绕过审查的具体操作步骤；坚决不提供任何真实可用节点地址或订阅链接。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部版权与披露 -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
+      <div>
+        © {currentYear} pianyijichang.world 便宜机场. 静态内容架构驱动.
+      </div>
+      <div class="text-center sm:text-right">
+        <span>商业披露：全站外部注册链接含商业推荐参数，可能为本站带来推荐报酬，但绝不影响用户实付价格。</span>
+      </div>
+    </div>
+  </div>
+</footer>
