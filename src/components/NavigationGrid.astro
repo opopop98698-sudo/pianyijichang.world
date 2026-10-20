@@ -113,52 +113,53 @@ const paths = [
     {paths.map((p) => (
       <a
         href={p.href}
-        class="group relative bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm hover:shadow-md hover:border-blue-400 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
+        class="group relative bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm hover:shadow-md hover:border-blue-400 hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between no-underline"
+        style="text-decoration: none !important;"
       >
         <div>
-          <!-- 痛点提问 -->
-          <div class="flex items-center justify-between gap-2 mb-3">
-            <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700 transition-colors">
+          <!-- 痛点提问 (放大至 13-14px 粗体) -->
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <span class="text-xs sm:text-sm font-extrabold text-blue-600 group-hover:text-blue-700 transition-colors tracking-wide">
               {p.painpoint}
             </span>
           </div>
 
-          <!-- 栏目标题与徽章 -->
-          <div class="flex items-center justify-between gap-2 mb-2">
-            <div class="flex items-center gap-2">
-              <span class="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-blue-50 text-slate-700 group-hover:text-blue-600 flex items-center justify-center transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <!-- 栏目标题与徽章 (升级至 18px 粗体标题，标签提升至 12px) -->
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-blue-50 text-slate-700 group-hover:text-blue-600 flex items-center justify-center transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={p.icon}></path>
                 </svg>
               </span>
-              <h3 class="text-base font-extrabold text-slate-900 m-0 group-hover:text-blue-600 transition-colors">
+              <h3 class="text-lg font-extrabold text-slate-900 m-0 group-hover:text-blue-600 transition-colors tracking-tight">
                 {p.title}
               </h3>
             </div>
-            <span class={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${p.tagColor}`}>
+            <span class={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${p.tagColor}`}>
               {p.tag}
             </span>
           </div>
 
-          <!-- 核心导读 -->
-          <p class="text-xs text-slate-600 leading-relaxed mt-2 mb-3">
+          <!-- 核心导读 (放大至 14px 标准正文字号，宽松行高，彻底消除下划线) -->
+          <p class="text-sm text-slate-600 leading-relaxed mt-2 mb-4 font-normal" style="text-decoration: none !important;">
             {p.description}
           </p>
 
-          <!-- 指标小标签 -->
+          <!-- 指标小标签 (放大至 12px，加大内边距，告别微型文字) -->
           <div class="flex flex-wrap gap-1.5 mb-4">
             {p.metrics.map((m) => (
-              <span class="text-[10px] font-mono text-slate-500 bg-slate-50 border border-slate-200 px-1.5 py-0.5 rounded">
+              <span class="text-xs font-medium text-slate-600 bg-slate-100/90 border border-slate-200 px-2 py-0.5 rounded-md">
                 #{m}
               </span>
             ))}
           </div>
         </div>
 
-        <!-- 底部进入箭头 -->
-        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-700 group-hover:text-blue-600 transition-colors">
+        <!-- 底部进入箭头 (放大至 14px 粗体) -->
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
           <span>进入专栏选购</span>
-          <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+          <span class="transform group-hover:translate-x-1.5 transition-transform text-base">→</span>
         </div>
       </a>
     ))}

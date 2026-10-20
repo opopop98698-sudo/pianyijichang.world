@@ -79,12 +79,12 @@ cheapPlans.sort((a, b) => a.monthlyEquivalent - b.monthlyEquivalent);
         {cheapPlans.map((item) => (
           <tr class="hover:bg-slate-50/80 transition-colors">
             <td class="py-2.5 px-3 font-semibold text-slate-900 flex items-center gap-1.5">
-              <span class="text-slate-400 font-mono text-[10px]">#{item.rank}</span>
-              <span>{item.brandName}</span>
+              <span class="text-slate-400 font-mono text-xs">#{item.rank}</span>
+              <span class="font-bold">{item.brandName}</span>
             </td>
             <td class="py-2.5 px-3 font-medium text-slate-800">{item.planName}</td>
             <td class="py-2.5 px-3">
-              <span class={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
+              <span class={`px-2 py-0.5 rounded text-xs font-semibold ${
                 item.isTrueMonthly ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600'
               }`}>
                 {item.billing}
@@ -92,23 +92,23 @@ cheapPlans.sort((a, b) => a.monthlyEquivalent - b.monthlyEquivalent);
             </td>
             <td class="py-2.5 px-3 font-mono font-bold text-slate-900">{item.priceDisplay}</td>
             <td class="py-2.5 px-3 font-mono text-slate-700">{item.traffic}</td>
-            <td class="py-2.5 px-3 font-mono font-extrabold text-blue-600">
-              ¥{item.monthlyEquivalent} <span class="text-[10px] text-slate-400 font-normal">/月</span>
+            <td class="py-2.5 px-3 font-mono font-extrabold text-blue-600 text-sm">
+              ¥{item.monthlyEquivalent} <span class="text-xs text-slate-400 font-normal">/月</span>
             </td>
             <td class="py-2.5 px-3">
               {item.isTrueMonthly ? (
-                <span class="inline-block px-1.5 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-800 font-semibold">
+                <span class="inline-block px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 font-semibold">
                   真月付
                 </span>
               ) : (
-                <span class="inline-block px-1.5 py-0.5 rounded text-[10px] bg-amber-50 text-amber-700 border border-amber-200">
+                <span class="inline-block px-2 py-0.5 rounded text-xs bg-amber-50 text-amber-700 border border-amber-200">
                   长周期折算
                 </span>
               )}
             </td>
-            <td class="py-2.5 px-3 font-mono text-[11px]">
+            <td class="py-2.5 px-3 font-mono text-xs">
               {item.hasSpeedtest ? (
-                <a href={`/recommend/#brand-evidence-${item.brandId}`} class="text-emerald-600 hover:underline font-medium">
+                <a href={`/recommend/#brand-evidence-${item.brandId}`} class="text-emerald-600 hover:underline font-semibold">
                   ● 查看测速图
                 </a>
               ) : (
@@ -132,7 +132,7 @@ cheapPlans.sort((a, b) => a.monthlyEquivalent - b.monthlyEquivalent);
     </table>
   </div>
   
-  <p class="text-[11px] text-slate-400 mt-4 m-0 leading-relaxed">
+  <p class="text-xs text-slate-500 mt-4 m-0 leading-relaxed">
     * 选购提醒：标有「真月付」的套餐支持单月续费，无预付一年风险；标有「长周期折算」的套餐需要一次性支付整年费用方可享受均摊价。含推广链接，请根据自身预算按需选购。
   </p>
 </div>

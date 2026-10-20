@@ -249,26 +249,26 @@ const typeLabel =
       <!-- 层级 3: 同集群三层递进闭环文章 (口径定义 -> 边界限制 -> 实操对比) -->
       <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
         <div class="flex items-center justify-between mb-3">
-          <h3 class="text-sm font-bold text-slate-900 m-0">
+          <h3 class="text-base font-bold text-slate-900 m-0">
             所属集群【{cluster.name}】三层递进长尾实测：
           </h3>
-          <span class="text-[11px] text-slate-400 font-mono">完整知识闭环</span>
+          <span class="text-xs text-slate-400 font-mono">完整知识闭环</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {allClusterArticles.map((sibling: any) => (
             <a
               href={`/articles/${sibling.slug}/`}
-              class={`p-3.5 rounded-xl border text-xs transition-all flex flex-col justify-between ${
+              class={`p-3.5 rounded-xl border text-sm transition-all flex flex-col justify-between ${
                 sibling.slug === article.slug
                   ? 'bg-blue-600 border-blue-600 !text-white font-bold shadow-sm'
                   : 'bg-white border-slate-200 text-slate-700 hover:border-blue-400 hover:shadow-sm'
               }`}
               style={sibling.slug === article.slug ? 'color: #ffffff !important; text-decoration: none !important;' : ''}
             >
-              <span class={`line-clamp-2 mb-2 leading-snug ${sibling.slug === article.slug ? '!text-white font-bold' : ''}`} style={sibling.slug === article.slug ? 'color: #ffffff !important;' : ''}>
+              <span class={`line-clamp-2 mb-2 leading-snug font-medium ${sibling.slug === article.slug ? '!text-white font-bold' : ''}`} style={sibling.slug === article.slug ? 'color: #ffffff !important;' : ''}>
                 {sibling.title}
               </span>
-              <span class={`text-[10px] font-mono ${sibling.slug === article.slug ? '!text-blue-100 font-bold' : 'text-slate-400'}`} style={sibling.slug === article.slug ? 'color: #dbeafe !important;' : ''}>
+              <span class={`text-xs font-mono ${sibling.slug === article.slug ? '!text-blue-100 font-bold' : 'text-slate-400'}`} style={sibling.slug === article.slug ? 'color: #dbeafe !important;' : ''}>
                 {sibling.type === 'definition' ? '[1.口径与定义]' : sibling.type === 'condition' ? '[2.适用边界]' : '[3.对比与操作]'}
               </span>
             </a>
@@ -278,37 +278,37 @@ const typeLabel =
 
       <!-- 层级 4: 跨主栏目语义转化高速公路 (Semantic Highway Bridges) -->
       <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-5">
-        <h4 class="text-xs font-bold text-blue-900 uppercase tracking-wider mb-3">
+        <h4 class="text-sm font-bold text-blue-900 uppercase tracking-wider mb-3">
           🚀 跨业务栏目高转化决策快速通道
         </h4>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-sm">
           <a
             href="/cheap/"
-            class="bg-white/80 hover:bg-white p-2.5 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
+            class="bg-white/80 hover:bg-white p-3 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
           >
-            <span>💰 便宜机场清单</span>
-            <span class="text-[10px] text-slate-400 mt-1">查看 7-8 元真月付</span>
+            <span class="font-bold">💰 便宜机场清单</span>
+            <span class="text-xs text-slate-500 mt-1">查看 7-8 元真月付</span>
           </a>
           <a
             href="/plans/"
-            class="bg-white/80 hover:bg-white p-2.5 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
+            class="bg-white/80 hover:bg-white p-3 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
           >
-            <span>📦 流量套餐分档</span>
-            <span class="text-[10px] text-slate-400 mt-1">50GB - 1TB+ 全案</span>
+            <span class="font-bold">📦 流量套餐分档</span>
+            <span class="text-xs text-slate-500 mt-1">50GB - 1TB+ 全案</span>
           </a>
           <a
             href="/monthly/"
-            class="bg-white/80 hover:bg-white p-2.5 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
+            class="bg-white/80 hover:bg-white p-3 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
           >
-            <span>🔄 真月付核验库</span>
-            <span class="text-[10px] text-slate-400 mt-1">免预付绑架单月扣</span>
+            <span class="font-bold">🔄 真月付核验库</span>
+            <span class="text-xs text-slate-500 mt-1">免预付绑架单月扣</span>
           </a>
           <a
             href="/recommend/#speedtest-evidence-vault"
-            class="bg-white/80 hover:bg-white p-2.5 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
+            class="bg-white/80 hover:bg-white p-3 rounded-xl border border-blue-200/60 text-slate-800 hover:text-blue-600 transition-colors font-medium flex flex-col justify-between"
           >
-            <span>⚡ 测速与解锁凭证</span>
-            <span class="text-[10px] text-slate-400 mt-1">17 家节点实测原图</span>
+            <span class="font-bold">⚡ 测速与解锁凭证</span>
+            <span class="text-xs text-slate-500 mt-1">17 家节点实测原图</span>
           </a>
         </div>
       </div>

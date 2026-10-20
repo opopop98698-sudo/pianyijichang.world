@@ -95,6 +95,16 @@ const pageSchemas = schema
       a {
         -webkit-tap-highlight-color: transparent;
       }
+      /* 卡片式链接彻底禁用段落和标签的下划线污染，保持现代应用卡片质感 */
+      a.group,
+      a.group p,
+      a.group span,
+      a.group h3,
+      a.group h4,
+      a.no-underline,
+      a.no-underline * {
+        text-decoration: none !important;
+      }
     </style>
   </head>
   <body class="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
