@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { generateBreadcrumbSchema } from '../lib/structured-data';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '隐私权政策', url: '/privacy/' }
+];
+
+const schema = generateBreadcrumbSchema(breadcrumbs);
+---
+
+<BaseLayout
+  title="隐私权政策与数据保护声明｜便宜机场"
+  description="便宜机场隐私权政策：我们恪守零个人信息收集、无数据库留存、无用户追踪与纯静态运行原则，完整披露访问日志、本地存储与第三方外链安全边界。"
+  canonicalUrl="/privacy/"
+  schema={schema}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- 面包屑 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">隐私权政策</span>
+    </nav>
+
+    <div class="border-b border-slate-200 pb-6 mb-8">
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-3">
+        隐私权政策与数据保护声明 (Privacy Policy)
+      </h1>
+      <p class="text-slate-600 text-sm leading-relaxed m-0">
+        生效与最后修订日期：2026年10月20日 ｜ 便宜机场中立评测组
+      </p>
+    </div>
+
+    <div class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed space-y-6">
+      <section class="bg-blue-50/60 border border-blue-200 rounded-2xl p-6">
+        <h2 class="text-lg font-bold text-blue-950 mt-0 mb-3 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+          一、核心隐私原则：零个人信息收集架构
+        </h2>
+        <p class="mb-2">
+          便宜机场（以下简称“本站”，官方访问地址：<code>https://pianyijichang.world</code>）采用完全去中心化的静态站点生成（SSG）技术驱动。
+        </p>
+        <p class="m-0 font-medium text-blue-900">
+          我们秉持极简与隐私保护原则：本站不设立任何用户注册体系、不设立用户登录表单、不要求您提供姓名、邮箱、手机号或支付账号，亦不在后端服务器建立任何用户个人资料数据库。您浏览本站无需提供任何个人身份信息。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          二、网络访问日志与匿名技术数据
+        </h2>
+        <p>
+          当您通过浏览器访问本站时，托管服务器或 CDN（内容分发网络，如 Cloudflare）可能会依照互联网通用协议自动记录基础的网络访问请求日志，此类信息包含：
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>技术环境参数</strong>：您的浏览器类型与版本（User-Agent）、操作系统平台、屏幕分辨率及语言偏好；</li>
+          <li><strong>网络传输元数据</strong>：请求访问的具体 URL 路径、访问时间戳、HTTP 状态码及数据传输字节数；</li>
+          <li><strong>IP 地址脱敏处理</strong>：用于抵抗恶意分布式拒绝服务攻击（DDoS）及统计区域访问聚合数据。此类技术日志不与任何现实个人身份相匹配，并在符合网络安全法定期限后由基础设施服务商自动滚动覆盖或销毁。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          三、Cookie 与本地浏览器存储（Local Storage）的使用
+        </h2>
+        <p>
+          本站坚决不使用任何用于用户行为画像、跨站广告追踪（Cross-site Tracking）或商业转售的侵入性 Cookie。
+        </p>
+        <p>
+          在必要时，本站仅使用轻量级浏览器本地存储（如 LocalStorage 或 SessionStorage）来保存您在本站当前会话的显式偏好设置（例如：表格筛选排序偏好、阅读模式切换等）。此类数据仅保存在您的本地设备中，绝不会自动上传至本站服务端。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          四、第三方外部链接与商业跳转免责
+        </h2>
+        <p>
+          本站评测矩阵与对比表格中包含指向各第三方机场商户、开源客户端软件代码仓库（如 GitHub）或速度测试工具官方网站的外部超链接。
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li>
+            <strong>跳转隐私隔离</strong>：当您点击外部链接离开本站并进入第三方商户网站时，本站的隐私保护政策即告终止。第三方网站有其独立制定的隐私条例与数据收集实践。
+          </li>
+          <li>
+            <strong>推广参数声明</strong>：部分外部商户链接可能附带中立的推广标识代码（Affiliate Code），该代码仅供商户收银台系统结算本站的推荐返佣，绝不向商户透露任何本站用户的个人隐私凭据。
+          </li>
+          <li>
+            我们强烈建议您在向任何第三方商户注册账号、输入电子邮箱或发起支付结算前，仔细查阅该商户自身的隐私协议与服务条款。
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          五、网络安全与数据传输加密
+        </h2>
+        <p>
+          全站强制部署全链路传输层安全加密协议（HTTPS / TLS 1.3），确保您的设备与本站之间传输的所有网页文本、参数对比与测速图表均处于高强度非对称加密状态，有效防止在公共 Wi-Fi 或中间节点上可能遭遇的通信窃听与内容篡改。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          六、政策更新与权利行使
+        </h2>
+        <p>
+          随着相关数据安全法律法规的发展或本站功能的迭代，我们可能会适时更新本隐私保护声明。最新修订版本将在页面顶部标明生效日期。若您对本政策有任何疑问或安全建议，可通过本站关于页公示的公开技术渠道与评测团队取得联系。
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

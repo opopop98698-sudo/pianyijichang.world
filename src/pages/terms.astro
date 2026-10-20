@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { generateBreadcrumbSchema } from '../lib/structured-data';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '服务条款与免责声明', url: '/terms/' }
+];
+
+const schema = generateBreadcrumbSchema(breadcrumbs);
+---
+
+<BaseLayout
+  title="服务条款与独立第三方免责声明｜便宜机场"
+  description="便宜机场服务条款与免责声明：明确本站作为独立第三方代理参数资料库的非隶属中立地位、数据核验时效性、用户自主决策风险与合规红线。"
+  canonicalUrl="/terms/"
+  schema={schema}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- 面包屑 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">服务条款</span>
+    </nav>
+
+    <div class="border-b border-slate-200 pb-6 mb-8">
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-3">
+        服务条款与免责声明 (Terms of Service & Disclaimer)
+      </h1>
+      <p class="text-slate-600 text-sm leading-relaxed m-0">
+        生效与最后修订日期：2026年10月20日 ｜ 便宜机场中立评测组
+      </p>
+    </div>
+
+    <div class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed space-y-6">
+      <section class="bg-amber-50/60 border border-amber-200 rounded-2xl p-6">
+        <h2 class="text-lg font-bold text-amber-950 mt-0 mb-3 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+          一、服务定位与非经营性声明
+        </h2>
+        <p class="mb-2">
+          便宜机场（官方网址：<code>https://pianyijichang.world</code>，以下简称“本站”）为完全免费、公开、非商业售卖性质的独立第三方计算机网络技术研究、代理协议参数比对与消费者防坑知识库。
+        </p>
+        <p class="m-0 font-medium text-amber-900">
+          <strong>本站自身不销售任何网络代理服务、不提供任何付费订阅账号、不架设或分发任何可用网络中继节点、不提供翻越网络审查的具体操作指引。</strong> 本站仅提供基于公开商户数据的技术参数对照、数学吞吐成本模型与客观实测数据解读。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          二、独立性与无隶属关系声明
+        </h2>
+        <p>
+          本站与收录的所有机场品牌（包括但不限于各测速表格、月付对比矩阵中涉及的任何服务商）不存在任何股权控制、母子公司、合伙经营或排他性代理关系。
+        </p>
+        <p>
+          本站所有评测评分、排位推荐及红黑榜单均基于公开采集数据与测试脚本（如 MAI-TEST-BOT 多线程日志）输出，绝不接受任何商户的付费删帖、付费买榜或操纵评测结果的要求。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          三、数据时效性与价格变动免责
+        </h2>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>
+            <strong>商户政策瞬时变动风险</strong>：第三方网络服务商的套餐定价、节点倍率、优惠码折扣、退款条例及服务条款（TOS）可能随时发生单方面调整。
+          </li>
+          <li>
+            <strong>实收金额以收银台为准</strong>：本站矩阵中的价格、流量与倍率均标明了数据采集与核验周期。用户在点击外部链接前往商户收银台结算前，必须自行核查商户当前的最新官方价格与服务条款。因商户突发涨价、汇率浮动或优惠码过期导致的差价，本站不承担任何法律与经济赔偿责任。
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          四、推广返佣与透明度披露 (Affiliate Disclosure)
+        </h2>
+        <p>
+          为维持本站持续运行（包括自动化测速服务器带宽、CDN 流量支出及独立测试节点采购费用），本站页面中指向部分第三方商户的注册按钮包含合规的商业推广链接（使用 <code>rel="nofollow sponsored noopener"</code> 标记）。
+        </p>
+        <p>
+          当您通过本站链接完成注册并购买服务时，本站可能会从商户处获得一定比例的推荐佣金。此项佣金由商户营销预算支付，<strong>绝不会增加您的实际订阅支付价格</strong>。佣金机制不影响本站对品牌技术缺陷与跑路风险的客观曝光。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          五、网络安全合规与用户行为自负
+        </h2>
+        <p>
+          用户在使用本站提供的技术信息时，应当严格遵守其所在国家及地区的现行法律法规与计算机信息网络国际联网管理规定。
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li>严禁将本站阐述的网络工程与协议原理用于任何危害国家安全、侵犯他人知识产权、网络攻击或非法渗透行为；</li>
+          <li>用户因违规使用网络工具而产生的任何民事争议、行政处罚或刑事法律后果，由用户自行全权承担，与本站无关。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          六、责任限制与商户纠纷解决
+        </h2>
+        <p>
+          第三方机场服务受运营商跨境网络波动、上游骨干网拥塞、机房拔线或商户团队自身运营能力制约，存在节点中断、丢包升高乃至关网跑路等不可抗力与商业信用风险。
+        </p>
+        <p>
+          本站不为任何第三方商户的履约能力、网络连通率（SLA）或资金安全性提供担保。若您与第三方商户发生退款纠纷、服务不到账或商户失联，本站建议您参考本站《避坑指南》中的“支付网关调解与争议申诉流程”向对应支付通道发起追索，本站不承担连带赔偿与兜底责任。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2">
+          七、原创版权与内容授权
+        </h2>
+        <p>
+          本站全站 384 篇深度长尾技术指南、知识库数学推导模型、独占测评图表与对比算法均受著作权法律保护。未经本站明确书面许可，任何组织或个人不得以爬虫采集、自动化镜像或抄袭等方式侵犯本站版权；合理引用需明确标注来源出处与原文超链接。
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

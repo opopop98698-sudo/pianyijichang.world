@@ -13,6 +13,10 @@ export default defineConfig({
     icon(),
     sitemap({
       filter: (page) => !page.includes("/draft/") && !page.includes("/search"),
+      serialize(item) {
+        item.lastmod = new Date("2026-10-20");
+        return item;
+      },
     }),
   ],
   build: { format: "directory" },

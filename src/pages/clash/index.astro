@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateBreadcrumbSchema, generateCollectionPageSchema } from '../../lib/structured-data';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: 'Clash 客户端与配置', url: '/clash/' }
+];
+
+const pageTitle = "Clash 订阅与客户端规则配置全攻略（Windows/Mac/iOS/Android）｜便宜机场";
+const pageDescription = "面向主流全平台的 Clash / Sing-box / Shadowrocket 客户端订阅导入、TUN 虚拟网卡全局接管与国内国外自动分流规则配置完全手册。";
+const canonicalUrl = "/clash/";
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+const collectionSchema = generateCollectionPageSchema(
+  pageTitle,
+  pageDescription,
+  canonicalUrl,
+  [
+    { name: "主流平台客户端选择矩阵", url: `${canonicalUrl}#client-matrix` },
+    { name: "TUN 虚拟网卡模式与系统代理对比", url: `${canonicalUrl}#tun-mode` },
+    { name: "常见订阅导入错误与排障", url: `${canonicalUrl}#troubleshooting` }
+  ]
+);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  schema={[breadcrumbSchema, collectionSchema]}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- 面包屑导航 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">Clash 专区</span>
+    </nav>
+
+    <!-- 头部 H1 -->
+    <div class="border-b border-slate-200 pb-8 mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-800 mb-3">
+        <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+        客户端软件与规则引擎 · Clash / Sing-box 专区
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+        Clash / Sing-box 客户端订阅与智能分流配置专区
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed max-w-4xl m-0">
+        Clash 作为现代网络代理体系中最主流的规则分流内核，支持基于域名规则集（Rule-Set）、GeoIP 地理位置与进程名将国内网站（直连）、学术与开源站点（自动测速选路）与海外流媒体（固定解锁节点）分流处理。本专区系统性拆解各平台可靠客户端下载、订阅转换与 TUN 虚拟网卡排错方案。
+      </p>
+    </div>
+
+    <!-- 客户端选型矩阵 -->
+    <section id="client-matrix" class="my-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <span class="w-2 h-6 bg-indigo-600 rounded-full inline-block"></span>
+        全平台主流开源内核客户端选型对照
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+        <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">Windows</span>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Clash Verge Rev</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">采用 Meta 内核，全面支持 Shadowsocks、VLESS-Reality 与 Hysteria 2 协议，支持一键开启 TUN 模式。</p>
+          <span class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-100 text-blue-800">推荐系统：Win 10 / 11</span>
+        </div>
+
+        <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+          <span class="text-xs font-bold text-purple-600 uppercase tracking-wider block mb-1">macOS</span>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Clash Verge / ClashX.Meta</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">支持 Apple Silicon 架构芯片原生编译运行，低 CPU 占用与无缝菜单栏快速节点切换。</p>
+          <span class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-100 text-purple-800">推荐系统：macOS 12+</span>
+        </div>
+
+        <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block mb-1">Android</span>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Clash Meta for Android</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">移动端最佳电池优化体验，支持按应用分流（绕过国内银行与微信）与前台服务自动保活。</p>
+          <span class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800">推荐系统：Android 9+</span>
+        </div>
+
+        <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
+          <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">iOS</span>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Shadowrocket / Loon</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-3">小火箭作为 iOS 生态经典工具，兼容 Clash 订阅导入与全协议解析，支持 Widget 快捷开关。</p>
+          <span class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-800">推荐平台：App Store (非国区)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TUN 模式排错核心 -->
+    <section id="tun-mode" class="my-10 bg-slate-900 text-white rounded-3xl p-6 sm:p-8">
+      <h2 class="text-xl sm:text-2xl font-bold mb-3 text-white">TUN 虚拟网卡接管与常规系统代理的核心区别</h2>
+      <p class="text-slate-300 text-sm leading-relaxed mb-6">
+        许多新手经常遇到“浏览器能上网，但终端命令行、Git 或 UWP 游戏无法连通代理”的问题，其根源在于应用是否遵从 Windows / macOS 的系统代理（HTTP/SOCKS5 Proxy）设置。
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700">
+          <strong class="text-blue-400 block mb-1.5 text-sm">系统代理模式 (System Proxy)</strong>
+          <p class="text-slate-300 m-0 leading-relaxed">仅对主动读取系统环境变量（如 Chrome、Edge 等现代浏览器）生效。开发工具（cmd, powershell, git）与多数游戏由于直接调用 Socket 协议栈，不会走系统代理。</p>
+        </div>
+        <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700">
+          <strong class="text-emerald-400 block mb-1.5 text-sm">TUN 虚拟网卡模式 (TUN Mode)</strong>
+          <p class="text-slate-300 m-0 leading-relaxed">在操作系统内核创建一块虚拟网络适配器，通过修改系统默认路由表接管整机全部 TCP / UDP IP 数据包。无需针对具体软件单独配置，直接实现全局透明代理。</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

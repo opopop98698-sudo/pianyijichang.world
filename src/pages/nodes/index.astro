@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateBreadcrumbSchema, generateCollectionPageSchema } from '../../lib/structured-data';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '全球节点测速与线路分析', url: '/nodes/' }
+];
+
+const pageTitle = "全球代理节点测速与线路延迟分析（香港/日本/美国/新加坡）｜便宜机场";
+const pageDescription = "深度解构香港原生 IP、日本 BGP、新加坡专线与美国流媒体解锁节点的晚高峰延迟、丢包率与 QoS 限制边界，提供客观实测报告。";
+const canonicalUrl = "/nodes/";
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+const collectionSchema = generateCollectionPageSchema(
+  pageTitle,
+  pageDescription,
+  canonicalUrl,
+  [
+    { name: "热门地区节点核心特性对照", url: `${canonicalUrl}#region-analysis` },
+    { name: "原生 IP 与广播 IP 流媒体解锁差异", url: `${canonicalUrl}#ip-types` },
+    { name: "晚高峰测速原图档案库", url: "/recommend/#speedtest-evidence-vault" }
+  ]
+);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  schema={[breadcrumbSchema, collectionSchema]}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- 面包屑导航 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">节点专区</span>
+    </nav>
+
+    <!-- 栏目头部 H1 -->
+    <div class="border-b border-slate-200 pb-8 mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-100 text-cyan-800 mb-3">
+        <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+        全球网络基础设施 · 节点延迟与线路实测
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+        全球代理节点线路测速与流媒体解锁分析专区
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed max-w-4xl m-0">
+        节点的地理物理距离与机房 BGP 互联质量直接决定了日常浏览与影音的流畅度。选购便宜机场时，切勿轻信商户标称的“数百个国家海量节点”，而应聚焦于主力香港、日本、新加坡及美国关键节点的真实丢包率、倍率乘数与原生流媒体（Netflix, Disney+, YouTube Premium）及 ChatGPT 纯净 IP 解锁能力。
+      </p>
+    </div>
+
+    <!-- 地区特性横评 -->
+    <section id="region-analysis" class="my-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+        <span class="w-2 h-6 bg-cyan-600 rounded-full inline-block"></span>
+        四大主流核心地区节点工程特征解析
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/80">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-bold text-slate-900">🇭🇰 香港节点 (Hong Kong)</h3>
+            <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-800">首选日常主力</span>
+          </div>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4 leading-relaxed">
+            <li><strong>物理延迟最低</strong>：沿海直连延迟低至 15-30ms，内陆专线通常在 35-50ms，网页点击秒开；</li>
+            <li><strong>常见问题</strong>：部分廉价机场香港节点为广播 IP，偶发无法正常使用某些仅限欧美地区的特定服务；</li>
+            <li><strong>倍率建议</strong>：优先选择 1.0x 标准倍率节点作为主力默认分流线路。</li>
+          </ul>
+        </div>
+
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/80">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-bold text-slate-900">🇯🇵 日本节点 (Japan)</h3>
+            <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">游戏与影音兼备</span>
+          </div>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4 leading-relaxed">
+            <li><strong>亚太网络枢纽</strong>：连接东京机房物理延迟稳定在 50-80ms，丢包率极低；</li>
+            <li><strong>优质内容解锁</strong>：绝大多数日本节点可稳定解锁 Netflix 日区、ABEMA、DMM 及各类亚太流媒体；</li>
+            <li><strong>高峰表现</strong>：若为 IPLC 专线，在晚八点到十一点期间游戏丢包率通常维持在 0%-1%。</li>
+          </ul>
+        </div>
+
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/80">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-bold text-slate-900">🇸🇬 新加坡节点 (Singapore)</h3>
+            <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-800">南亚与东南亚枢纽</span>
+          </div>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4 leading-relaxed">
+            <li><strong>延迟稳定性高</strong>：华南及西南地区访问新加坡节点延迟在 50-70ms，国际出口带宽充沛；</li>
+            <li><strong>合规度极高</strong>：对各类海外企业办公套件、跨境电商后台（Shopee, Lazada）兼容性最好；</li>
+            <li><strong>流媒体友好</strong>：几乎全量支持东南亚区 Disney+ 与 Netflix 独占剧集。</li>
+          </ul>
+        </div>
+
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/80">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-bold text-slate-900">🇺🇸 美国节点 (United States)</h3>
+            <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">AI 与大吞吐下载</span>
+          </div>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-4 leading-relaxed">
+            <li><strong>物理延迟较高</strong>：跨太平洋海底光缆物理延迟通常在 140-200ms 之间，不适宜实时竞技游戏；</li>
+            <li><strong>带宽容量最大</strong>：机房单机带宽常为 10Gbps+，下载超大文件时持续吞吐表现极佳；</li>
+            <li><strong>AI 与原生服务首选</strong>：访问 ChatGPT、Claude、美区银行或各类本地金融服务的最纯净 IP 节点池。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 原生 IP 与广播 IP -->
+    <section id="ip-types" class="my-10 bg-slate-50 rounded-3xl border border-slate-200 p-6 sm:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-3">原生 IP (Residential/Native) 与广播 IP (Anycast/BGP) 核心区别</h2>
+      <p class="text-sm text-slate-600 leading-relaxed mb-4">
+        流媒体平台与 AI 服务商并非根据您的真实位置判断权限，而是根据节点出口 IP 在 MaxMind 等数据库中的登记属性和风控分值（Fraud Score）判定。
+      </p>
+      <div class="bg-white rounded-xl p-4 border border-slate-200 text-xs text-slate-700 space-y-2 leading-relaxed">
+        <p class="m-0"><strong>原生住宅 IP (Residential IP)</strong>：由机房向本地电信运营商购买之家庭/静态宽带 IP 段，IP 归属地与机房真实物理位置完全一致，风控评分极低，几乎 100% 解锁流媒体且免于反复触发人机验证（Cloudflare Turnstile / reCAPTCHA）。</p>
+        <p class="m-0"><strong>机房广播 IP (Datacenter Broadcast IP)</strong>：商户通过 BGP 宣告将其他国家闲置的机房 IP 映射至当前机房，虽然测速能跑满带宽，但由于被标注为机房（Hosting），容易被 Netflix 或 ChatGPT 判定为风控名单并弹出警告。</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

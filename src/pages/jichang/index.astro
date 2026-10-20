@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateBreadcrumbSchema, generateCollectionPageSchema } from '../../lib/structured-data';
+import CheapPlansMatrix from '../../components/CheapPlansMatrix.astro';
+import TrueMonthlyMatrix from '../../components/TrueMonthlyMatrix.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场推荐与测速排行', url: '/jichang/' }
+];
+
+const pageTitle = "2026便宜机场推荐与节点测速排行榜｜便宜机场";
+const pageDescription = "汇总 42 家高性价比便宜机场梯子，提供晚高峰真实节点测速原图、4K 流媒体与 ChatGPT 解锁实测、月付 5 元起低价套餐全景对比。";
+const canonicalUrl = "/jichang/";
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+const collectionSchema = generateCollectionPageSchema(
+  pageTitle,
+  pageDescription,
+  canonicalUrl,
+  [
+    { name: "极限低价便宜机场月付榜单", url: `${canonicalUrl}#cheap-matrix` },
+    { name: "无长周期绑架之真月付核验库", url: `${canonicalUrl}#monthly-matrix` }
+  ]
+);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  schema={[breadcrumbSchema, collectionSchema]}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- 面包屑导航 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">机场推荐</span>
+    </nav>
+
+    <!-- 栏目头部 H1 -->
+    <div class="border-b border-slate-200 pb-8 mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+        核心选购专区 · 42 家主流品牌全量实测
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+        2026 便宜机场推荐与高性价比节点测速精选
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed max-w-4xl m-0">
+        拒绝空泛口头宣称与注水跑分。便宜机场评测组基于独立测试探针，对全网 42 家代表性机场展开全方位晚高峰丢包率、流媒体原生解锁、真实到手月付资费与工单响应速度核验，助您在有限预算内挑选出稳定、不折腾的主力与备用网络线路。
+      </p>
+    </div>
+
+    <!-- 快速导航胶囊 -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-8 not-prose">
+      <a href="/recommend/" class="p-4 bg-white border border-slate-200 rounded-2xl hover:border-blue-400 hover:shadow-sm transition-all group">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">场景决策</span>
+        <span class="font-bold text-slate-900 group-hover:text-blue-600">新手首选推荐 →</span>
+      </a>
+      <a href="/cheap/" class="p-4 bg-white border border-slate-200 rounded-2xl hover:border-blue-400 hover:shadow-sm transition-all group">
+        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block mb-1">极限控费</span>
+        <span class="font-bold text-slate-900 group-hover:text-blue-600">5.6元起极低价 →</span>
+      </a>
+      <a href="/monthly/" class="p-4 bg-white border border-slate-200 rounded-2xl hover:border-blue-400 hover:shadow-sm transition-all group">
+        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">安全防坑</span>
+        <span class="font-bold text-slate-900 group-hover:text-blue-600">纯粹单月结算 →</span>
+      </a>
+      <a href="/recommend/#speedtest-evidence-vault" class="p-4 bg-white border border-slate-200 rounded-2xl hover:border-blue-400 hover:shadow-sm transition-all group">
+        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider block mb-1">实测证据</span>
+        <span class="font-bold text-slate-900 group-hover:text-blue-600">17家测速原图 →</span>
+      </a>
+    </div>
+
+    <!-- 便宜机场套餐矩阵 -->
+    <section id="cheap-matrix" class="my-10">
+      <CheapPlansMatrix />
+    </section>
+
+    <!-- 真月付核验矩阵 -->
+    <section id="monthly-matrix" class="my-10">
+      <TrueMonthlyMatrix />
+    </section>
+  </div>
+</BaseLayout>

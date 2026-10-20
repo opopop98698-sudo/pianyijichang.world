@@ -2,13 +2,17 @@
 const currentYear = new Date().getFullYear();
 
 const pillars = [
-  { name: '机场推荐', href: '/recommend/' },
+  { name: '机场推荐', href: '/jichang/' },
   { name: '便宜机场', href: '/cheap/' },
-  { name: '免费机场', href: '/free/' },
-  { name: '性价比机场', href: '/value/' },
-  { name: '流量套餐', href: '/plans/' },
+  { name: 'VPN 评测', href: '/vpn/' },
+  { name: 'Clash 配置', href: '/clash/' },
+  { name: '节点测速', href: '/nodes/' },
+  { name: '梯子防坑', href: '/tizi/' },
+  { name: '免费资源', href: '/free/' },
+  { name: '使用教程', href: '/tutorial/' },
+  { name: '品牌档案库', href: '/brands/' },
   { name: '月付机场', href: '/monthly/' },
-  { name: '价格对比', href: '/compare/' },
+  { name: '流量套餐', href: '/plans/' },
   { name: '机场避坑', href: '/avoid/' }
 ];
 ---
@@ -61,6 +65,16 @@ const pillars = [
             </a>
           </li>
           <li>
+            <a href="/privacy/" class="hover:text-white transition-colors">
+              隐私权政策 (Privacy Policy)
+            </a>
+          </li>
+          <li>
+            <a href="/terms/" class="hover:text-white transition-colors">
+              服务条款与免责声明 (Terms)
+            </a>
+          </li>
+          <li>
             <a href="/search/" class="hover:text-white">
               Pagefind 静态检索库
             </a>
@@ -87,8 +101,16 @@ const pillars = [
 
     <!-- 底部版权与披露 -->
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-      <div>
-        © {currentYear} pianyijichang.world 便宜机场. 静态内容架构驱动.
+      <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+        <span>© {currentYear} pianyijichang.world 便宜机场.</span>
+        <span>·</span>
+        <a href="/privacy/" class="hover:text-white transition-colors">隐私政策</a>
+        <span>·</span>
+        <a href="/terms/" class="hover:text-white transition-colors">服务条款</a>
+        <span>·</span>
+        <a href="/about/" class="hover:text-white transition-colors">关于我们</a>
+        <span>·</span>
+        <span>静态内容架构驱动.</span>
       </div>
       <div class="text-center sm:text-right">
         <span>商业披露：全站外部注册链接含商业推荐参数，可能为本站带来推荐报酬，但绝不影响用户实付价格。</span>

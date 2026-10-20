@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateBreadcrumbSchema, generateCollectionPageSchema } from '../../lib/structured-data';
+import BrandDirectory from '../../components/BrandDirectory.astro';
+import brandsData from '../../data/brands.json';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '42家机场品牌档案库', url: '/brands/' }
+];
+
+const pageTitle = "42家机场品牌全景评测档案库与收银台实测｜便宜机场";
+const pageDescription = "收录 42 家主流与新锐代理机场品牌全景档案，包含官方镜像、真实月付资费、支持协议、高清测速原图与运营状态持续监测。";
+const canonicalUrl = "/brands/";
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+const collectionSchema = generateCollectionPageSchema(
+  pageTitle,
+  pageDescription,
+  canonicalUrl,
+  brandsData.map((b) => ({
+    name: b.name,
+    url: `${canonicalUrl}#brand-${b.id}`
+  }))
+);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  schema={[breadcrumbSchema, collectionSchema]}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- 面包屑导航 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">品牌库</span>
+    </nav>
+
+    <!-- 栏目头部 H1 -->
+    <div class="border-b border-slate-200 pb-8 mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-3">
+        <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+        全景品牌数据库 · 42 家品牌独立实测档案
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+        42 家机场品牌全景评测档案与收银台实测数据库
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed max-w-4xl m-0">
+        本品牌数据库基于公开收银台结算系统与测试探针长期核验，收录了 42 家具有代表性的代理机场服务商。包含各品牌的入局年限、起步套餐价格、主力骨干网类型（IPLC/IEPL/BGP）、支持客户端与真实测速数据。所有数据均标注采集批次与核验周期，拒绝虚标与虚构跑分。
+      </p>
+    </div>
+
+    <!-- 品牌全景目录组件 -->
+    <BrandDirectory />
+  </div>
+</BaseLayout>

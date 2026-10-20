@@ -130,15 +130,19 @@ const tiers = [
                   ¥{p.monthlyEquivalent}/月
                 </td>
                 <td class="py-2.5 px-3 text-right">
-                  <a
-                    href={p.registerUrl}
-                    target="_blank"
-                    rel="nofollow sponsored noopener"
-                    class="inline-block px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-blue-600 !text-white text-xs font-bold transition-colors shadow-sm"
-                    style="color: #ffffff !important; text-decoration: none !important;"
-                  >
-                    开通 →
-                  </a>
+                  {p.registerUrl && p.registerUrl !== '#' ? (
+                    <a
+                      href={p.registerUrl}
+                      target="_blank"
+                      rel="nofollow sponsored noopener"
+                      class="inline-block px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-blue-600 !text-white text-xs font-bold transition-colors shadow-sm"
+                      style="color: #ffffff !important; text-decoration: none !important;"
+                    >
+                      开通 →
+                    </a>
+                  ) : (
+                    <span class="inline-block px-2.5 py-1 rounded bg-slate-100 text-slate-400 text-xs font-medium">待镜像更新</span>
+                  )}
                 </td>
               </tr>
             ))}

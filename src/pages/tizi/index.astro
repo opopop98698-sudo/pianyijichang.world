@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateBreadcrumbSchema, generateCollectionPageSchema } from '../../lib/structured-data';
+import SpeedtestPitfallsGuide from '../../components/SpeedtestPitfallsGuide.astro';
+import TrueMonthlyMatrix from '../../components/TrueMonthlyMatrix.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '梯子选购与防坑指南', url: '/tizi/' }
+];
+
+const pageTitle = "梯子软件选购与新手防坑实战指南（2026年防跑路秘籍）｜便宜机场";
+const pageDescription = "面向预算有限的个人与学生用户，盘点稳定可靠的便宜梯子工具，深度揭露虚假不限速、年付跑路陷阱与恶意专有客户端套路。";
+const canonicalUrl = "/tizi/";
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+const collectionSchema = generateCollectionPageSchema(
+  pageTitle,
+  pageDescription,
+  canonicalUrl,
+  [
+    { name: "测速与虚标陷阱现场实操", url: `${canonicalUrl}#pitfalls` },
+    { name: "真月付防跑路核心方案", url: `${canonicalUrl}#monthly-pick` }
+  ]
+);
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  schema={[breadcrumbSchema, collectionSchema]}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <!-- 面包屑导航 -->
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
+      <a href="/" class="hover:text-blue-600 transition-colors">首页</a>
+      <span>/</span>
+      <span class="text-slate-800 font-medium">梯子选购防坑</span>
+    </nav>
+
+    <!-- 头部 H1 -->
+    <div class="border-b border-slate-200 pb-8 mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-800 mb-3">
+        <span class="w-2 h-2 rounded-full bg-rose-600"></span>
+        消费者权益保护 · 梯子工具与跑路避坑指南
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+        梯子软件科学选购与消费者避坑实战专区
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed max-w-4xl m-0">
+        近年来，“99元包永久”、“超大带宽一折促销”等噱头层出不穷，但背后伴随着极高的资金盘卷款跑路风险。本专区提炼出 5 条硬核防坑守则，结合严谨的月付核验机制，帮助您避免预付沉没损失，用最低的实际持有成本享受稳健的网络服务。
+      </p>
+    </div>
+
+    <!-- 跑路前兆避坑警示卡片 -->
+    <section class="my-8 bg-amber-50/70 border border-amber-200 rounded-3xl p-6 sm:p-8">
+      <h2 class="text-xl font-bold text-amber-950 mb-3 flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+        识别梯子商户跑路前的 5 大典型红线征兆
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mt-4 text-xs text-slate-700">
+        <div class="bg-white p-4 rounded-xl border border-amber-200/80 shadow-xs">
+          <strong class="text-rose-700 block mb-1 font-bold text-sm">1. 官方交流群全员禁言</strong>
+          <p class="m-0 leading-relaxed text-slate-600">Telegram 官方群突然关闭发言权限、清理活跃老用户，通常说明节点出现大面积瘫痪，管理团队已准备弃盘。</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-amber-200/80 shadow-xs">
+          <strong class="text-rose-700 block mb-1 font-bold text-sm">2. 狂推超长周期永久套餐</strong>
+          <p class="m-0 leading-relaxed text-slate-600">突然下架原本的月付或季付套餐，强推“3年付/永久套餐仅需150元”的超低折扣，极大概率是上游欠费前的最后资金池收割。</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-amber-200/80 shadow-xs">
+          <strong class="text-rose-700 block mb-1 font-bold text-sm">3. 工单超过 72 小时无人应答</strong>
+          <p class="m-0 leading-relaxed text-slate-600">技术支持团队失联、客服机器人自动回复，说明运维人员已停止修复机房拔线或节点维护。</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-amber-200/80 shadow-xs">
+          <strong class="text-rose-700 block mb-1 font-bold text-sm">4. 频繁声称被 DDoS 攻击</strong>
+          <p class="m-0 leading-relaxed text-slate-600">持续数周以“上游机房遭受大流量攻击”为由拒绝补偿，实际上可能是无力续费国际专线带宽。</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-amber-200/80 shadow-xs">
+          <strong class="text-rose-700 block mb-1 font-bold text-sm">5. 强制捆绑专有木马客户端</strong>
+          <p class="m-0 leading-relaxed text-slate-600">不提供通用开源协议订阅（Shadowsocks / Clash），强制要求下载未经安全审计的第三方闭源 exe/apk，存在严重的恶意篡改与隐私窃取风险。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 测速陷阱实操剖析 -->
+    <section id="pitfalls" class="my-10">
+      <SpeedtestPitfallsGuide />
+    </section>
+
+    <!-- 安全真月付矩阵推荐 -->
+    <section id="monthly-pick" class="my-10">
+      <div class="mb-4">
+        <h2 class="text-2xl font-bold text-slate-900">真月付梯子安全核验榜单（小额低风险）</h2>
+        <p class="text-sm text-slate-600">以下品牌均已核实支持真实单月支付，无任何隐藏预缴捆绑：</p>
+      </div>
+      <TrueMonthlyMatrix />
+    </section>
+  </div>
+</BaseLayout>

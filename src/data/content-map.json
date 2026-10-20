@@ -20,7 +20,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "新手选购预算口径与认知建立",
                 "status": "planned",
-                "slug": "新手初次购买机场预算怎么算-真实月付与一次性投入的计价口径"
+                "slug": "newbie-mindset-guide"
               },
               {
                 "title": "免费试用或一折活动什么时候不适用？初次选购时的商家运营边界判断",
@@ -31,7 +31,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "新手低价引流陷阱排查",
                 "status": "planned",
-                "slug": "免费试用或一折活动什么时候不适用-初次选购时的商家运营边界判断"
+                "slug": "newbie-mindset-limits"
               },
               {
                 "title": "第一次买机场怎么验证基础可用性？从首月连接到基础测速的操作流程",
@@ -42,7 +42,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "新手初次到手验证与对比指南",
                 "status": "planned",
-                "slug": "第一次买机场怎么验证基础可用性-从首月连接到基础测速的操作流程"
+                "slug": "newbie-mindset-comparison"
               }
             ]
           },
@@ -59,7 +59,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "协议标准与通用客户端基础定义",
                 "status": "planned",
-                "slug": "通用协议订阅链接是什么-Shadowsocks-VLESS与Trojan的格式标准口径"
+                "slug": "protocol-client-readiness-guide"
               },
               {
                 "title": "专有客户端在什么系统环境下无法运行？第三方开源客户端替代的兼容边界",
@@ -70,7 +70,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "专属客户端受限环境与协议边界",
                 "status": "planned",
-                "slug": "专有客户端在什么系统环境下无法运行-第三方开源客户端替代的兼容边界"
+                "slug": "protocol-client-readiness-limits"
               },
               {
                 "title": "多平台客户端导入订阅怎么对比？Clash、Sing-box与Shadowrocket配置流程差异",
@@ -81,7 +81,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "多客户端导入与配置实操对照",
                 "status": "planned",
-                "slug": "多平台客户端导入订阅怎么对比-Clash-Sing-box与Shadowrocket配置流程差异"
+                "slug": "protocol-client-readiness-comparison"
               }
             ]
           }
@@ -104,7 +104,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "主力机场可用率指标定义",
                 "status": "planned",
-                "slug": "主力机场可用率基准线怎么算-月均SLA与掉线时长的量化统计口径"
+                "slug": "daily-flow-baseline-guide"
               },
               {
                 "title": "低价主力套餐在什么网络环境下容易断连？本地运营商与QoS限制的边界",
@@ -115,7 +115,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "本地ISP与专线/直连边界排查",
                 "status": "planned",
-                "slug": "低价主力套餐在什么网络环境下容易断连-本地运营商与QoS限制的边界"
+                "slug": "daily-flow-baseline-limits"
               },
               {
                 "title": "主力机场日常浏览与高清视频怎么搭配？按时段分配主备线路的使用方法",
@@ -126,7 +126,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "主力线路日常负载分配对比",
                 "status": "planned",
-                "slug": "主力机场日常浏览与高清视频怎么搭配-按时段分配主备线路的使用方法"
+                "slug": "daily-flow-baseline-comparison"
               }
             ]
           },
@@ -143,7 +143,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "晚高峰网络表现量化口径",
                 "status": "planned",
-                "slug": "晚高峰拥堵延迟指标怎么看-晚上八点到十一点的丢包率测试口径"
+                "slug": "peak-hours-experience-guide"
               },
               {
                 "title": "标称大带宽在晚高峰什么时候会严重缩水？上游骨干网拥塞与限速条件",
@@ -154,7 +154,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "峰值带宽缩水边界条件",
                 "status": "planned",
-                "slug": "标称大带宽在晚高峰什么时候会严重缩水-上游骨干网拥塞与限速条件"
+                "slug": "peak-hours-experience-limits"
               },
               {
                 "title": "专线与普通公网直连在晚高峰怎么对比？不同预算下的高峰延迟平稳度实测",
@@ -165,7 +165,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "晚高峰专线与直连真实对比",
                 "status": "planned",
-                "slug": "专线与普通公网直连在晚高峰怎么对比-不同预算下的高峰延迟平稳度实测"
+                "slug": "peak-hours-experience-comparison"
               }
             ]
           }
@@ -188,7 +188,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "备用线路沉没成本量化定义",
                 "status": "planned",
-                "slug": "备用机场年均持有成本怎么算-不限时流量包与极低月付的摊薄口径"
+                "slug": "standby-cost-control-guide"
               },
               {
                 "title": "长周期未使用的备用账号什么时候会失效？静默期清退与到期规则限制",
@@ -199,7 +199,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "备用账号长周期休眠失效边界",
                 "status": "planned",
-                "slug": "长周期未使用的备用账号什么时候会失效-静默期清退与到期规则限制"
+                "slug": "standby-cost-control-limits"
               },
               {
                 "title": "不限时按量计费与小额月付当备用怎么对比？根据突发频次选择最佳方案",
@@ -210,7 +210,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "按量包与微月付备用方案对比",
                 "status": "planned",
-                "slug": "不限时按量计费与小额月付当备用怎么对比-根据突发频次选择最佳方案"
+                "slug": "standby-cost-control-comparison"
               }
             ]
           },
@@ -227,7 +227,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "故障切换响应指标规范",
                 "status": "planned",
-                "slug": "冷备与热备切换时间差指标是什么-客户端故障自动转移的阈值定义"
+                "slug": "cold-standby-switching-guide"
               },
               {
                 "title": "主力机场完全失联时备用线路什么时候会同步瘫痪？同源上游机房故障边界",
@@ -238,7 +238,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "上游同源供应商依赖边界识别",
                 "status": "planned",
-                "slug": "主力机场完全失联时备用线路什么时候会同步瘫痪-同源上游机房故障边界"
+                "slug": "cold-standby-switching-limits"
               },
               {
                 "title": "主力出现故障时怎么一键切换备用节点？客户端分流策略与配置管理指南",
@@ -249,7 +249,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "应急倒换具体操作与路由对比",
                 "status": "planned",
-                "slug": "主力出现故障时怎么一键切换备用节点-客户端分流策略与配置管理指南"
+                "slug": "cold-standby-switching-comparison"
               }
             ]
           }
@@ -272,7 +272,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "手机后台功耗与流量测量口径",
                 "status": "planned",
-                "slug": "移动端后台代理耗电量怎么测量-协议握手与保活心跳包的资源统计口径"
+                "slug": "mobile-battery-traffic-guide"
               },
               {
                 "title": "手机锁屏休眠时代理连接什么时候会被杀后台？系统电池优化策略的限制条件",
@@ -283,7 +283,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "移动操作系统后台保活边界",
                 "status": "planned",
-                "slug": "手机锁屏休眠时代理连接什么时候会被杀后台-系统电池优化策略的限制条件"
+                "slug": "mobile-battery-traffic-limits"
               },
               {
                 "title": "iOS与Android端代理客户端耗电怎么对比？不同核心对电量与发热的影响",
@@ -294,7 +294,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "主流移动平台客户端能耗实测对比",
                 "status": "planned",
-                "slug": "iOS与Android端代理客户端耗电怎么对比-不同核心对电量与发热的影响"
+                "slug": "mobile-battery-traffic-comparison"
               }
             ]
           },
@@ -311,7 +311,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "移动网络基站漫游切换时间定义",
                 "status": "planned",
-                "slug": "网络切换重连延迟指标怎么算-从4G-5G切换至Wi-Fi的重协商时间口径"
+                "slug": "cellular-wifi-handover-guide"
               },
               {
                 "title": "公共Wi-Fi强制登录页在什么情况下导致代理挂死？Captive Portal探测限制",
@@ -322,7 +322,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "网络认证跳转与代理死锁边界",
                 "status": "planned",
-                "slug": "公共Wi-Fi强制登录页在什么情况下导致代理挂死-Captive-Portal探测限制"
+                "slug": "cellular-wifi-handover-limits"
               },
               {
                 "title": "蜂窝移动数据与家庭宽带怎么配置分流？针对流量配额的客户端路由分流",
@@ -333,7 +333,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "多网络环境分流策略设置与使用",
                 "status": "planned",
-                "slug": "蜂窝移动数据与家庭宽带怎么配置分流-针对流量配额的客户端路由分流"
+                "slug": "cellular-wifi-handover-comparison"
               }
             ]
           }
@@ -356,7 +356,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "桌面端并发连接数指标定义",
                 "status": "planned",
-                "slug": "桌面端并发连接数上限怎么统计-多标签页与多应用并发下的套接字口径"
+                "slug": "desktop-multitasking-guide"
               },
               {
                 "title": "机场节点连接数满载时什么时候会阻断新请求？单账号并发IP限制条件",
@@ -367,7 +367,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "多并发受限与节点熔断边界",
                 "status": "planned",
-                "slug": "机场节点连接数满载时什么时候会阻断新请求-单账号并发IP限制条件"
+                "slug": "desktop-multitasking-limits"
               },
               {
                 "title": "浏览器多开与后台下载怎么分配带宽？基于进程规则的本地分流操作",
@@ -378,7 +378,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "桌面多任务带宽调度与配置对比",
                 "status": "planned",
-                "slug": "浏览器多开与后台下载怎么分配带宽-基于进程规则的本地分流操作"
+                "slug": "desktop-multitasking-comparison"
               }
             ]
           },
@@ -395,7 +395,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "系统全局代理与TUN模式定义",
                 "status": "planned",
-                "slug": "TUN虚拟网卡模式接管流量口径是什么-网络层代理与应用层代理的技术界定"
+                "slug": "system-proxy-rules-guide"
               },
               {
                 "title": "UWP应用与局部软件在什么条件下无法走系统代理？Loopback回环限制边界",
@@ -406,7 +406,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "Windows回环与系统代理边界排查",
                 "status": "planned",
-                "slug": "UWP应用与局部软件在什么条件下无法走系统代理-Loopback回环限制边界"
+                "slug": "system-proxy-rules-limits"
               },
               {
                 "title": "纯系统代理与TUN模式怎么对比？针对开发终端与非代理软件的兼容性操作",
@@ -417,7 +417,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "系统代理模式实测优劣与切换方法",
                 "status": "planned",
-                "slug": "纯系统代理与TUN模式怎么对比-针对开发终端与非代理软件的兼容性操作"
+                "slug": "system-proxy-rules-comparison"
               }
             ]
           }
@@ -440,7 +440,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "多设备并发数统计口径标准",
                 "status": "planned",
-                "slug": "同时在线设备数怎么界定-按连接公网IP判定与按活跃客户端判定口径"
+                "slug": "device-concurrency-limits-guide"
               },
               {
                 "title": "家庭设备超过并发上限时什么时候会触发封禁？商户防火墙封控阈值条件",
@@ -451,7 +451,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "超量并发触发临时封锁的边界",
                 "status": "planned",
-                "slug": "家庭设备超过并发上限时什么时候会触发封禁-商户防火墙封控阈值条件"
+                "slug": "device-concurrency-limits-limits"
               },
               {
                 "title": "限制设备数与限制总带宽的套餐怎么对比？家庭多口人共享预算核算实操",
@@ -462,7 +462,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "不同并发计费规则方案对比",
                 "status": "planned",
-                "slug": "限制设备数与限制总带宽的套餐怎么对比-家庭多口人共享预算核算实操"
+                "slug": "device-concurrency-limits-comparison"
               }
             ]
           },
@@ -479,7 +479,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "旁路由代理全屋流量核算口径",
                 "status": "planned",
-                "slug": "局域网透明网关代理流量怎么核算-路由器中央分流对总额度的消耗口径"
+                "slug": "router-gateway-deployment-guide"
               },
               {
                 "title": "智能家居和电视盒子在什么情况下无法穿透代理？组播与局域网发现协议边界",
@@ -490,7 +490,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "全屋代理环境下局域网互通边界",
                 "status": "planned",
-                "slug": "智能家居和电视盒子在什么情况下无法穿透代理-组播与局域网发现协议边界"
+                "slug": "router-gateway-deployment-limits"
               },
               {
                 "title": "全屋旁路由配置与单机独立客户端怎么对比？维护成本与全家便利性折中",
@@ -501,7 +501,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "软路由网关与单机独立客户端对比",
                 "status": "planned",
-                "slug": "全屋旁路由配置与单机独立客户端怎么对比-维护成本与全家便利性折中"
+                "slug": "router-gateway-deployment-comparison"
               }
             ]
           }
@@ -524,7 +524,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "学术研究文献检索时延定义",
                 "status": "planned",
-                "slug": "学术数据库代理访问延迟指标怎么衡量-首字节时间TTFB与长连接保持口径"
+                "slug": "scholar-paper-access-guide"
               },
               {
                 "title": "下载百兆PDF论文时什么时候会被限速？大文件持续单线程传输的限制条件",
@@ -535,7 +535,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "文献下载大流量触发降速边界",
                 "status": "planned",
-                "slug": "下载百兆PDF论文时什么时候会被限速-大文件持续单线程传输的限制条件"
+                "slug": "scholar-paper-access-limits"
               },
               {
                 "title": "Google Scholar与IEEE Xplore访问怎么优化？选用稳定静态IP节点的配置方法",
@@ -546,7 +546,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "高校学术资源访问节点调度对比",
                 "status": "planned",
-                "slug": "Google-Scholar与IEEE-Xplore访问怎么优化-选用稳定静态IP节点的配置方法"
+                "slug": "scholar-paper-access-comparison"
               }
             ]
           },
@@ -563,7 +563,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "出口节点IP纯净度指标定义",
                 "status": "planned",
-                "slug": "出口IP黑名单与信誉分怎么查询-Cloudflare风险评分与欺诈度量化口径"
+                "slug": "clean-ip-for-research-guide"
               },
               {
                 "title": "频繁弹出人机验证验证码在什么条件下发生？多人共用公网出口的判定边界",
@@ -574,7 +574,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "频繁风控验证码触发边界",
                 "status": "planned",
-                "slug": "频繁弹出人机验证验证码在什么条件下发生-多人共用公网出口的判定边界"
+                "slug": "clean-ip-for-research-limits"
               },
               {
                 "title": "数据机房原生IP与广播IP查资料怎么对比？人机验证频次与页面打开效率实测",
@@ -585,7 +585,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "不同IP类型在学术检索中的实操对比",
                 "status": "planned",
-                "slug": "数据机房原生IP与广播IP查资料怎么对比-人机验证频次与页面打开效率实测"
+                "slug": "clean-ip-for-research-comparison"
               }
             ]
           }
@@ -608,7 +608,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "AI合规接入地区与接口标准定义",
                 "status": "planned",
-                "slug": "AI服务区域支持口径怎么查-OpenAI与Claude官方允许访问的地区清单标准"
+                "slug": "ai-service-ip-risk-guide"
               },
               {
                 "title": "注册或登录AI账号时什么时候会弹出Access Denied？高风险机房ASN封锁边界",
@@ -619,7 +619,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "机房ASN封禁触发边界排查",
                 "status": "planned",
-                "slug": "注册或登录AI账号时什么时候会弹出Access-Denied-高风险机房ASN封锁边界"
+                "slug": "ai-service-ip-risk-limits"
               },
               {
                 "title": "原生住宅节点与优质专线节点调用AI怎么对比？首字生成延迟与账号安全权衡",
@@ -630,7 +630,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "不同节点类型调用大模型体验对比",
                 "status": "planned",
-                "slug": "原生住宅节点与优质专线节点调用AI怎么对比-首字生成延迟与账号安全权衡"
+                "slug": "ai-service-ip-risk-comparison"
               }
             ]
           },
@@ -647,7 +647,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "办公协作网络长连接标准口径",
                 "status": "planned",
-                "slug": "办公即时通讯长连接心跳保活口径是什么-Slack与Teams断线重连阈值定义"
+                "slug": "remote-work-security-guide"
               },
               {
                 "title": "公司内网VPN与第三方代理在什么条件下发生路由冲突？子网掩码重叠边界",
@@ -658,7 +658,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "企业VPN与商业代理子网冲突边界",
                 "status": "planned",
-                "slug": "公司内网VPN与第三方代理在什么条件下发生路由冲突-子网掩码重叠边界"
+                "slug": "remote-work-security-limits"
               },
               {
                 "title": "轻办公选低价专线还是便宜直连？文件传输与视频会议体验横向比对",
@@ -669,7 +669,7 @@
                 "pillarId": "recommend",
                 "primaryIntent": "日常轻办公网络方案选购对比",
                 "status": "planned",
-                "slug": "轻办公选低价专线还是便宜直连-文件传输与视频会议体验横向比对"
+                "slug": "remote-work-security-comparison"
               }
             ]
           }
@@ -698,7 +698,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "十元内极低月付核算口径",
                 "status": "planned",
-                "slug": "真月付10元以下套餐计价口径是什么-单月实际结算与无年付绑定的认定标准"
+                "slug": "under-10-payment-model-guide"
               },
               {
                 "title": "个位数月付在什么情况下会暗含初装费？首次支付附加开户费的限制条件",
@@ -709,7 +709,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "低价初装附加费边界排查",
                 "status": "planned",
-                "slug": "个位数月付在什么情况下会暗含初装费-首次支付附加开户费的限制条件"
+                "slug": "under-10-payment-model-limits"
               },
               {
                 "title": "5元档与9元档真实月付怎么对比？流量配额与节点可用线路数量差异",
@@ -720,7 +720,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "10元内不同价位真实月付方案横比",
                 "status": "planned",
-                "slug": "5元档与9元档真实月付怎么对比-流量配额与节点可用线路数量差异"
+                "slug": "under-10-payment-model-comparison"
               }
             ]
           },
@@ -737,7 +737,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "十元内带宽与配额量化定义",
                 "status": "planned",
-                "slug": "10元以下机场峰值带宽口径怎么看-共享带宽池与单连接硬限速标准"
+                "slug": "under-10-service-boundaries-guide"
               },
               {
                 "title": "低价节点在晚间高峰期什么时候会出现大面积超时？资源超售率临界边界",
@@ -748,7 +748,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "极低价晚高峰崩盘临界点判断",
                 "status": "planned",
-                "slug": "低价节点在晚间高峰期什么时候会出现大面积超时-资源超售率临界边界"
+                "slug": "under-10-service-boundaries-limits"
               },
               {
                 "title": "超低价机场如何作为应急备用接入？搭配轻量客户端的参数设置对比",
@@ -759,7 +759,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "极低价套餐应急配置与操作指引",
                 "status": "planned",
-                "slug": "超低价机场如何作为应急备用接入-搭配轻量客户端的参数设置对比"
+                "slug": "under-10-service-boundaries-comparison"
               }
             ]
           }
@@ -782,7 +782,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "甜品级月付单位成本标准口径",
                 "status": "planned",
-                "slug": "10到20元甜品档单位流量成本怎么算-百G月付套餐的真实单价折算口径"
+                "slug": "sweet-spot-value-guide"
               },
               {
                 "title": "甜品档位标称专线什么时候仅是直连中转？隧道混入公网线路的鉴别边界",
@@ -793,7 +793,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "假专线与真内网隧道边界条件",
                 "status": "planned",
-                "slug": "甜品档位标称专线什么时候仅是直连中转-隧道混入公网线路的鉴别边界"
+                "slug": "sweet-spot-value-limits"
               },
               {
                 "title": "15元100G与20元150G月付怎么选？根据日常月消耗曲线的对比选购",
@@ -804,7 +804,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "甜品区间不同流量档位实操决策",
                 "status": "planned",
-                "slug": "15元100G与20元150G月付怎么选-根据日常月消耗曲线的对比选购"
+                "slug": "sweet-spot-value-comparison"
               }
             ]
           },
@@ -821,7 +821,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "专线混合路由技术口径解析",
                 "status": "planned",
-                "slug": "IEPL企业专线与直连节点混用比例口径是什么-入口路由探测标准定义"
+                "slug": "sla-and-line-types-guide"
               },
               {
                 "title": "专线节点在什么网络故障下会切换至降级备用链路？跨境海缆中断边界",
@@ -832,7 +832,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "专线容灾降级切换边界排查",
                 "status": "planned",
-                "slug": "专线节点在什么网络故障下会切换至降级备用链路-跨境海缆中断边界"
+                "slug": "sla-and-line-types-limits"
               },
               {
                 "title": "纯直连优化与混合专线在20元档怎么对比？高峰延迟波动与丢包率实测",
@@ -843,7 +843,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "同价位直连与专线真实表现比对",
                 "status": "planned",
-                "slug": "纯直连优化与混合专线在20元档怎么对比-高峰延迟波动与丢包率实测"
+                "slug": "sla-and-line-types-comparison"
               }
             ]
           }
@@ -866,7 +866,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "结账实付综合税费标准口径",
                 "status": "planned",
-                "slug": "实际到手付款金额怎么计算-标价-汇率转换与收银台通道手续费口径"
+                "slug": "checkout-hidden-fees-guide"
               },
               {
                 "title": "支付网关什么时候会额外收取货币转换费？境外第三方商户收款结算限制",
@@ -877,7 +877,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "非本币跨境结算手续费边界",
                 "status": "planned",
-                "slug": "支付网关什么时候会额外收取货币转换费-境外第三方商户收款结算限制"
+                "slug": "checkout-hidden-fees-limits"
               },
               {
                 "title": "支付宝直连、微信第三方代收与USDT结算怎么对比？最终实付总额差价实操",
@@ -888,7 +888,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "主流收银台支付通道真实到手价对比",
                 "status": "planned",
-                "slug": "支付宝直连-微信第三方代收与USDT结算怎么对比-最终实付总额差价实操"
+                "slug": "checkout-hidden-fees-comparison"
               }
             ]
           },
@@ -905,7 +905,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "平台资金结算门槛指标规范",
                 "status": "planned",
-                "slug": "账户最低充值额度门槛口径是什么-余额制与直接订单支付的技术机制"
+                "slug": "setup-fee-and-deposit-guide"
               },
               {
                 "title": "首付低价什么时候包含不可退的账户押金？商家条款中的资金保留边界",
@@ -916,7 +916,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "押金不可退与余额沉淀限制条件",
                 "status": "planned",
-                "slug": "首付低价什么时候包含不可退的账户押金-商家条款中的资金保留边界"
+                "slug": "setup-fee-and-deposit-limits"
               },
               {
                 "title": "直接购买月付套餐与按固定金额充值扣费怎么对比？资金闲置成本量化",
@@ -927,7 +927,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "充值余额制与直接付订单方式对比",
                 "status": "planned",
-                "slug": "直接购买月付套餐与按固定金额充值扣费怎么对比-资金闲置成本量化"
+                "slug": "setup-fee-and-deposit-comparison"
               }
             ]
           }
@@ -950,7 +950,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "年付分摊计算与财务折现定义",
                 "status": "planned",
-                "slug": "年付折合月均价格怎么科学折算-实付总额除以12个月与资金机会成本口径"
+                "slug": "annual-amortization-math-guide"
               },
               {
                 "title": "年付超低折算什么时候不能作为性价比依据？商家年中停业与跑路风险边界",
@@ -961,7 +961,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "长期预付面临违约的边界判断",
                 "status": "planned",
-                "slug": "年付超低折算什么时候不能作为性价比依据-商家年中停业与跑路风险边界"
+                "slug": "annual-amortization-math-limits"
               },
               {
                 "title": "月付连续交一年与年付一次性交款怎么对比？现金流灵活性与折扣差额实操",
@@ -972,7 +972,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "按月连续支出与年付现值对比",
                 "status": "planned",
-                "slug": "月付连续交一年与年付一次性交款怎么对比-现金流灵活性与折扣差额实操"
+                "slug": "annual-amortization-math-comparison"
               }
             ]
           },
@@ -989,7 +989,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "商家生命周期与预付风险指标定义",
                 "status": "planned",
-                "slug": "年付沉没成本风险系数怎么定义-运营年限-历史工单与信誉指标口径"
+                "slug": "sunk-cost-risk-appraisal-guide"
               },
               {
                 "title": "新开业不满半年的机场在什么情况下坚决不碰年付？运营资金链断裂特征",
@@ -1000,7 +1000,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "短期投机型机场年付拒选边界",
                 "status": "planned",
-                "slug": "新开业不满半年的机场在什么情况下坚决不碰年付-运营资金链断裂特征"
+                "slug": "sunk-cost-risk-appraisal-limits"
               },
               {
                 "title": "三年付巨幅折扣与单年付怎么对比？沉没成本损失概率与边际收益分析",
@@ -1011,7 +1011,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "超长周期预付与单年付风险对比",
                 "status": "planned",
-                "slug": "三年付巨幅折扣与单年付怎么对比-沉没成本损失概率与边际收益分析"
+                "slug": "sunk-cost-risk-appraisal-comparison"
               }
             ]
           }
@@ -1034,7 +1034,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "微流量额度定价结构解析",
                 "status": "planned",
-                "slug": "小额度套餐每GB真实成本怎么算-月均20GB及以下套餐的溢价口径"
+                "slug": "micro-quota-economics-guide"
               },
               {
                 "title": "小流量套餐在什么使用场景下会瞬间见底？系统静默更新与视频自动播放限制",
@@ -1045,7 +1045,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "后台意外吞噬微额度的边界条件",
                 "status": "planned",
-                "slug": "小流量套餐在什么使用场景下会瞬间见底-系统静默更新与视频自动播放限制"
+                "slug": "micro-quota-economics-limits"
               },
               {
                 "title": "20G微月付与100G常规月付怎么对比？单纯查资料用户按需购买实操",
@@ -1056,7 +1056,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "轻量用量与标准用量套餐对比决策",
                 "status": "planned",
-                "slug": "20G微月付与100G常规月付怎么对比-单纯查资料用户按需购买实操"
+                "slug": "micro-quota-economics-comparison"
               }
             ]
           },
@@ -1073,7 +1073,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "配额重置周期与有效时间定义",
                 "status": "planned",
-                "slug": "流量清零周期的标准口径是什么-自然月第一天与账单日重置的认定区分"
+                "slug": "dormant-account-expiration-guide"
               },
               {
                 "title": "未用完的配额什么时候可以结转至次月？大多数商家不可结转条款边界",
@@ -1084,7 +1084,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "流量结转功能支持与否的边界",
                 "status": "planned",
-                "slug": "未用完的配额什么时候可以结转至次月-大多数商家不可结转条款边界"
+                "slug": "dormant-account-expiration-limits"
               },
               {
                 "title": "月末清零前如何合理消耗或监控流量？客户端额度提醒与自动断网配置",
@@ -1095,7 +1095,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "流量阈值报警设置与多客户端对比",
                 "status": "planned",
-                "slug": "月末清零前如何合理消耗或监控流量-客户端额度提醒与自动断网配置"
+                "slug": "dormant-account-expiration-comparison"
               }
             ]
           }
@@ -1118,7 +1118,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "首购营销让利真实比率计算",
                 "status": "planned",
-                "slug": "首月特惠折扣率怎么核算-促销码立减金额与次月原价续费对比口径"
+                "slug": "first-order-discount-truth-guide"
               },
               {
                 "title": "一折首单优惠在什么条件下无法续费？仅限首购账户与老用户排除条款",
@@ -1129,7 +1129,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "促销排他性限制与活动边界",
                 "status": "planned",
-                "slug": "一折首单优惠在什么条件下无法续费-仅限首购账户与老用户排除条款"
+                "slug": "first-order-discount-truth-limits"
               },
               {
                 "title": "首月促销体验后次月原价续订怎么评估？以次月真实付款作为选购决策依据",
@@ -1140,7 +1140,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "营销低价与长期原价对比决策",
                 "status": "planned",
-                "slug": "首月促销体验后次月原价续订怎么评估-以次月真实付款作为选购决策依据"
+                "slug": "first-order-discount-truth-comparison"
               }
             ]
           },
@@ -1157,7 +1157,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "服务分级与特惠节点权限定义",
                 "status": "planned",
-                "slug": "促销引流节点与商业主力节点分流口径是什么-不同用户组权限隔离标准"
+                "slug": "promotional-line-divergence-guide"
               },
               {
                 "title": "特惠用户在什么网络拥挤期会被降权？QoS多级队列调度优先级限制",
@@ -1168,7 +1168,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "促销用户被降级排队边界排查",
                 "status": "planned",
-                "slug": "特惠用户在什么网络拥挤期会被降权-QoS多级队列调度优先级限制"
+                "slug": "promotional-line-divergence-limits"
               },
               {
                 "title": "促销节点与正价节点延迟怎么对比？使用相同服务器测速验证分级差异",
@@ -1179,7 +1179,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "特惠节点性能差异实测对照",
                 "status": "planned",
-                "slug": "促销节点与正价节点延迟怎么对比-使用相同服务器测速验证分级差异"
+                "slug": "promotional-line-divergence-comparison"
               }
             ]
           }
@@ -1202,7 +1202,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "续约价格变动与套餐版本定义",
                 "status": "planned",
-                "slug": "续费通胀率指标怎么衡量-老用户原价续费承诺与套餐强制升级口径"
+                "slug": "renewal-inflation-monitoring-guide"
               },
               {
                 "title": "商户下架老套餐时老用户什么时候必须加价？强制迁移新版产品条款边界",
@@ -1213,7 +1213,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "老套餐退市强推高价套餐边界",
                 "status": "planned",
-                "slug": "商户下架老套餐时老用户什么时候必须加价-强制迁移新版产品条款边界"
+                "slug": "renewal-inflation-monitoring-limits"
               },
               {
                 "title": "同价位续费与换新机场首单优惠怎么对比？迁移配置成本与资金节省差额",
@@ -1224,7 +1224,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "留存续费与迁移新站成本收益比对",
                 "status": "planned",
-                "slug": "同价位续费与换新机场首单优惠怎么对比-迁移配置成本与资金节省差额"
+                "slug": "renewal-inflation-monitoring-comparison"
               }
             ]
           },
@@ -1241,7 +1241,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "长期总拥有成本TCO指标计算",
                 "status": "planned",
-                "slug": "代理服务年度支出总成本TCO怎么核算-基础套餐加备用线路及工具综合口径"
+                "slug": "long-term-spending-ceiling-guide"
               },
               {
                 "title": "预算严格控制在每年100元以内在什么条件下可行？低配月付与冷备组合边界",
@@ -1252,7 +1252,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "百元年度极限预算可行性边界",
                 "status": "planned",
-                "slug": "预算严格控制在每年100元以内在什么条件下可行-低配月付与冷备组合边界"
+                "slug": "long-term-spending-ceiling-limits"
               },
               {
                 "title": "单一全能高价机场与两个廉价互补机场怎么对比？年总预算相同下的稳定性",
@@ -1263,7 +1263,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "单高配方案与双低配冗余方案对比",
                 "status": "planned",
-                "slug": "单一全能高价机场与两个廉价互补机场怎么对比-年总预算相同下的稳定性"
+                "slug": "long-term-spending-ceiling-comparison"
               }
             ]
           }
@@ -1286,7 +1286,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "无期限流量单价核算规范",
                 "status": "planned",
-                "slug": "一次性流量包单价怎么折算-不设月租与长期有效特性的容量折现口径"
+                "slug": "non-expiring-pack-cost-guide"
               },
               {
                 "title": "不限时流量在什么运营状况下会提前归零？服务条款中不可抗力与变更边界",
@@ -1297,7 +1297,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "流量包提前失效法律与条款风险",
                 "status": "planned",
-                "slug": "不限时流量在什么运营状况下会提前归零-服务条款中不可抗力与变更边界"
+                "slug": "non-expiring-pack-cost-limits"
               },
               {
                 "title": "50元200G不限时与每月10元30G怎么对比？根据季度实际消耗曲线实操",
@@ -1308,7 +1308,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "不限时大包与低额月付划算度对比",
                 "status": "planned",
-                "slug": "50元200G不限时与每月10元30G怎么对比-根据季度实际消耗曲线实操"
+                "slug": "non-expiring-pack-cost-comparison"
               }
             ]
           },
@@ -1325,7 +1325,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "零月租账户存续技术口径标准",
                 "status": "planned",
-                "slug": "零月租账户生命周期怎么定义-长期无活动连接的保号与销户机制口径"
+                "slug": "account-maintenance-period-guide"
               },
               {
                 "title": "半年未登录的流量包账号什么时候会被系统回收？数据库清理不活跃规则",
@@ -1336,7 +1336,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "沉睡账户被回收清退条件边界",
                 "status": "planned",
-                "slug": "半年未登录的流量包账号什么时候会被系统回收-数据库清理不活跃规则"
+                "slug": "account-maintenance-period-limits"
               },
               {
                 "title": "长期存放流量包怎么做节点存活检测？定期自动轻量握手脚本配置指引",
@@ -1347,7 +1347,7 @@
                 "pillarId": "cheap",
                 "primaryIntent": "长期账户健康度监控方法对比",
                 "status": "planned",
-                "slug": "长期存放流量包怎么做节点存活检测-定期自动轻量握手脚本配置指引"
+                "slug": "account-maintenance-period-comparison"
               }
             ]
           }
@@ -1376,7 +1376,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费商业模式与成本支撑定义",
                 "status": "planned",
-                "slug": "永久免费机场商业存续逻辑怎么辨析-广告展示与流量变现收益核算口径"
+                "slug": "free-tier-sustainability-guide"
               },
               {
                 "title": "宣称不限速免费的机场在什么条件下必然崩盘？带宽与服务器刚性成本边界",
@@ -1387,7 +1387,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费零收益无法长期覆盖硬件边界",
                 "status": "planned",
-                "slug": "宣称不限速免费的机场在什么条件下必然崩盘-带宽与服务器刚性成本边界"
+                "slug": "free-tier-sustainability-limits"
               },
               {
                 "title": "广告推广型免费与公益赞助型节点怎么对比？长期可用性与安全性核验",
@@ -1398,7 +1398,7 @@
                 "pillarId": "free",
                 "primaryIntent": "不同类型免费资源真实表现比对",
                 "status": "planned",
-                "slug": "广告推广型免费与公益赞助型节点怎么对比-长期可用性与安全性核验"
+                "slug": "free-tier-sustainability-comparison"
               }
             ]
           },
@@ -1415,7 +1415,7 @@
                 "pillarId": "free",
                 "primaryIntent": "公共节点拥塞度量化标准",
                 "status": "planned",
-                "slug": "公共免费节点争抢拥堵指数怎么定义-并发用户数与节点总出口带宽比例口径"
+                "slug": "public-bandwidth-congestion-guide"
               },
               {
                 "title": "免费节点在晚间高峰期什么时候会彻底断流？TCP重传率达到100%的边界",
@@ -1426,7 +1426,7 @@
                 "pillarId": "free",
                 "primaryIntent": "公共节点严重过载熔断边界",
                 "status": "planned",
-                "slug": "免费节点在晚间高峰期什么时候会彻底断流-TCP重传率达到100百分之的边界"
+                "slug": "public-bandwidth-congestion-limits"
               },
               {
                 "title": "免费节点测速百兆与打开网页超时怎么对比？ICMP欺骗与真实HTTP吞吐对照",
@@ -1437,7 +1437,7 @@
                 "pillarId": "free",
                 "primaryIntent": "假测速表现与真网页加载对比操作",
                 "status": "planned",
-                "slug": "免费节点测速百兆与打开网页超时怎么对比-ICMP欺骗与真实HTTP吞吐对照"
+                "slug": "public-bandwidth-congestion-comparison"
               }
             ]
           }
@@ -1460,7 +1460,7 @@
                 "pillarId": "free",
                 "primaryIntent": "试用门槛与防羊毛风控标准定义",
                 "status": "planned",
-                "slug": "免费试用资格判定标准是什么-一次性临时邮箱过滤与实名手机验证口径"
+                "slug": "trial-qualification-checks-guide"
               },
               {
                 "title": "需要绑定国际信用卡才能领取的试用什么时候有扣费风险？自动订阅续约边界",
@@ -1471,7 +1471,7 @@
                 "pillarId": "free",
                 "primaryIntent": "绑定扣款渠道衍生自动续订边界",
                 "status": "planned",
-                "slug": "需要绑定国际信用卡才能领取的试用什么时候有扣费风险-自动订阅续约边界"
+                "slug": "trial-qualification-checks-limits"
               },
               {
                 "title": "零门槛免注册试用与需邮箱验证试用怎么对比？节点速度与隐私暴露程度",
@@ -1482,7 +1482,7 @@
                 "pillarId": "free",
                 "primaryIntent": "不同注册门槛试用资源实操权衡",
                 "status": "planned",
-                "slug": "零门槛免注册试用与需邮箱验证试用怎么对比-节点速度与隐私暴露程度"
+                "slug": "trial-qualification-checks-comparison"
               }
             ]
           },
@@ -1499,7 +1499,7 @@
                 "pillarId": "free",
                 "primaryIntent": "试用窗口时间标准与配额规则",
                 "status": "planned",
-                "slug": "试用期倒计时怎么计算-自注册激活起算与自然日结束的有效时间口径"
+                "slug": "trial-quota-validity-window-guide"
               },
               {
                 "title": "试用套餐在什么情况下无法解锁流媒体与AI？特惠专属降配受限边界",
@@ -1510,7 +1510,7 @@
                 "pillarId": "free",
                 "primaryIntent": "试用账号功能阉割与限制边界",
                 "status": "planned",
-                "slug": "试用套餐在什么情况下无法解锁流媒体与AI-特惠专属降配受限边界"
+                "slug": "trial-quota-validity-window-limits"
               },
               {
                 "title": "2小时短时试用与3天长期试用怎么对比？针对网络高峰期的验证策略",
@@ -1521,7 +1521,7 @@
                 "pillarId": "free",
                 "primaryIntent": "不同时长试用在高峰期的检验对比",
                 "status": "planned",
-                "slug": "2小时短时试用与3天长期试用怎么对比-针对网络高峰期的验证策略"
+                "slug": "trial-quota-validity-window-comparison"
               }
             ]
           }
@@ -1544,7 +1544,7 @@
                 "pillarId": "free",
                 "primaryIntent": "注册礼包额度与生命周期定义",
                 "status": "planned",
-                "slug": "注册送流量的真实单价怎么核定-首登礼包与单日消耗速率的匹配口径"
+                "slug": "signup-gift-consumption-guide"
               },
               {
                 "title": "送的10G流量什么时候无法使用？必须充值激活或达到最低提现门槛边界",
@@ -1555,7 +1555,7 @@
                 "pillarId": "free",
                 "primaryIntent": "虚假赠送套路与激活限制条件",
                 "status": "planned",
-                "slug": "送的10G流量什么时候无法使用-必须充值激活或达到最低提现门槛边界"
+                "slug": "signup-gift-consumption-limits"
               },
               {
                 "title": "送流量后直接跑路与送流量引导长期月付怎么对比？商家靠谱度筛选实操",
@@ -1566,7 +1566,7 @@
                 "pillarId": "free",
                 "primaryIntent": "赠送流量型商家真实口碑对比",
                 "status": "planned",
-                "slug": "送流量后直接跑路与送流量引导长期月付怎么对比-商家靠谱度筛选实操"
+                "slug": "signup-gift-consumption-comparison"
               }
             ]
           },
@@ -1583,7 +1583,7 @@
                 "pillarId": "free",
                 "primaryIntent": "每日签到机制长期期望值计算",
                 "status": "planned",
-                "slug": "每日签到赠送流量统计口径是什么-随机抽奖机制与固定底仓的期望值计算"
+                "slug": "invitation-referral-math-guide"
               },
               {
                 "title": "邀请好友返还的流量在什么情况下无法兑换？阶梯门槛与防作弊风控边界",
@@ -1594,7 +1594,7 @@
                 "pillarId": "free",
                 "primaryIntent": "推广返利兑现失效限制边界",
                 "status": "planned",
-                "slug": "邀请好友返还的流量在什么情况下无法兑换-阶梯门槛与防作弊风控边界"
+                "slug": "invitation-referral-math-limits"
               },
               {
                 "title": "靠签到白嫖与直接买几元入门月付怎么对比？时间成本与可用性账目核算",
@@ -1605,7 +1605,7 @@
                 "pillarId": "free",
                 "primaryIntent": "签到耗费精力与极低单价购买对照",
                 "status": "planned",
-                "slug": "靠签到白嫖与直接买几元入门月付怎么对比-时间成本与可用性账目核算"
+                "slug": "invitation-referral-math-comparison"
               }
             ]
           }
@@ -1628,7 +1628,7 @@
                 "pillarId": "free",
                 "primaryIntent": "突发流量涌入下的可用率指标",
                 "status": "planned",
-                "slug": "限时免费活动期间可用率指标怎么算-涌入大量羊毛党时的连通率统计口径"
+                "slug": "event-surge-performance-guide"
               },
               {
                 "title": "全网公开限免活动在什么时间段体验最差？晚高峰并发雪崩边界条件",
@@ -1639,7 +1639,7 @@
                 "pillarId": "free",
                 "primaryIntent": "限免节点资源耗尽与崩溃边界",
                 "status": "planned",
-                "slug": "全网公开限免活动在什么时间段体验最差-晚高峰并发雪崩边界条件"
+                "slug": "event-surge-performance-limits"
               },
               {
                 "title": "常规付费节点与限免公开节点怎么对比？同时段同运营商下的延迟丢包实测",
@@ -1650,7 +1650,7 @@
                 "pillarId": "free",
                 "primaryIntent": "限免节点与正价节点体验对比",
                 "status": "planned",
-                "slug": "常规付费节点与限免公开节点怎么对比-同时段同运营商下的延迟丢包实测"
+                "slug": "event-surge-performance-comparison"
               }
             ]
           },
@@ -1667,7 +1667,7 @@
                 "pillarId": "free",
                 "primaryIntent": "自动转付费条款与技术判定标准",
                 "status": "planned",
-                "slug": "限免转付费扣款协议认定口径是什么-静默授权与预授权扣款的技术标准"
+                "slug": "expiration-transition-rules-guide"
               },
               {
                 "title": "限免到期前什么时候必须手动取消解绑？各支付平台预授权关闭时间限制",
@@ -1678,7 +1678,7 @@
                 "pillarId": "free",
                 "primaryIntent": "防自动扣费取消授权的时间边界",
                 "status": "planned",
-                "slug": "限免到期前什么时候必须手动取消解绑-各支付平台预授权关闭时间限制"
+                "slug": "expiration-transition-rules-limits"
               },
               {
                 "title": "手动充值型限免与免密签约型限免怎么对比？用户资金安全防御实操",
@@ -1689,7 +1689,7 @@
                 "pillarId": "free",
                 "primaryIntent": "两种限免模式下的安全性权衡对比",
                 "status": "planned",
-                "slug": "手动充值型限免与免密签约型限免怎么对比-用户资金安全防御实操"
+                "slug": "expiration-transition-rules-comparison"
               }
             ]
           }
@@ -1712,7 +1712,7 @@
                 "pillarId": "free",
                 "primaryIntent": "公开池节点生命周期衰减指标",
                 "status": "planned",
-                "slug": "公开抓取节点存活半衰期指标怎么定义-GitHub开源池节点的失效率统计口径"
+                "slug": "node-scraping-freshness-guide"
               },
               {
                 "title": "免费批量订阅在什么情况下会全部失效？统一被防火墙特征阻断边界",
@@ -1723,7 +1723,7 @@
                 "pillarId": "free",
                 "primaryIntent": "开源大池被批量指纹封锁边界",
                 "status": "planned",
-                "slug": "免费批量订阅在什么情况下会全部失效-统一被防火墙特征阻断边界"
+                "slug": "node-scraping-freshness-limits"
               },
               {
                 "title": "自建爬虫清洗节点与直接使用聚合订阅怎么对比？可用节点筛选操作指南",
@@ -1734,7 +1734,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费节点批量清洗与测速对比实操",
                 "status": "planned",
-                "slug": "自建爬虫清洗节点与直接使用聚合订阅怎么对比-可用节点筛选操作指南"
+                "slug": "node-scraping-freshness-comparison"
               }
             ]
           },
@@ -1751,7 +1751,7 @@
                 "pillarId": "free",
                 "primaryIntent": "中间人攻击与明文泄露定义规范",
                 "status": "planned",
-                "slug": "公开节点中间人窃听风险指标怎么定义-未加密SNI与DNS明文泄露口径"
+                "slug": "mitm-traffic-inspection-guide"
               },
               {
                 "title": "使用公共免费节点登录银行或邮箱在什么条件下必定被劫持？自签证书边界",
@@ -1762,7 +1762,7 @@
                 "pillarId": "free",
                 "primaryIntent": "敏感账户在公共节点操作的红线边界",
                 "status": "planned",
-                "slug": "使用公共免费节点登录银行或邮箱在什么条件下必定被劫持-自签证书边界"
+                "slug": "mitm-traffic-inspection-limits"
               },
               {
                 "title": "HTTPS端到端加密与公共节点日志记录怎么对比？隐私泄露边界防范实操",
@@ -1773,7 +1773,7 @@
                 "pillarId": "free",
                 "primaryIntent": "公共节点安全威胁与防御措施对比",
                 "status": "planned",
-                "slug": "HTTPS端到端加密与公共节点日志记录怎么对比-隐私泄露边界防范实操"
+                "slug": "mitm-traffic-inspection-comparison"
               }
             ]
           }
@@ -1796,7 +1796,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费层级QoS流控标准定义",
                 "status": "planned",
-                "slug": "免费套餐限速限频指标怎么界定-带宽封顶Mbps与单连接请求速率口径"
+                "slug": "free-plan-throttling-guide"
               },
               {
                 "title": "免费节点在什么流量阈值下会触发硬关断？单日消耗超出立即阻断边界",
@@ -1807,7 +1807,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费配额瞬间耗尽关断边界",
                 "status": "planned",
-                "slug": "免费节点在什么流量阈值下会触发硬关断-单日消耗超出立即阻断边界"
+                "slug": "free-plan-throttling-limits"
               },
               {
                 "title": "限制2Mbps免费与无限制超低价套餐怎么对比？打开网页渲染耗时实测",
@@ -1818,7 +1818,7 @@
                 "pillarId": "free",
                 "primaryIntent": "硬限速免费与入门低价流畅度对比",
                 "status": "planned",
-                "slug": "限制2Mbps免费与无限制超低价套餐怎么对比-打开网页渲染耗时实测"
+                "slug": "free-plan-throttling-comparison"
               }
             ]
           },
@@ -1835,7 +1835,7 @@
                 "pillarId": "free",
                 "primaryIntent": "并发限制与连接池指标定义",
                 "status": "planned",
-                "slug": "免费账号并发连接数上限怎么统计-单IP同时在线TCP连接数限制口径"
+                "slug": "concurrent-connection-caps-guide"
               },
               {
                 "title": "打开复杂网页时免费节点什么时候会假死？连接池满溢导致DNS解析失败边界",
@@ -1846,7 +1846,7 @@
                 "pillarId": "free",
                 "primaryIntent": "多并发触发节点拒绝响应边界",
                 "status": "planned",
-                "slug": "打开复杂网页时免费节点什么时候会假死-连接池满溢导致DNS解析失败边界"
+                "slug": "concurrent-connection-caps-limits"
               },
               {
                 "title": "单线程下载与多线程并发在免费节点怎么对比？吞吐量与连接存活对比",
@@ -1857,7 +1857,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费节点不同传输模式稳定性比对",
                 "status": "planned",
-                "slug": "单线程下载与多线程并发在免费节点怎么对比-吞吐量与连接存活对比"
+                "slug": "concurrent-connection-caps-comparison"
               }
             ]
           }
@@ -1880,7 +1880,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费节点自动化探活与健康度指标",
                 "status": "planned",
-                "slug": "免费节点真实可用性探测口径怎么定-HTTP状态码与真实握手延迟口径"
+                "slug": "node-health-audit-method-guide"
               },
               {
                 "title": "自动化脚本探活在什么情况下会误判为有效？假握手欺骗页面的识别边界",
@@ -1891,7 +1891,7 @@
                 "pillarId": "free",
                 "primaryIntent": "节点虚假响应与真实通网判断边界",
                 "status": "planned",
-                "slug": "自动化脚本探活在什么情况下会误判为有效-假握手欺骗页面的识别边界"
+                "slug": "node-health-audit-method-limits"
               },
               {
                 "title": "客户端自带ping与真延迟测速怎么对比？排查节点假活虚标的操作指南",
@@ -1902,7 +1902,7 @@
                 "pillarId": "free",
                 "primaryIntent": "探针工具与客户端连通性测试对比",
                 "status": "planned",
-                "slug": "客户端自带ping与真延迟测速怎么对比-排查节点假活虚标的操作指南"
+                "slug": "node-health-audit-method-comparison"
               }
             ]
           },
@@ -1919,7 +1919,7 @@
                 "pillarId": "free",
                 "primaryIntent": "流量泄露风险等级与防范标准",
                 "status": "planned",
-                "slug": "节点出口流量脱敏标准是什么-端到端TLS协议与本地DNS防护口径"
+                "slug": "credential-leak-prevention-guide"
               },
               {
                 "title": "哪些在线业务在任何条件下都严禁走免费节点？支付与双重认证红线边界",
@@ -1930,7 +1930,7 @@
                 "pillarId": "free",
                 "primaryIntent": "高危业务场景绝对隔离边界",
                 "status": "planned",
-                "slug": "哪些在线业务在任何条件下都严禁走免费节点-支付与双重认证红线边界"
+                "slug": "credential-leak-prevention-limits"
               },
               {
                 "title": "为免费节点配置独立无痕浏览器环境怎么操作？与日常生产环境隔离对比",
@@ -1941,7 +1941,7 @@
                 "pillarId": "free",
                 "primaryIntent": "沙箱隔离与环境安全配置对比指南",
                 "status": "planned",
-                "slug": "为免费节点配置独立无痕浏览器环境怎么操作-与日常生产环境隔离对比"
+                "slug": "credential-leak-prevention-comparison"
               }
             ]
           }
@@ -1964,7 +1964,7 @@
                 "pillarId": "free",
                 "primaryIntent": "沉没时间成本与精力核算模型",
                 "status": "planned",
-                "slug": "折腾免费节点的时间成本怎么折现-每小时时间价值与找节点耗时核算口径"
+                "slug": "opportunity-cost-of-free-guide"
               },
               {
                 "title": "免费节点在紧急工作会议时什么时候会造成灾难？突发中断不可预测边界",
@@ -1975,7 +1975,7 @@
                 "pillarId": "free",
                 "primaryIntent": "关键任务使用不可靠资源的红线边界",
                 "status": "planned",
-                "slug": "免费节点在紧急工作会议时什么时候会造成灾难-突发中断不可预测边界"
+                "slug": "opportunity-cost-of-free-limits"
               },
               {
                 "title": "每天花半小时找免费节点与花5元买月付怎么对比？综合ROI账目核算",
@@ -1986,7 +1986,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费时间损耗与低价购买ROI对比",
                 "status": "planned",
-                "slug": "每天花半小时找免费节点与花5元买月付怎么对比-综合ROI账目核算"
+                "slug": "opportunity-cost-of-free-comparison"
               }
             ]
           },
@@ -2003,7 +2003,7 @@
                 "pillarId": "free",
                 "primaryIntent": "微小付费带来的服务契约指标定义",
                 "status": "planned",
-                "slug": "入门付费套餐的SLA保障指标是什么-客服工单支持与节点在线率标准口径"
+                "slug": "entry-level-paid-migration-guide"
               },
               {
                 "title": "几块钱的机场在什么情况下依然无法替代高品质网络？轻量专线性能边界",
@@ -2014,7 +2014,7 @@
                 "pillarId": "free",
                 "primaryIntent": "极低价付费产品的自身局限性边界",
                 "status": "planned",
-                "slug": "几块钱的机场在什么情况下依然无法替代高品质网络-轻量专线性能边界"
+                "slug": "entry-level-paid-migration-limits"
               },
               {
                 "title": "从全免费迁移至5元月付怎么平滑过渡？双轨并行验证稳定性的实操指南",
@@ -2025,7 +2025,7 @@
                 "pillarId": "free",
                 "primaryIntent": "免费转低价方案的具体迁移步骤对比",
                 "status": "planned",
-                "slug": "从全免费迁移至5元月付怎么平滑过渡-双轨并行验证稳定性的实操指南"
+                "slug": "entry-level-paid-migration-comparison"
               }
             ]
           }
@@ -2054,7 +2054,7 @@
                 "pillarId": "value",
                 "primaryIntent": "每GB标称价格标准定义与计算公式",
                 "status": "planned",
-                "slug": "标称每GB成本怎么计算-套餐价格除以标称配额的标准核算口径"
+                "slug": "cost-per-gigabyte-formula-guide"
               },
               {
                 "title": "标称单价极低什么时候并不等于划算？总额度过大且期限太短的浪费边界",
@@ -2065,7 +2065,7 @@
                 "pillarId": "value",
                 "primaryIntent": "名义低单价与超额浪费边界判断",
                 "status": "planned",
-                "slug": "标称单价极低什么时候并不等于划算-总额度过大且期限太短的浪费边界"
+                "slug": "cost-per-gigabyte-formula-limits"
               },
               {
                 "title": "大容量低单价与小容量高单价套餐怎么对比？基于个人月耗的损益临界点",
@@ -2076,7 +2076,7 @@
                 "pillarId": "value",
                 "primaryIntent": "不同容量单价格局横向对照",
                 "status": "planned",
-                "slug": "大容量低单价与小容量高单价套餐怎么对比-基于个人月耗的损益临界点"
+                "slug": "cost-per-gigabyte-formula-comparison"
               }
             ]
           },
@@ -2093,7 +2093,7 @@
                 "pillarId": "value",
                 "primaryIntent": "超售比例指标与有效承载力定义",
                 "status": "planned",
-                "slug": "机场服务器超售率指标怎么理解-带宽总储备与销售总配额的折算口径"
+                "slug": "overselling-ratio-impact-guide"
               },
               {
                 "title": "高超售机场在什么并发场景下会严重劣化？大型体育赛事与晚高峰拥堵边界",
@@ -2104,7 +2104,7 @@
                 "pillarId": "value",
                 "primaryIntent": "超售崩溃的并发触发边界",
                 "status": "planned",
-                "slug": "高超售机场在什么并发场景下会严重劣化-大型体育赛事与晚高峰拥堵边界"
+                "slug": "overselling-ratio-impact-limits"
               },
               {
                 "title": "适度超售廉价方案与低超售轻奢方案怎么对比？单位有效带宽真实单价分析",
@@ -2115,7 +2115,7 @@
                 "pillarId": "value",
                 "primaryIntent": "超售率对真实性价比的摊薄对比",
                 "status": "planned",
-                "slug": "适度超售廉价方案与低超售轻奢方案怎么对比-单位有效带宽真实单价分析"
+                "slug": "overselling-ratio-impact-comparison"
               }
             ]
           }
@@ -2138,7 +2138,7 @@
                 "pillarId": "value",
                 "primaryIntent": "实际消耗单价与利用率指标核算",
                 "status": "planned",
-                "slug": "有效利用率单价怎么计算-实际消耗流量与月实付金额的折算口径"
+                "slug": "unutilized-quota-waste-guide"
               },
               {
                 "title": "月耗不足30%时大套餐什么时候会变成高价产品？未用流量清零惩罚边界",
@@ -2149,7 +2149,7 @@
                 "pillarId": "value",
                 "primaryIntent": "配额过剩导致的单位成本飙升边界",
                 "status": "planned",
-                "slug": "月耗不足30百分之时大套餐什么时候会变成高价产品-未用流量清零惩罚边界"
+                "slug": "unutilized-quota-waste-limits"
               },
               {
                 "title": "每月剩一半流量与买小套餐偶尔加购怎么对比？年度真实总支出精算",
@@ -2160,7 +2160,7 @@
                 "pillarId": "value",
                 "primaryIntent": "包月过量与按需增补方案对比",
                 "status": "planned",
-                "slug": "每月剩一半流量与买小套餐偶尔加购怎么对比-年度真实总支出精算"
+                "slug": "unutilized-quota-waste-comparison"
               }
             ]
           },
@@ -2177,7 +2177,7 @@
                 "pillarId": "value",
                 "primaryIntent": "用量波动与档位精准匹配模型",
                 "status": "planned",
-                "slug": "阶梯式套餐匹配标准是什么-用量波动区间的方差统计与档位界定口径"
+                "slug": "just-in-time-tier-matching-guide"
               },
               {
                 "title": "月中调低套餐档位在什么条款下不可行？商户降档限制与次月生效边界",
@@ -2188,7 +2188,7 @@
                 "pillarId": "value",
                 "primaryIntent": "套餐变更限制与生效时间边界",
                 "status": "planned",
-                "slug": "月中调低套餐档位在什么条款下不可行-商户降档限制与次月生效边界"
+                "slug": "just-in-time-tier-matching-limits"
               },
               {
                 "title": "精准定额与宽松冗余套餐怎么对比？为防断网溢价付费的合算度实操",
@@ -2199,7 +2199,7 @@
                 "pillarId": "value",
                 "primaryIntent": "紧平衡与宽冗余方案的性价权衡",
                 "status": "planned",
-                "slug": "精准定额与宽松冗余套餐怎么对比-为防断网溢价付费的合算度实操"
+                "slug": "just-in-time-tier-matching-comparison"
               }
             ]
           }
@@ -2222,7 +2222,7 @@
                 "pillarId": "value",
                 "primaryIntent": "倍率折算容量与真实配额核算",
                 "status": "planned",
-                "slug": "折算倍率后的真实可用容量怎么算-标称额度除以节点倍率的标准口径"
+                "slug": "multiplier-conversion-rate-guide"
               },
               {
                 "title": "三倍甚至五倍率节点在什么场景下会瞬间榨干套餐？4K高码率视频消耗边界",
@@ -2233,7 +2233,7 @@
                 "pillarId": "value",
                 "primaryIntent": "高倍率结合大吞吐引发的断网边界",
                 "status": "planned",
-                "slug": "三倍甚至五倍率节点在什么场景下会瞬间榨干套餐-4K高码率视频消耗边界"
+                "slug": "multiplier-conversion-rate-limits"
               },
               {
                 "title": "100G单倍率专线与300G三倍率专线怎么对比？实际可用时长与额度对比",
@@ -2244,7 +2244,7 @@
                 "pillarId": "value",
                 "primaryIntent": "等效容量方案横向实测对比",
                 "status": "planned",
-                "slug": "100G单倍率专线与300G三倍率专线怎么对比-实际可用时长与额度对比"
+                "slug": "multiplier-conversion-rate-comparison"
               }
             ]
           },
@@ -2261,7 +2261,7 @@
                 "pillarId": "value",
                 "primaryIntent": "加权有效单价与综合模型定义",
                 "status": "planned",
-                "slug": "综合有效GB成本公式是什么-考虑各倍率节点使用权重的加权单价口径"
+                "slug": "effective-gigabyte-recalculation-guide"
               },
               {
                 "title": "低倍率普通节点全部瘫痪时高倍率套餐在什么条件下性价比归零？强制使用边界",
@@ -2272,7 +2272,7 @@
                 "pillarId": "value",
                 "primaryIntent": "被迫全走高倍率带来的成本失控边界",
                 "status": "planned",
-                "slug": "低倍率普通节点全部瘫痪时高倍率套餐在什么条件下性价比归零-强制使用边界"
+                "slug": "effective-gigabyte-recalculation-limits"
               },
               {
                 "title": "低倍直连浏览加高倍专线关键任务怎么搭配？客户端分流策略优化性价比",
@@ -2283,7 +2283,7 @@
                 "pillarId": "value",
                 "primaryIntent": "混合倍率节点分流配置实操对比",
                 "status": "planned",
-                "slug": "低倍直连浏览加高倍专线关键任务怎么搭配-客户端分流策略优化性价比"
+                "slug": "effective-gigabyte-recalculation-comparison"
               }
             ]
           }
@@ -2306,7 +2306,7 @@
                 "pillarId": "value",
                 "primaryIntent": "测速吞吐量与真实体验换算标准",
                 "status": "planned",
-                "slug": "测速带宽与网页加载首屏延迟转化口径是什么-TCP慢启动与握手耗时指标"
+                "slug": "benchmark-reality-gap-guide"
               },
               {
                 "title": "跑满千兆但在日常浏览时什么时候依然卡顿？DNS解析迟缓与高延迟边界",
@@ -2317,7 +2317,7 @@
                 "pillarId": "value",
                 "primaryIntent": "峰值高却响应迟缓的矛盾边界",
                 "status": "planned",
-                "slug": "跑满千兆但在日常浏览时什么时候依然卡顿-DNS解析迟缓与高延迟边界"
+                "slug": "benchmark-reality-gap-limits"
               },
               {
                 "title": "300Mbps极速低价与50Mbps平稳专线怎么对比？真实网页秒开率对比",
@@ -2328,7 +2328,7 @@
                 "pillarId": "value",
                 "primaryIntent": "大带宽直连与低延迟专线对比实操",
                 "status": "planned",
-                "slug": "300Mbps极速低价与50Mbps平稳专线怎么对比-真实网页秒开率对比"
+                "slug": "benchmark-reality-gap-comparison"
               }
             ]
           },
@@ -2345,7 +2345,7 @@
                 "pillarId": "value",
                 "primaryIntent": "丢包率对有效吞吐杀伤力数学口径",
                 "status": "planned",
-                "slug": "丢包率与吞吐量衰减模型口径是什么-Mathis公式量化TCP传输速率指标"
+                "slug": "packet-loss-penalty-guide"
               },
               {
                 "title": "丢包率超过5%时在什么业务下会发生严重卡顿？远程桌面与语音通话边界",
@@ -2356,7 +2356,7 @@
                 "pillarId": "value",
                 "primaryIntent": "高丢包对实时交互业务的杀伤边界",
                 "status": "planned",
-                "slug": "丢包率超过5百分之时在什么业务下会发生严重卡顿-远程桌面与语音通话边界"
+                "slug": "packet-loss-penalty-limits"
               },
               {
                 "title": "0丢包专线与3%丢包廉价直连怎么对比？不同预算下的单位顺畅体验价值",
@@ -2367,7 +2367,7 @@
                 "pillarId": "value",
                 "primaryIntent": "无损专线与轻微丢包直连性价比对比",
                 "status": "planned",
-                "slug": "0丢包专线与3百分之丢包廉价直连怎么对比-不同预算下的单位顺畅体验价值"
+                "slug": "packet-loss-penalty-comparison"
               }
             ]
           }
@@ -2390,7 +2390,7 @@
                 "pillarId": "value",
                 "primaryIntent": "掉线停工损失折现指标体系",
                 "status": "planned",
-                "slug": "网络故障中断成本怎么折算-每小时停工损失与月均故障时长的量化口径"
+                "slug": "downtime-cost-quantification-guide"
               },
               {
                 "title": "便宜机场频繁维护在什么工作场景下坚决不能接受？线上交易与考试边界",
@@ -2401,7 +2401,7 @@
                 "pillarId": "value",
                 "primaryIntent": "低SLA不可接受的高危业务边界",
                 "status": "planned",
-                "slug": "便宜机场频繁维护在什么工作场景下坚决不能接受-线上交易与考试边界"
+                "slug": "downtime-cost-quantification-limits"
               },
               {
                 "title": "月付10元经常维护与月付25元稳定运行怎么对比？计入生产力损失的综合账",
@@ -2412,7 +2412,7 @@
                 "pillarId": "value",
                 "primaryIntent": "低价常断与稍贵长稳方案财务对比",
                 "status": "planned",
-                "slug": "月付10元经常维护与月付25元稳定运行怎么对比-计入生产力损失的综合账"
+                "slug": "downtime-cost-quantification-comparison"
               }
             ]
           },
@@ -2429,7 +2429,7 @@
                 "pillarId": "value",
                 "primaryIntent": "运维响应时效MTTR指标定义",
                 "status": "planned",
-                "slug": "工单平均解决时长MTTR指标是什么-从提交故障到恢复通信的量化统计口径"
+                "slug": "customer-support-response-cost-guide"
               },
               {
                 "title": "无客服或纯机器人回复在什么突发故障下会导致长期失联？封锁大排查边界",
@@ -2440,7 +2440,7 @@
                 "pillarId": "value",
                 "primaryIntent": "缺乏人工支持导致完全失联的边界",
                 "status": "planned",
-                "slug": "无客服或纯机器人回复在什么突发故障下会导致长期失联-封锁大排查边界"
+                "slug": "customer-support-response-cost-limits"
               },
               {
                 "title": "社区Telegram互助与专业工单支持怎么对比？排障效率与个人折腾时间权衡",
@@ -2451,7 +2451,7 @@
                 "pillarId": "value",
                 "primaryIntent": "不同售后支持模式对性价比的影响比对",
                 "status": "planned",
-                "slug": "社区Telegram互助与专业工单支持怎么对比-排障效率与个人折腾时间权衡"
+                "slug": "customer-support-response-cost-comparison"
               }
             ]
           }
@@ -2474,7 +2474,7 @@
                 "pillarId": "value",
                 "primaryIntent": "客户端工具成本分摊计算口径",
                 "status": "planned",
-                "slug": "客户端软件授权分摊成本怎么算-买断制与订阅制在年度网络预算中的口径"
+                "slug": "paid-client-overhead-guide"
               },
               {
                 "title": "付费客户端在什么系统升级后会失效？跨大版本更新需重新付费的限制边界",
@@ -2485,7 +2485,7 @@
                 "pillarId": "value",
                 "primaryIntent": "客户端授权版本过期失效边界",
                 "status": "planned",
-                "slug": "付费客户端在什么系统升级后会失效-跨大版本更新需重新付费的限制边界"
+                "slug": "paid-client-overhead-limits"
               },
               {
                 "title": "免费开源客户端与收费专属客户端怎么对比？年度总体支出与易用性权衡",
@@ -2496,7 +2496,7 @@
                 "pillarId": "value",
                 "primaryIntent": "开源免费与商业买断工具全寿命成本对比",
                 "status": "planned",
-                "slug": "免费开源客户端与收费专属客户端怎么对比-年度总体支出与易用性权衡"
+                "slug": "paid-client-overhead-comparison"
               }
             ]
           },
@@ -2513,7 +2513,7 @@
                 "pillarId": "value",
                 "primaryIntent": "规则维护隐性时间成本指标",
                 "status": "planned",
-                "slug": "开源规则配置维护时间折现口径是什么-分流规则订阅与本地排障耗时核算"
+                "slug": "open-source-config-learning-guide"
               },
               {
                 "title": "小白用户在什么情况下配置开源核心容易出错？YAML缩进与分流语法边界",
@@ -2524,7 +2524,7 @@
                 "pillarId": "value",
                 "primaryIntent": "技术门槛导致配置崩溃的边界",
                 "status": "planned",
-                "slug": "小白用户在什么情况下配置开源核心容易出错-YAML缩进与分流语法边界"
+                "slug": "open-source-config-learning-limits"
               },
               {
                 "title": "一键导入托管配置与手动定制规则链怎么对比？维护精力与分流精准度权衡",
@@ -2535,7 +2535,7 @@
                 "pillarId": "value",
                 "primaryIntent": "开箱即用与深度定制体验对比",
                 "status": "planned",
-                "slug": "一键导入托管配置与手动定制规则链怎么对比-维护精力与分流精准度权衡"
+                "slug": "open-source-config-learning-comparison"
               }
             ]
           }
@@ -2558,7 +2558,7 @@
                 "pillarId": "value",
                 "primaryIntent": "多设备平摊成本计算口径定义",
                 "status": "planned",
-                "slug": "单设备月度摊薄成本公式是什么-套餐总价除以实际并发终端数的核算口径"
+                "slug": "cost-per-active-terminal-guide"
               },
               {
                 "title": "单账号多设备在什么情况下会触发商户限流？总带宽被多端抢占压垮的边界",
@@ -2569,7 +2569,7 @@
                 "pillarId": "value",
                 "primaryIntent": "并发超负荷引发服务降级边界",
                 "status": "planned",
-                "slug": "单账号多设备在什么情况下会触发商户限流-总带宽被多端抢占压垮的边界"
+                "slug": "cost-per-active-terminal-limits"
               },
               {
                 "title": "3设备套餐与无限制设备套餐怎么对比？个人多终端与家庭共享的真实单价",
@@ -2580,7 +2580,7 @@
                 "pillarId": "value",
                 "primaryIntent": "不同终端限制套餐性价比对比",
                 "status": "planned",
-                "slug": "3设备套餐与无限制设备套餐怎么对比-个人多终端与家庭共享的真实单价"
+                "slug": "cost-per-active-terminal-comparison"
               }
             ]
           },
@@ -2597,7 +2597,7 @@
                 "pillarId": "value",
                 "primaryIntent": "多用户合租资金与额度分配口径",
                 "status": "planned",
-                "slug": "合租流量分配模型怎么设计-各人带宽占用权重与按头分摊账目口径"
+                "slug": "household-token-sharing-guide"
               },
               {
                 "title": "合租室友跑BT下载时在什么条件下会导致全员封号？违规流量触发风控边界",
@@ -2608,7 +2608,7 @@
                 "pillarId": "value",
                 "primaryIntent": "连带责任导致账号连坐封禁边界",
                 "status": "planned",
-                "slug": "合租室友跑BT下载时在什么条件下会导致全员封号-违规流量触发风控边界"
+                "slug": "household-token-sharing-limits"
               },
               {
                 "title": "多人合租大套餐与各自买小套餐怎么对比？隐私、稳定性与费用节省比对",
@@ -2619,7 +2619,7 @@
                 "pillarId": "value",
                 "primaryIntent": "合租与独立购买优缺点深度对比",
                 "status": "planned",
-                "slug": "多人合租大套餐与各自买小套餐怎么对比-隐私-稳定性与费用节省比对"
+                "slug": "household-token-sharing-comparison"
               }
             ]
           }
@@ -2642,7 +2642,7 @@
                 "pillarId": "value",
                 "primaryIntent": "解锁增值服务溢价度量化标准",
                 "status": "planned",
-                "slug": "流媒体解锁溢价率指标怎么计算-纯直连翻墙与原生IP解锁的价差核算口径"
+                "slug": "media-unlocking-premium-guide"
               },
               {
                 "title": "宣称全解锁的节点在什么风控大封锁下会瞬间失效？机房IP段被批量拉黑边界",
@@ -2653,7 +2653,7 @@
                 "pillarId": "value",
                 "primaryIntent": "流媒体风控升级导致解锁失效边界",
                 "status": "planned",
-                "slug": "宣称全解锁的节点在什么风控大封锁下会瞬间失效-机房IP段被批量拉黑边界"
+                "slug": "media-unlocking-premium-limits"
               },
               {
                 "title": "不含解锁的低价节点搭配独立DNS与全包套餐怎么对比？综合性价比实操",
@@ -2664,7 +2664,7 @@
                 "pillarId": "value",
                 "primaryIntent": "外部解锁辅助与原生解锁套餐对比",
                 "status": "planned",
-                "slug": "不含解锁的低价节点搭配独立DNS与全包套餐怎么对比-综合性价比实操"
+                "slug": "media-unlocking-premium-comparison"
               }
             ]
           },
@@ -2681,7 +2681,7 @@
                 "pillarId": "value",
                 "primaryIntent": "节点地域冗余与成本利用率指标",
                 "status": "planned",
-                "slug": "节点有效利用率指标怎么定义-常用亚太节点与冷门小众节点的成本占比口径"
+                "slug": "niche-region-utility-guide"
               },
               {
                 "title": "拥有80个冷门国家的机场在什么情况下纯属营销噱头？高延迟与低带宽边界",
@@ -2692,7 +2692,7 @@
                 "pillarId": "value",
                 "primaryIntent": "冷门节点华而不实的判定边界",
                 "status": "planned",
-                "slug": "拥有80个冷门国家的机场在什么情况下纯属营销噱头-高延迟与低带宽边界"
+                "slug": "niche-region-utility-limits"
               },
               {
                 "title": "精简10国优质专线与庞大100国杂牌节点怎么对比？日常使用真实体验横评",
@@ -2703,7 +2703,7 @@
                 "pillarId": "value",
                 "primaryIntent": "少而精与多而杂节点方案对比",
                 "status": "planned",
-                "slug": "精简10国优质专线与庞大100国杂牌节点怎么对比-日常使用真实体验横评"
+                "slug": "niche-region-utility-comparison"
               }
             ]
           }
@@ -2732,7 +2732,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "极轻量流量消耗模型标准定义",
                 "status": "planned",
-                "slug": "50GB以下轻量套餐用量怎么规划-日常纯网页浏览与文字通讯的消耗口径"
+                "slug": "minimal-usage-profile-guide"
               },
               {
                 "title": "50GB配额在什么操作下会在一天内消耗殆尽？后台自动同步与网盘更新边界",
@@ -2743,7 +2743,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "轻量额度意外爆仓边界排查",
                 "status": "planned",
-                "slug": "50GB配额在什么操作下会在一天内消耗殆尽-后台自动同步与网盘更新边界"
+                "slug": "minimal-usage-profile-limits"
               },
               {
                 "title": "20GB极低档与50GB轻量档怎么对比？满足文字办公需求下的性价比选购",
@@ -2754,7 +2754,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "轻量区间不同档位对比实操",
                 "status": "planned",
-                "slug": "20GB极低档与50GB轻量档怎么对比-满足文字办公需求下的性价比选购"
+                "slug": "minimal-usage-profile-comparison"
               }
             ]
           },
@@ -2771,7 +2771,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "流量告警缓冲指标标准设定",
                 "status": "planned",
-                "slug": "安全冗余缓冲带指标怎么设定-月末断网预警阈值的流量百分比核算口径"
+                "slug": "buffer-safety-margin-guide"
               },
               {
                 "title": "小额度套餐在剩余5%流量时在什么网络请求下会彻底掐断？长连接重试边界",
@@ -2782,7 +2782,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "临界状态完全熔断的技术边界",
                 "status": "planned",
-                "slug": "小额度套餐在剩余5百分之流量时在什么网络请求下会彻底掐断-长连接重试边界"
+                "slug": "buffer-safety-margin-limits"
               },
               {
                 "title": "通过客户端屏蔽系统更新流量怎么配置？小额度套餐防跑量实操指南",
@@ -2793,7 +2793,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "规则拦截大流量域名与实测对比",
                 "status": "planned",
-                "slug": "通过客户端屏蔽系统更新流量怎么配置-小额度套餐防跑量实操指南"
+                "slug": "buffer-safety-margin-comparison"
               }
             ]
           }
@@ -2816,7 +2816,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "中轻量社交媒体流量标准核算模型",
                 "status": "planned",
-                "slug": "百G以内标准图文月消耗怎么算-推特-Instagram与图文网页加载口径"
+                "slug": "standard-browsing-fit-guide"
               },
               {
                 "title": "100GB套餐在什么高频场景下月末会吃紧？短视频沉浸式刷取的时间边界",
@@ -2827,7 +2827,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "短视频大流量吞噬百G额度边界",
                 "status": "planned",
-                "slug": "100GB套餐在什么高频场景下月末会吃紧-短视频沉浸式刷取的时间边界"
+                "slug": "standard-browsing-fit-limits"
               },
               {
                 "title": "60GB与100GB套餐怎么对比？普通上班族非重度用户的月度开支对照",
@@ -2838,7 +2838,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "中轻量区间主流档位实用度比对",
                 "status": "planned",
-                "slug": "60GB与100GB套餐怎么对比-普通上班族非重度用户的月度开支对照"
+                "slug": "standard-browsing-fit-comparison"
               }
             ]
           },
@@ -2855,7 +2855,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "视频清晰度与流量换算标准定义",
                 "status": "planned",
-                "slug": "视频流媒体每小时流量消耗口径是什么-1080P与720P码率的真实数据消耗"
+                "slug": "video-streaming-hours-guide"
               },
               {
                 "title": "在100GB月配额下每天看高清视频在什么时长内安全？月末断流临界边界",
@@ -2866,7 +2866,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "视频观看安全时长边界排查",
                 "status": "planned",
-                "slug": "在100GB月配额下每天看高清视频在什么时长内安全-月末断流临界边界"
+                "slug": "video-streaming-hours-limits"
               },
               {
                 "title": "自动分辨率与锁死1080P在流量消耗上怎么对比？画质与额度节省权衡操作",
@@ -2877,7 +2877,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "客户端视频画质限制与节省流量对比",
                 "status": "planned",
-                "slug": "自动分辨率与锁死1080P在流量消耗上怎么对比-画质与额度节省权衡操作"
+                "slug": "video-streaming-hours-comparison"
               }
             ]
           }
@@ -2900,7 +2900,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "重度日常主力档位核算标准",
                 "status": "planned",
-                "slug": "100到200GB主流甜品档核算口径是什么-高清视频-音乐流与办公综合消耗"
+                "slug": "heavy-media-sweet-spot-guide"
               },
               {
                 "title": "200GB套餐在什么重度下载任务下依然不足？大型游戏补丁与RAW素材边界",
@@ -2911,7 +2911,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "甜品档面对大文件下载的局限边界",
                 "status": "planned",
-                "slug": "200GB套餐在什么重度下载任务下依然不足-大型游戏补丁与RAW素材边界"
+                "slug": "heavy-media-sweet-spot-limits"
               },
               {
                 "title": "150GB专线套餐与300GB直连套餐怎么对比？同等花费下的速度与额度取舍",
@@ -2922,7 +2922,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "中大容量专线与超大直连对比实操",
                 "status": "planned",
-                "slug": "150GB专线套餐与300GB直连套餐怎么对比-同等花费下的速度与额度取舍"
+                "slug": "heavy-media-sweet-spot-comparison"
               }
             ]
           },
@@ -2939,7 +2939,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "双人合用流量平摊指标模型",
                 "status": "planned",
-                "slug": "双人合用流量配额分配指标怎么定-设备并发与峰值时段错峰的统计口径"
+                "slug": "family-dual-user-split-guide"
               },
               {
                 "title": "一人看4K视频时另一人在什么条件下会遭遇卡顿？单节点总带宽争抢边界",
@@ -2950,7 +2950,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "局域网并发带宽挤占的边界判断",
                 "status": "planned",
-                "slug": "一人看4K视频时另一人在什么条件下会遭遇卡顿-单节点总带宽争抢边界"
+                "slug": "family-dual-user-split-limits"
               },
               {
                 "title": "给两台设备设置分流限速规则怎么操作？客户端本地QoS调控对比",
@@ -2961,7 +2961,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "多设备限流与分流实操方案对比",
                 "status": "planned",
-                "slug": "给两台设备设置分流限速规则怎么操作-客户端本地QoS调控对比"
+                "slug": "family-dual-user-split-comparison"
               }
             ]
           }
@@ -2984,7 +2984,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "超高清视频流量吞吐标准定义",
                 "status": "planned",
-                "slug": "4K高码率视频每小时数据吞吐口径是什么-Netflix与YouTube-4K码率规范"
+                "slug": "high-bandwidth-workloads-guide"
               },
               {
                 "title": "500GB大套餐在什么连续高负载下会触发公平使用限制？运营商单日阈值边界",
@@ -2995,7 +2995,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "超大额度触发单日FUP封顶边界",
                 "status": "planned",
-                "slug": "500GB大套餐在什么连续高负载下会触发公平使用限制-运营商单日阈值边界"
+                "slug": "high-bandwidth-workloads-limits"
               },
               {
                 "title": "200GB高品质专线与500GB普通BGP怎么对比？针对画质追求者的选购横评",
@@ -3006,7 +3006,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "大容量不同线路档位体验对比",
                 "status": "planned",
-                "slug": "200GB高品质专线与500GB普通BGP怎么对比-针对画质追求者的选购横评"
+                "slug": "high-bandwidth-workloads-comparison"
               }
             ]
           },
@@ -3023,7 +3023,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "突发传输吞吐冗余度指标定义",
                 "status": "planned",
-                "slug": "突发峰值传输速率冗余度指标怎么衡量-突发文件同步与并发下载口径"
+                "slug": "burst-transfer-resilience-guide"
               },
               {
                 "title": "套餐标称500G但在晚高峰什么时候跑不满带宽？单线程连接受限边界",
@@ -3034,7 +3034,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "大容量套餐单线程限速边界条件",
                 "status": "planned",
-                "slug": "套餐标称500G但在晚高峰什么时候跑不满带宽-单线程连接受限边界"
+                "slug": "burst-transfer-resilience-limits"
               },
               {
                 "title": "单机大流量与网关级共享分流怎么对比？针对多设备高吞吐环境的配置",
@@ -3045,7 +3045,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "大容量套餐在不同接入架构下的对比",
                 "status": "planned",
-                "slug": "单机大流量与网关级共享分流怎么对比-针对多设备高吞吐环境的配置"
+                "slug": "burst-transfer-resilience-comparison"
               }
             ]
           }
@@ -3068,7 +3068,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "团队流量池规划与核算口径",
                 "status": "planned",
-                "slug": "小型团队共享流量池计算口径是什么-团队人均消耗与公用网关的叠加模型"
+                "slug": "studio-and-small-team-guide"
               },
               {
                 "title": "接近1TB套餐在什么频繁爬虫作业下会被封禁？高频HTTP请求触发风控边界",
@@ -3079,7 +3079,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "数据采集触发商户滥用封锁边界",
                 "status": "planned",
-                "slug": "接近1TB套餐在什么频繁爬虫作业下会被封禁-高频HTTP请求触发风控边界"
+                "slug": "studio-and-small-team-limits"
               },
               {
                 "title": "团队合买1TB商业大包与成员各买200G怎么对比？管理权限与总费用实操",
@@ -3090,7 +3090,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "企业合采与个人独立报销方案对比",
                 "status": "planned",
-                "slug": "团队合买1TB商业大包与成员各买200G怎么对比-管理权限与总费用实操"
+                "slug": "studio-and-small-team-comparison"
               }
             ]
           },
@@ -3107,7 +3107,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "公平使用原则FUP核心指标定义",
                 "status": "planned",
-                "slug": "公平使用原则FUP具体条款口径是什么-单日峰值限额与全天总量的协议界定"
+                "slug": "fair-use-policy-checks-guide"
               },
               {
                 "title": "月配额充足时为什么在连续下载后被限速至1Mbps？商户动态QoS降级边界",
@@ -3118,7 +3118,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "短时超量触发隐性流控边界",
                 "status": "planned",
-                "slug": "月配额充足时为什么在连续下载后被限速至1Mbps-商户动态QoS降级边界"
+                "slug": "fair-use-policy-checks-limits"
               },
               {
                 "title": "标榜不限量套餐与明码标价800G套餐怎么对比？真实可用额度与限制对比",
@@ -3129,7 +3129,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "虚假无限量与真实大容量方案对比",
                 "status": "planned",
-                "slug": "标榜不限量套餐与明码标价800G套餐怎么对比-真实可用额度与限制对比"
+                "slug": "fair-use-policy-checks-comparison"
               }
             ]
           }
@@ -3152,7 +3152,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "企业级海量吞吐指标标准定义",
                 "status": "planned",
-                "slug": "TB级企业出口流量吞吐计算口径是什么-千兆局域网满载与上行并发核算"
+                "slug": "enterprise-level-traffic-guide"
               },
               {
                 "title": "超大TB套餐在什么网络环境下单端口会成为瓶颈？服务器网卡与硬件转发边界",
@@ -3163,7 +3163,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "硬件吞吐与端口速率瓶颈边界",
                 "status": "planned",
-                "slug": "超大TB套餐在什么网络环境下单端口会成为瓶颈-服务器网卡与硬件转发边界"
+                "slug": "enterprise-level-traffic-limits"
               },
               {
                 "title": "多条500G专线负载均衡与单条2TB大套餐怎么对比？冗余安全性与管理难度",
@@ -3174,7 +3174,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "多线聚合与单线大包架构对比实操",
                 "status": "planned",
-                "slug": "多条500G专线负载均衡与单条2TB大套餐怎么对比-冗余安全性与管理难度"
+                "slug": "enterprise-level-traffic-comparison"
               }
             ]
           },
@@ -3191,7 +3191,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "带宽饱和度量化指标定义",
                 "status": "planned",
-                "slug": "企业级带宽饱和度指标怎么定义-长期满载率与突发容限统计口径"
+                "slug": "bandwidth-saturation-limits-guide"
               },
               {
                 "title": "TB级流量在什么跨境协议下会被运营商主动丢包？UDP协议被QoS限流边界",
@@ -3202,7 +3202,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "UDP/TCP在大吞吐下的运营商限制",
                 "status": "planned",
-                "slug": "TB级流量在什么跨境协议下会被运营商主动丢包-UDP协议被QoS限流边界"
+                "slug": "bandwidth-saturation-limits-limits"
               },
               {
                 "title": "TB级大流量如何进行协议分流以规避限速？TCP与Hysteria2协议调度对比",
@@ -3213,7 +3213,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "大流量抗封锁与抗限速协议配置对比",
                 "status": "planned",
-                "slug": "TB级大流量如何进行协议分流以规避限速-TCP与Hysteria2协议调度对比"
+                "slug": "bandwidth-saturation-limits-comparison"
               }
             ]
           }
@@ -3236,7 +3236,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "不限时无期限流量核算标准",
                 "status": "planned",
-                "slug": "永不过期流量包计费机制口径是什么-零月租按量抵扣与永久有效契约界定"
+                "slug": "timeless-pool-mechanics-guide"
               },
               {
                 "title": "宣称不限时的流量包在什么服务终止下会作废？商户跑路与节点更迭边界",
@@ -3247,7 +3247,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "不可抗力导致长期流量包终止边界",
                 "status": "planned",
-                "slug": "宣称不限时的流量包在什么服务终止下会作废-商户跑路与节点更迭边界"
+                "slug": "timeless-pool-mechanics-limits"
               },
               {
                 "title": "不限时流量包与包年重置套餐怎么对比？针对低频出差者的真实年开支对照",
@@ -3258,7 +3258,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "低频长周期使用两种计费方案对比",
                 "status": "planned",
-                "slug": "不限时流量包与包年重置套餐怎么对比-针对低频出差者的真实年开支对照"
+                "slug": "timeless-pool-mechanics-comparison"
               }
             ]
           },
@@ -3275,7 +3275,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "混合计费自动容灾指标规范",
                 "status": "planned",
-                "slug": "主备混合容灾双保险模型口径是什么-主套餐耗尽自动切流量包的判定标准"
+                "slug": "hybrid-backup-strategy-guide"
               },
               {
                 "title": "备用不限时节点在什么情况下无法自动唤醒？客户端分流回落规则缺失边界",
@@ -3286,7 +3286,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "故障转移规则失效的边界排查",
                 "status": "planned",
-                "slug": "备用不限时节点在什么情况下无法自动唤醒-客户端分流回落规则缺失边界"
+                "slug": "hybrid-backup-strategy-limits"
               },
               {
                 "title": "日常小月付加永不过期流量包怎么搭配？兼顾低成本与不限流操作指引",
@@ -3297,7 +3297,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "小月付配按量包双订阅实操配置对比",
                 "status": "planned",
-                "slug": "日常小月付加永不过期流量包怎么搭配-兼顾低成本与不限流操作指引"
+                "slug": "hybrid-backup-strategy-comparison"
               }
             ]
           }
@@ -3320,7 +3320,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "配额重置时间戳与时区认定标准",
                 "status": "planned",
-                "slug": "流量重置时间戳计算口径是什么-UTC时区判定与本地账单周期的换算标准"
+                "slug": "cycle-reset-timing-rules-guide"
               },
               {
                 "title": "月中购买的套餐在自然月1号重置时什么时候会吃亏？计费天数不足折损边界",
@@ -3331,7 +3331,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "自然月对非月初购入者的折损边界",
                 "status": "planned",
-                "slug": "月中购买的套餐在自然月1号重置时什么时候会吃亏-计费天数不足折损边界"
+                "slug": "cycle-reset-timing-rules-limits"
               },
               {
                 "title": "动态账单日重置与固定自然月重置怎么对比？根据发薪日和用量规划选购",
@@ -3342,7 +3342,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "两种重置机制的灵活性与坑点比对",
                 "status": "planned",
-                "slug": "动态账单日重置与固定自然月重置怎么对比-根据发薪日和用量规划选购"
+                "slug": "cycle-reset-timing-rules-comparison"
               }
             ]
           },
@@ -3359,7 +3359,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "应急增量流量包溢价计算口径",
                 "status": "planned",
-                "slug": "月中加购临时流量单价溢价率口径怎么算-加购包单价与基础套餐单价之比"
+                "slug": "addon-traffic-pricing-premium-guide"
               },
               {
                 "title": "加购的临时流量在账单周期结束时什么时候会清零？不可结转条款边界",
@@ -3370,7 +3370,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "临时补充包跟随主周期清零边界",
                 "status": "planned",
-                "slug": "加购的临时流量在账单周期结束时什么时候会清零-不可结转条款边界"
+                "slug": "addon-traffic-pricing-premium-limits"
               },
               {
                 "title": "临时加购流量与直接提前重置套餐怎么对比？商户重置费与加购单价精算",
@@ -3381,7 +3381,7 @@
                 "pillarId": "plans",
                 "primaryIntent": "加购流量与提前重置方案划算度对比",
                 "status": "planned",
-                "slug": "临时加购流量与直接提前重置套餐怎么对比-商户重置费与加购单价精算"
+                "slug": "addon-traffic-pricing-premium-comparison"
               }
             ]
           }
@@ -3410,7 +3410,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "自主单月与强制续费识别标准",
                 "status": "planned",
-                "slug": "单月一次性支付与持续自动扣款口径是什么-收银台授权模式的区分标准"
+                "slug": "recurring-charge-transparency-guide"
               },
               {
                 "title": "勾选月付在什么付款方式下会默认签署自动代扣协议？第三方支付授权边界",
@@ -3421,7 +3421,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "隐形免密代扣签约边界排查",
                 "status": "planned",
-                "slug": "勾选月付在什么付款方式下会默认签署自动代扣协议-第三方支付授权边界"
+                "slug": "recurring-charge-transparency-limits"
               },
               {
                 "title": "单次手动付款与开启自动续费怎么对比？安全性与防断网便利性权衡",
@@ -3432,7 +3432,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "手动单月付与自动扣款利弊对比",
                 "status": "planned",
-                "slug": "单次手动付款与开启自动续费怎么对比-安全性与防断网便利性权衡"
+                "slug": "recurring-charge-transparency-comparison"
               }
             ]
           },
@@ -3449,7 +3449,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "分期假月付与真月付鉴别指标",
                 "status": "planned",
-                "slug": "分期年付与真实无合约月付的判定口径是什么-总债务与单期违约金定义"
+                "slug": "annual-installment-trap-guide"
               },
               {
                 "title": "分期月付在什么时候想退订会面临高额违约金？合同期未满强退条款边界",
@@ -3460,7 +3460,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "提前解约违约金陷阱限制边界",
                 "status": "planned",
-                "slug": "分期月付在什么时候想退订会面临高额违约金-合同期未满强退条款边界"
+                "slug": "annual-installment-trap-limits"
               },
               {
                 "title": "假月付分期协议与纯粹按月结算怎么对比？在收银台页面识别合同条款",
@@ -3471,7 +3471,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "真假月付合同文本识别与比对实操",
                 "status": "planned",
-                "slug": "假月付分期协议与纯粹按月结算怎么对比-在收银台页面识别合同条款"
+                "slug": "annual-installment-trap-comparison"
               }
             ]
           }
@@ -3494,7 +3494,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "短期单月采购成本效益指标",
                 "status": "planned",
-                "slug": "单月临时需求成本核算口径是什么-短期溢价与无后续沉没成本的标准界定"
+                "slug": "short-term-project-needs-guide"
               },
               {
                 "title": "买一个月用于海外出差在什么情况下可能刚落地就失效？境外IP被锁边界",
@@ -3505,7 +3505,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "异地登录触发安全风控锁号边界",
                 "status": "planned",
-                "slug": "买一个月用于海外出差在什么情况下可能刚落地就失效-境外IP被锁边界"
+                "slug": "short-term-project-needs-limits"
               },
               {
                 "title": "买大容量单月套餐与买不限时小包怎么对比？短期高强度用网最佳方案",
@@ -3516,7 +3516,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "短期出差不同套餐类型实操对比",
                 "status": "planned",
-                "slug": "买大容量单月套餐与买不限时小包怎么对比-短期高强度用网最佳方案"
+                "slug": "short-term-project-needs-comparison"
               }
             ]
           },
@@ -3533,7 +3533,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "扣款周期与关闭窗口期指标定义",
                 "status": "planned",
-                "slug": "关闭自动续费倒计时口径是什么-提前扣款时间窗口与账单生成日标准"
+                "slug": "cancellation-deadlines-guide"
               },
               {
                 "title": "在到期前几个小时关闭续费在什么情况下依然会被扣款？支付通道批处理边界",
@@ -3544,7 +3544,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "临期取消遭遇延迟扣款的边界",
                 "status": "planned",
-                "slug": "在到期前几个小时关闭续费在什么情况下依然会被扣款-支付通道批处理边界"
+                "slug": "cancellation-deadlines-limits"
               },
               {
                 "title": "支付网关后台关闭扣款与机场面板点击取消怎么对比？双重解约防扣实操",
@@ -3555,7 +3555,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "多渠道彻底关闭自动扣款对比指南",
                 "status": "planned",
-                "slug": "支付网关后台关闭扣款与机场面板点击取消怎么对比-双重解约防扣实操"
+                "slug": "cancellation-deadlines-comparison"
               }
             ]
           }
@@ -3578,7 +3578,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "新购首周质量验收指标体系",
                 "status": "planned",
-                "slug": "首周稳定性追踪指标怎么算-前7天平均掉线频次与真实延迟记录口径"
+                "slug": "first-week-honeymoon-test-guide"
               },
               {
                 "title": "首周体验极佳的机场在什么时候可能迅速变慢？用户大量涌入后的超售边界",
@@ -3589,7 +3589,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "蜜月期过后性能衰减的边界判断",
                 "status": "planned",
-                "slug": "首周体验极佳的机场在什么时候可能迅速变慢-用户大量涌入后的超售边界"
+                "slug": "first-week-honeymoon-test-limits"
               },
               {
                 "title": "首月建立本地网络日志与凭感觉评估怎么对比？科学验收续费依据操作",
@@ -3600,7 +3600,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "量化日志记录与主观感受对比实操",
                 "status": "planned",
-                "slug": "首月建立本地网络日志与凭感觉评估怎么对比-科学验收续费依据操作"
+                "slug": "first-week-honeymoon-test-comparison"
               }
             ]
           },
@@ -3617,7 +3617,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "整月晚高峰质检抽样规范",
                 "status": "planned",
-                "slug": "晚高峰质检抽样统计口径是什么-连续30天晚间8点Ping与下载速率记录"
+                "slug": "rush-hour-quality-logging-guide"
               },
               {
                 "title": "单日晚高峰严重卡顿在什么情况下属于偶然偶发？骨干光缆故障边界排除",
@@ -3628,7 +3628,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "偶发事故与常态劣化的区分边界",
                 "status": "planned",
-                "slug": "单日晚高峰严重卡顿在什么情况下属于偶然偶发-骨干光缆故障边界排除"
+                "slug": "rush-hour-quality-logging-limits"
               },
               {
                 "title": "首月合格率超过80%才续费的标准怎么操作？决定是否次月续费的评估树",
@@ -3639,7 +3639,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "首月验收通过与换站决策树对比",
                 "status": "planned",
-                "slug": "首月合格率超过80百分之才续费的标准怎么操作-决定是否次月续费的评估树"
+                "slug": "rush-hour-quality-logging-comparison"
               }
             ]
           }
@@ -3662,7 +3662,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "续约机制主动与被动指标定义",
                 "status": "planned",
-                "slug": "主动续费与被动扣款风险收益指标口径是什么-资金安全与服务连续性权重"
+                "slug": "manual-vs-auto-renewal-guide"
               },
               {
                 "title": "手动续费在什么断网临界期会导致配置被清除？节点订阅链接重置边界",
@@ -3673,7 +3673,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "欠费断服引发配置注销的时间边界",
                 "status": "planned",
-                "slug": "手动续费在什么断网临界期会导致配置被清除-节点订阅链接重置边界"
+                "slug": "manual-vs-auto-renewal-limits"
               },
               {
                 "title": "手动按月支付与提前3天设置日历提醒怎么对比？无痛月付管理实操指南",
@@ -3684,7 +3684,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "手动续费提醒机制与自动扣款对比",
                 "status": "planned",
-                "slug": "手动按月支付与提前3天设置日历提醒怎么对比-无痛月付管理实操指南"
+                "slug": "manual-vs-auto-renewal-comparison"
               }
             ]
           },
@@ -3701,7 +3701,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "服务到期宽限保留期技术指标",
                 "status": "planned",
-                "slug": "到期宽限期保留时长口径怎么算-各商户停机保留与彻底释放端口的标准"
+                "slug": "grace-period-handling-guide"
               },
               {
                 "title": "宽限期内的账号在什么情况下依然可以接收低速配置？软断网服务降级边界",
@@ -3712,7 +3712,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "宽限期低权限维持通信的边界",
                 "status": "planned",
-                "slug": "宽限期内的账号在什么情况下依然可以接收低速配置-软断网服务降级边界"
+                "slug": "grace-period-handling-limits"
               },
               {
                 "title": "宽限期内补缴续费与重新购买新账号怎么对比？历史配置继承与重新配置",
@@ -3723,7 +3723,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "宽限续费与重新注册新单成本对比",
                 "status": "planned",
-                "slug": "宽限期内补缴续费与重新购买新账号怎么对比-历史配置继承与重新配置"
+                "slug": "grace-period-handling-comparison"
               }
             ]
           }
@@ -3746,7 +3746,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "升降档折算天数财务计算模型",
                 "status": "planned",
-                "slug": "月中升级补差价计算公式是什么-剩余有效天数折算与新套餐现价口径"
+                "slug": "prorated-billing-rules-guide"
               },
               {
                 "title": "升级操作在什么恶劣条款下会直接抹平未用流量？非折算覆盖型条款边界",
@@ -3757,7 +3757,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "升级直接吞没旧额度的陷阱边界",
                 "status": "planned",
-                "slug": "升级操作在什么恶劣条款下会直接抹平未用流量-非折算覆盖型条款边界"
+                "slug": "prorated-billing-rules-limits"
               },
               {
                 "title": "按天折算补差价升级与等到下月再升怎么对比？资金支出与迫切需求权衡",
@@ -3768,7 +3768,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "立即按天补差与下月升级成本对比",
                 "status": "planned",
-                "slug": "按天折算补差价升级与等到下月再升怎么对比-资金支出与迫切需求权衡"
+                "slug": "prorated-billing-rules-comparison"
               }
             ]
           },
@@ -3785,7 +3785,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "套餐降级生效时间节点标准",
                 "status": "planned",
-                "slug": "降档生效机制标准口径是什么-当前周期履约完毕与立即生效的差异界定"
+                "slug": "downgrade-effective-date-guide"
               },
               {
                 "title": "月中申请降档在什么情况下可能无法退还差价？大多数商户不支持退款边界",
@@ -3796,7 +3796,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "降档不退差价条款的合法合规边界",
                 "status": "planned",
-                "slug": "月中申请降档在什么情况下可能无法退还差价-大多数商户不支持退款边界"
+                "slug": "downgrade-effective-date-limits"
               },
               {
                 "title": "直接降档与取消续费重新购买低配怎么对比？操作流程与资金结算对比",
@@ -3807,7 +3807,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "系统内降档与重新下单路径比对",
                 "status": "planned",
-                "slug": "直接降档与取消续费重新购买低配怎么对比-操作流程与资金结算对比"
+                "slug": "downgrade-effective-date-comparison"
               }
             ]
           }
@@ -3830,7 +3830,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "非连续订阅账户保留周期指标",
                 "status": "planned",
-                "slug": "间歇性停机保号指标口径是什么-账户资产留存与节点配置持久化标准"
+                "slug": "intermittent-subscription-guide"
               },
               {
                 "title": "停用两个月后重新充值什么时候会发现订阅链接变更？后台端口重构边界",
@@ -3841,7 +3841,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "长期间断后历史配置失效边界",
                 "status": "planned",
-                "slug": "停用两个月后重新充值什么时候会发现订阅链接变更-后台端口重构边界"
+                "slug": "intermittent-subscription-limits"
               },
               {
                 "title": "用一个月停一个月与长期持有一个微额度低价怎么对比？总体资金与省心度",
@@ -3852,7 +3852,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "断续使用与低价长持方案全面比对",
                 "status": "planned",
-                "slug": "用一个月停一个月与长期持有一个微额度低价怎么对比-总体资金与省心度"
+                "slug": "intermittent-subscription-comparison"
               }
             ]
           },
@@ -3869,7 +3869,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "重新订阅凭证刷新技术机制",
                 "status": "planned",
-                "slug": "重新激活订阅令牌更新口径是什么-用户UUID重置与节点列表同步机制"
+                "slug": "re-subscription-node-update-guide"
               },
               {
                 "title": "重新付款后客户端为什么依然提示节点不可用？本地缓存未清除边界排查",
@@ -3880,7 +3880,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "续订后本地节点同步失败边界",
                 "status": "planned",
-                "slug": "重新付款后客户端为什么依然提示节点不可用-本地缓存未清除边界排查"
+                "slug": "re-subscription-node-update-limits"
               },
               {
                 "title": "手动更新订阅与删除后重新导入怎么对比？快速恢复通网的操作排障指南",
@@ -3891,7 +3891,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "重新激活后多客户端配置恢复对比",
                 "status": "planned",
-                "slug": "手动更新订阅与删除后重新导入怎么对比-快速恢复通网的操作排障指南"
+                "slug": "re-subscription-node-update-comparison"
               }
             ]
           }
@@ -3914,7 +3914,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "服务期内节点变动率量化指标",
                 "status": "planned",
-                "slug": "节点列表变动率指标怎么定义-月中悄悄下架或替换线路的比例核算口径"
+                "slug": "unannounced-node-pruning-guide"
               },
               {
                 "title": "主力节点在没有通知下突然移除在什么条件下属于严重违约？SLA承诺边界",
@@ -3925,7 +3925,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "静默砍线路构成违约的判定边界",
                 "status": "planned",
-                "slug": "主力节点在没有通知下突然移除在什么条件下属于严重违约-SLA承诺边界"
+                "slug": "unannounced-node-pruning-limits"
               },
               {
                 "title": "遭遇节点下架后月付用户维权与直接下月换站怎么对比？止损策略抉择",
@@ -3936,7 +3936,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "申诉补偿与潇洒弃坑方案对比",
                 "status": "planned",
-                "slug": "遭遇节点下架后月付用户维权与直接下月换站怎么对比-止损策略抉择"
+                "slug": "unannounced-node-pruning-comparison"
               }
             ]
           },
@@ -3953,7 +3953,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "TOS单向变更与用户退出权标准",
                 "status": "planned",
-                "slug": "服务条款TOS单向修改认定口径是什么-用户权益受损时的契约有效性标准"
+                "slug": "tos-terms-modification-audit-guide"
               },
               {
                 "title": "商家更改限速与倍率规则什么时候立即对当月生效？免责条款边界条件",
@@ -3964,7 +3964,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "霸王条款侵害月付用户权益边界",
                 "status": "planned",
-                "slug": "商家更改限速与倍率规则什么时候立即对当月生效-免责条款边界条件"
+                "slug": "tos-terms-modification-audit-limits"
               },
               {
                 "title": "月付用户的退出自由度与年付用户被套牢怎么对比？灵活性带来的安全溢价",
@@ -3975,7 +3975,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "月付与年付在权益受损时的抗风险对比",
                 "status": "planned",
-                "slug": "月付用户的退出自由度与年付用户被套牢怎么对比-灵活性带来的安全溢价"
+                "slug": "tos-terms-modification-audit-comparison"
               }
             ]
           }
@@ -3998,7 +3998,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "跨服务迁移平滑度与耗时指标",
                 "status": "planned",
-                "slug": "无缝迁移时间成本指标口径是什么-新旧订阅交替与分流规则继承耗时标准"
+                "slug": "seamless-client-handoff-guide"
               },
               {
                 "title": "多订阅同时导入客户端在什么情况下会发生节点名称冲突？重名覆盖边界",
@@ -4009,7 +4009,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "多订阅混编命名冲突边界排查",
                 "status": "planned",
-                "slug": "多订阅同时导入客户端在什么情况下会发生节点名称冲突-重名覆盖边界"
+                "slug": "seamless-client-handoff-limits"
               },
               {
                 "title": "在Clash与Sing-box中新建配置与直接覆盖旧配置怎么对比？配置备份实操",
@@ -4020,7 +4020,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "平滑替换订阅配置操作对比指南",
                 "status": "planned",
-                "slug": "在Clash与Sing-box中新建配置与直接覆盖旧配置怎么对比-配置备份实操"
+                "slug": "seamless-client-handoff-comparison"
               }
             ]
           },
@@ -4037,7 +4037,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "重叠测试期资金成本与冗余模型",
                 "status": "planned",
-                "slug": "新旧交接重叠期成本计算公式是什么-提前两三天购买新服务重叠天数口径"
+                "slug": "dual-subscription-overlap-guide"
               },
               {
                 "title": "老服务还有3天到期时在什么情况下坚决提前买新？老站彻底跑路前兆边界",
@@ -4048,7 +4048,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "前兆频发必须提前切站的临界边界",
                 "status": "planned",
-                "slug": "老服务还有3天到期时在什么情况下坚决提前买新-老站彻底跑路前兆边界"
+                "slug": "dual-subscription-overlap-limits"
               },
               {
                 "title": "单月换一家尝鲜与固定一家长期月付怎么对比？探索新商家与沉淀习惯比对",
@@ -4059,7 +4059,7 @@
                 "pillarId": "monthly",
                 "primaryIntent": "频繁换站与长稳复购的利弊对比",
                 "status": "planned",
-                "slug": "单月换一家尝鲜与固定一家长期月付怎么对比-探索新商家与沉淀习惯比对"
+                "slug": "dual-subscription-overlap-comparison"
               }
             ]
           }
@@ -4088,7 +4088,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "双品牌直接对决指标体系建立",
                 "status": "planned",
-                "slug": "同价位两品牌直接对比模型口径是什么-带宽-流量-协议与节点数核算"
+                "slug": "same-price-feature-clash-guide"
               },
               {
                 "title": "纸面参数完全一致时在什么实际指标下高下立判？晚高峰真实吞吐边界",
@@ -4099,7 +4099,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "虚标参数在实际测量下的破防边界",
                 "status": "planned",
-                "slug": "纸面参数完全一致时在什么实际指标下高下立判-晚高峰真实吞吐边界"
+                "slug": "same-price-feature-clash-limits"
               },
               {
                 "title": "两家热门月付15元机场怎么对比？从延迟、流媒体解锁到稳定性的全景横评",
@@ -4110,7 +4110,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "具体对决案例横向评测操作",
                 "status": "planned",
-                "slug": "两家热门月付15元机场怎么对比-从延迟-流媒体解锁到稳定性的全景横评"
+                "slug": "same-price-feature-clash-comparison"
               }
             ]
           },
@@ -4127,7 +4127,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "专线小额与直连海量指标折算模型",
                 "status": "planned",
-                "slug": "专线品质系数与大流量池折现口径是什么-速度平稳度与总容量的乘积模型"
+                "slug": "line-quality-vs-traffic-pool-guide"
               },
               {
                 "title": "小流量专线在什么使用场景下绝不能选？全家大流量重度下载边界",
@@ -4138,7 +4138,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "专线虽好但额度不够的限制边界",
                 "status": "planned",
-                "slug": "小流量专线在什么使用场景下绝不能选-全家大流量重度下载边界"
+                "slug": "line-quality-vs-traffic-pool-limits"
               },
               {
                 "title": "20元买50G纯专线与20元买300G直连怎么对比？不同用户画像的精准匹配",
@@ -4149,7 +4149,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "专线质感与直连海量针对性对比选购",
                 "status": "planned",
-                "slug": "20元买50G纯专线与20元买300G直连怎么对比-不同用户画像的精准匹配"
+                "slug": "line-quality-vs-traffic-pool-comparison"
               }
             ]
           }
@@ -4172,7 +4172,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "固定预算约束下的价值最大化指标",
                 "status": "planned",
-                "slug": "固定预算收益最大化评估口径是什么-单位金钱换取有效流量与SLA指标"
+                "slug": "fixed-monthly-budget-matrix-guide"
               },
               {
                 "title": "在10元固定月预算下什么时候必须牺牲流媒体解锁？基础通网优先边界",
@@ -4183,7 +4183,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "极限预算必须割舍次要特性的边界",
                 "status": "planned",
-                "slug": "在10元固定月预算下什么时候必须牺牲流媒体解锁-基础通网优先边界"
+                "slug": "fixed-monthly-budget-matrix-limits"
               },
               {
                 "title": "全网10元档与20元档代表性套餐怎么横向对比？多维度打分矩阵实操",
@@ -4194,7 +4194,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "同预算多品牌矩阵式横向对照",
                 "status": "planned",
-                "slug": "全网10元档与20元档代表性套餐怎么横向对比-多维度打分矩阵实操"
+                "slug": "fixed-monthly-budget-matrix-comparison"
               }
             ]
           },
@@ -4211,7 +4211,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "综合实付归一化计算标准",
                 "status": "planned",
-                "slug": "归一化实付金额计算公式是什么-标价加上各通道手续费后的真实总支出"
+                "slug": "hidden-cost-normalization-guide"
               },
               {
                 "title": "标价便宜但手续费高达15%时在什么条件下会反超标价贵的品牌？总成本逆转边界",
@@ -4222,7 +4222,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "通道税费导致实际价格倒挂边界",
                 "status": "planned",
-                "slug": "标价便宜但手续费高达15百分之时在什么条件下会反超标价贵的品牌-总成本逆转边界"
+                "slug": "hidden-cost-normalization-limits"
               },
               {
                 "title": "两家机场到手实付只差1元时怎么对比？从节点冗余度看细微差价的超值度",
@@ -4233,7 +4233,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "消除手续费杂音后的精确对比实操",
                 "status": "planned",
-                "slug": "两家机场到手实付只差1元时怎么对比-从节点冗余度看细微差价的超值度"
+                "slug": "hidden-cost-normalization-comparison"
               }
             ]
           }
@@ -4256,7 +4256,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "行业基准档位价格离散指标",
                 "status": "planned",
-                "slug": "100GB基准档价格离散度指标怎么衡量-全行业百G月付价格极差与中位数口径"
+                "slug": "fixed-quota-price-spread-guide"
               },
               {
                 "title": "百G套餐卖到40元以上在什么线路支撑下才算合理？金融级专线与独享带宽边界",
@@ -4267,7 +4267,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "超高溢价所需的技术支撑边界",
                 "status": "planned",
-                "slug": "百G套餐卖到40元以上在什么线路支撑下才算合理-金融级专线与独享带宽边界"
+                "slug": "fixed-quota-price-spread-limits"
               },
               {
                 "title": "8元100G与25元100G套餐怎么对比？便宜与高价背后的线路资源真相",
@@ -4278,7 +4278,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "巨大差价下的底层网络对比分析",
                 "status": "planned",
-                "slug": "8元100G与25元100G套餐怎么对比-便宜与高价背后的线路资源真相"
+                "slug": "fixed-quota-price-spread-comparison"
               }
             ]
           },
@@ -4295,7 +4295,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "额度相同下的速率指标量化规范",
                 "status": "planned",
-                "slug": "同等容量下的带宽配额指标口径是什么-百兆共享与千兆独享的价值界定"
+                "slug": "effective-bandwidth-parity-guide"
               },
               {
                 "title": "同样是100G流量在什么时候下载速度相差十倍？单线程与多线程端口限制边界",
@@ -4306,7 +4306,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "速率硬限速导致的体验断层边界",
                 "status": "planned",
-                "slug": "同样是100G流量在什么时候下载速度相差十倍-单线程与多线程端口限制边界"
+                "slug": "effective-bandwidth-parity-limits"
               },
               {
                 "title": "同流量套餐的在线测速与BT下载限制怎么对比？商家条款对速度影响实测",
@@ -4317,7 +4317,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "同容量产品在不同网络任务下的比对",
                 "status": "planned",
-                "slug": "同流量套餐的在线测速与BT下载限制怎么对比-商家条款对速度影响实测"
+                "slug": "effective-bandwidth-parity-comparison"
               }
             ]
           }
@@ -4340,7 +4340,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "长周期折扣与存活风险精算指标",
                 "status": "planned",
-                "slug": "周期折扣风险调整收益率口径怎么算-月均折扣差额与存活概率的精算模型"
+                "slug": "discount-vs-runaway-risk-guide"
               },
               {
                 "title": "年付打5折但在运营不到3个月时跑路在什么条件下必定亏损？回本周期边界",
@@ -4351,7 +4351,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "预付亏损回本临界点数学判断",
                 "status": "planned",
-                "slug": "年付打5折但在运营不到3个月时跑路在什么条件下必定亏损-回本周期边界"
+                "slug": "discount-vs-runaway-risk-limits"
               },
               {
                 "title": "季付9折、半年付8折与年付7折怎么对比？根据运营年限选择最佳周期",
@@ -4362,7 +4362,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "不同付款周期的折现与风险对比实操",
                 "status": "planned",
-                "slug": "季付9折-半年付8折与年付7折怎么对比-根据运营年限选择最佳周期"
+                "slug": "discount-vs-runaway-risk-comparison"
               }
             ]
           },
@@ -4379,7 +4379,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "随时切换权力的资金灵活性价值定义",
                 "status": "planned",
-                "slug": "无合约资金流动性价值指标怎么量化-随时弃坑权力的期权价值折现口径"
+                "slug": "cash-flow-flexibility-value-guide"
               },
               {
                 "title": "年付省几十块钱在什么时候会变成巨大负担？中途搬迁或换更好产品限制边界",
@@ -4390,7 +4390,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "沉没资金造成决策锁死边界",
                 "status": "planned",
-                "slug": "年付省几十块钱在什么时候会变成巨大负担-中途搬迁或换更好产品限制边界"
+                "slug": "cash-flow-flexibility-value-limits"
               },
               {
                 "title": "月月掏钱的麻烦与年付一次性交款的焦虑怎么对比？心态与账面双重对比",
@@ -4401,7 +4401,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "月付心智负担与年付风险全面横评",
                 "status": "planned",
-                "slug": "月月掏钱的麻烦与年付一次性交款的焦虑怎么对比-心态与账面双重对比"
+                "slug": "cash-flow-flexibility-value-comparison"
               }
             ]
           }
@@ -4424,7 +4424,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "包月与流量包临界平衡点数学口径",
                 "status": "planned",
-                "slug": "周期订阅与按量流量包损益平衡点公式是什么-月均消耗阈值的计算口径"
+                "slug": "breakeven-utilization-curve-guide"
               },
               {
                 "title": "流量包在什么月消耗量以上会导致成本远超按月订阅？高消耗下的溢价边界",
@@ -4435,7 +4435,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "大消耗强用流量包导致的成本失控边界",
                 "status": "planned",
-                "slug": "流量包在什么月消耗量以上会导致成本远超按月订阅-高消耗下的溢价边界"
+                "slug": "breakeven-utilization-curve-limits"
               },
               {
                 "title": "月耗15G用户买流量包还是买月付怎么对比？一年真实支出曲线对比实操",
@@ -4446,7 +4446,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "临界点用户的具体费用曲线对比",
                 "status": "planned",
-                "slug": "月耗15G用户买流量包还是买月付怎么对比-一年真实支出曲线对比实操"
+                "slug": "breakeven-utilization-curve-comparison"
               }
             ]
           },
@@ -4463,7 +4463,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "低频用户节省比率核算模型",
                 "status": "planned",
-                "slug": "低频用网用户省钱率指标怎么算-按年统计实际用量与常年月租浪费之比"
+                "slug": "low-frequency-user-savings-guide"
               },
               {
                 "title": "仅在周末偶尔查资料在什么情况下买包月最亏？30天清零带来的纯浪费边界",
@@ -4474,7 +4474,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "低频包月纯亏损的判定边界",
                 "status": "planned",
-                "slug": "仅在周末偶尔查资料在什么情况下买包月最亏-30天清零带来的纯浪费边界"
+                "slug": "low-frequency-user-savings-limits"
               },
               {
                 "title": "100元500G不限时用两年与每月10元连续买两年怎么对比？账目全览",
@@ -4485,7 +4485,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "跨年度使用模式的真实花费对比",
                 "status": "planned",
-                "slug": "100元500G不限时用两年与每月10元连续买两年怎么对比-账目全览"
+                "slug": "low-frequency-user-savings-comparison"
               }
             ]
           }
@@ -4508,7 +4508,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "优惠码净让利计算标准规范",
                 "status": "planned",
-                "slug": "优惠券真实让利净值指标怎么算-满减门槛与折上折限制扣减口径"
+                "slug": "coupon-code-validation-guide"
               },
               {
                 "title": "8折优惠码在什么情况下结算时无法生效？仅限年付或特定高价套餐边界",
@@ -4519,7 +4519,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "优惠码生效门槛与适用范围边界",
                 "status": "planned",
-                "slug": "8折优惠码在什么情况下结算时无法生效-仅限年付或特定高价套餐边界"
+                "slug": "coupon-code-validation-limits"
               },
               {
                 "title": "无优惠码纯净实价与带假打折码抬价怎么对比？识别真实让利的验算步骤",
@@ -4530,7 +4530,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "虚假先涨后降与真实让利对比识别",
                 "status": "planned",
-                "slug": "无优惠码纯净实价与带假打折码抬价怎么对比-识别真实让利的验算步骤"
+                "slug": "coupon-code-validation-comparison"
               }
             ]
           },
@@ -4547,7 +4547,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "推广佣金与买家支付价格独立性标准",
                 "status": "planned",
-                "slug": "推广返利佣金机制口径是什么-商家推广预算与终端用户付价中立性认定"
+                "slug": "affiliate-rebate-neutrality-guide"
               },
               {
                 "title": "推广链接在什么异常情况下会导致买家支付价格虚高？个别黑心加价渠道边界",
@@ -4558,7 +4558,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "恶意加价反向欺诈通道边界",
                 "status": "planned",
-                "slug": "推广链接在什么异常情况下会导致买家支付价格虚高-个别黑心加价渠道边界"
+                "slug": "affiliate-rebate-neutrality-limits"
               },
               {
                 "title": "直接官网注册与通过披露合规链接注册怎么对比？价格、权益与售后一致性",
@@ -4569,7 +4569,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "官网直达与推广注册全流程一致性比对",
                 "status": "planned",
-                "slug": "直接官网注册与通过披露合规链接注册怎么对比-价格-权益与售后一致性"
+                "slug": "affiliate-rebate-neutrality-comparison"
               }
             ]
           }
@@ -4592,7 +4592,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "单双向计费技术标准与配额损耗定义",
                 "status": "planned",
-                "slug": "单向计费与双向计费流量损耗口径怎么定-上行请求数据是否计入总配额标准"
+                "slug": "upload-download-accounting-guide"
               },
               {
                 "title": "双向计费在什么大文件上传场景下会造成流量翻倍？网盘同步与视频推流边界",
@@ -4603,7 +4603,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "上传大任务导致双向计费爆仓边界",
                 "status": "planned",
-                "slug": "双向计费在什么大文件上传场景下会造成流量翻倍-网盘同步与视频推流边界"
+                "slug": "upload-download-accounting-limits"
               },
               {
                 "title": "单向计费100G与双向计费150G怎么对比？实际可用下载净容量换算",
@@ -4614,7 +4614,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "不同计费方向规则下的真实容量对比",
                 "status": "planned",
-                "slug": "单向计费100G与双向计费150G怎么对比-实际可用下载净容量换算"
+                "slug": "upload-download-accounting-comparison"
               }
             ]
           },
@@ -4631,7 +4631,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "滑动计费与日历计费时间戳模型",
                 "status": "planned",
-                "slug": "滑动30天计费与自然月计费认定口径是什么-滚动周期与日历周期的差异标准"
+                "slug": "sliding-window-vs-calendar-guide"
               },
               {
                 "title": "大小月份切换时自然月计费在什么时候会导致使用天数缩水？2月28天扣费边界",
@@ -4642,7 +4642,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "自然月天数差异带来的扣费边界",
                 "status": "planned",
-                "slug": "大小月份切换时自然月计费在什么时候会导致使用天数缩水-2月28天扣费边界"
+                "slug": "sliding-window-vs-calendar-limits"
               },
               {
                 "title": "动态滚动账期与固定自然月账期怎么对比？记账与充值习惯的选择对照",
@@ -4653,7 +4653,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "不同计费周期对用户习惯影响比对",
                 "status": "planned",
-                "slug": "动态滚动账期与固定自然月账期怎么对比-记账与充值习惯的选择对照"
+                "slug": "sliding-window-vs-calendar-comparison"
               }
             ]
           }
@@ -4676,7 +4676,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "双订阅容灾性价比指标定义",
                 "status": "planned",
-                "slug": "主备双服务冗余度ROI指标怎么计算-提高一个9的可用性所需边际成本口径"
+                "slug": "dual-provider-redundancy-guide"
               },
               {
                 "title": "双机场方案在什么上游故障下依然会同时瘫痪？国际海缆物理中断边界",
@@ -4687,7 +4687,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "外部不可抗力引发全盘瘫痪的边界",
                 "status": "planned",
-                "slug": "双机场方案在什么上游故障下依然会同时瘫痪-国际海缆物理中断边界"
+                "slug": "dual-provider-redundancy-limits"
               },
               {
                 "title": "月付30元单高级机场与月付15+5元双机场怎么对比？综合可用性与支出横评",
@@ -4698,7 +4698,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "单高配方案与双低配互备方案对比",
                 "status": "planned",
-                "slug": "月付30元单高级机场与月付15加5元双机场怎么对比-综合可用性与支出横评"
+                "slug": "dual-provider-redundancy-comparison"
               }
             ]
           },
@@ -4715,7 +4715,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "合租规模效应边际收益模型",
                 "status": "planned",
-                "slug": "多用户合买大套餐边际效益口径是什么-人均支出与总流量池富余度计算"
+                "slug": "shared-account-vs-independent-guide"
               },
               {
                 "title": "合租账号在什么违规操作下会导致连坐全员失效？一人违规被拉黑节点边界",
@@ -4726,7 +4726,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "合租连带责任导致服务归零边界",
                 "status": "planned",
-                "slug": "合租账号在什么违规操作下会导致连坐全员失效-一人违规被拉黑节点边界"
+                "slug": "shared-account-vs-independent-limits"
               },
               {
                 "title": "4人合买1TB大套餐与各买150G怎么对比？人均费用、隐私权与管理复杂度",
@@ -4737,7 +4737,7 @@
                 "pillarId": "compare",
                 "primaryIntent": "合租与独立建号全方位多维比对",
                 "status": "planned",
-                "slug": "4人合买1TB大套餐与各买150G怎么对比-人均费用-隐私权与管理复杂度"
+                "slug": "shared-account-vs-independent-comparison"
               }
             ]
           }
@@ -4766,7 +4766,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "低价文字游戏与欺诈标价定义",
                 "status": "planned",
-                "slug": "虚假标价欺诈判定口径是什么-月均1元但强制年付且不可单月购买标准"
+                "slug": "headline-price-deception-guide"
               },
               {
                 "title": "超低标价在结账跳转后什么时候会强制捆绑其他收费？隐藏开卡费边界",
@@ -4777,7 +4777,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "收银台二次绑售附加费边界排查",
                 "status": "planned",
-                "slug": "超低标价在结账跳转后什么时候会强制捆绑其他收费-隐藏开卡费边界"
+                "slug": "headline-price-deception-limits"
               },
               {
                 "title": "标题1元机场与真实到手实付账单怎么对比？一眼识破虚假宣传的操作流程",
@@ -4788,7 +4788,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "虚假宣传文案与真实结账比对实操",
                 "status": "planned",
-                "slug": "标题1元机场与真实到手实付账单怎么对比-一眼识破虚假宣传的操作流程"
+                "slug": "headline-price-deception-comparison"
               }
             ]
           },
@@ -4805,7 +4805,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "引流期到收割期性能衰减指标",
                 "status": "planned",
-                "slug": "引流诱饵节点降速周期指标怎么算-开业首周与满月后带宽衰减率口径"
+                "slug": "temporary-bait-nodes-guide"
               },
               {
                 "title": "新机场疯狂大放水低价促销在什么条件下预示资金链即将断裂？超售跑路前兆",
@@ -4816,7 +4816,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "甩卖型降价预示卷款跑路边界",
                 "status": "planned",
-                "slug": "新机场疯狂大放水低价促销在什么条件下预示资金链即将断裂-超售跑路前兆"
+                "slug": "temporary-bait-nodes-limits"
               },
               {
                 "title": "开业巨惠期跑分与三个月后常态测速怎么对比？历史老客户评价溯源方法",
@@ -4827,7 +4827,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "开业初期数据与长期稳定数据对比",
                 "status": "planned",
-                "slug": "开业巨惠期跑分与三个月后常态测速怎么对比-历史老客户评价溯源方法"
+                "slug": "temporary-bait-nodes-comparison"
               }
             ]
           }
@@ -4850,7 +4850,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "暗中扣量与阴阳倍率技术判定标准",
                 "status": "planned",
-                "slug": "暗倍率与扣量行为判定口径是什么-客户端统计与商户后台扣除差异标准"
+                "slug": "shadow-multiplier-inflation-guide"
               },
               {
                 "title": "后台扣费倍率在什么悄无声息的系统更新中会被上调？未发公告篡改规则边界",
@@ -4861,7 +4861,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "单向修改倍率不告知的违规边界",
                 "status": "planned",
-                "slug": "后台扣费倍率在什么悄无声息的系统更新中会被上调-未发公告篡改规则边界"
+                "slug": "shadow-multiplier-inflation-limits"
               },
               {
                 "title": "使用本地网络抓包核算与后台账单怎么对比？抓出机场暗中扣量的实操指南",
@@ -4872,7 +4872,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "本地流量监测与商户扣量比对实操",
                 "status": "planned",
-                "slug": "使用本地网络抓包核算与后台账单怎么对比-抓出机场暗中扣量的实操指南"
+                "slug": "shadow-multiplier-inflation-comparison"
               }
             ]
           },
@@ -4889,7 +4889,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "提前清零违约事实认定指标",
                 "status": "planned",
-                "slug": "提前清零违约认定口径是什么-服务周期尚未过完流量被强行截断的证据链"
+                "slug": "early-cycle-reset-disputes-guide"
               },
               {
                 "title": "商户在系统维护时什么时候会意外触发全体重置？数据库故障回滚边界",
@@ -4900,7 +4900,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "系统故障导致配额异常清空的边界",
                 "status": "planned",
-                "slug": "商户在系统维护时什么时候会意外触发全体重置-数据库故障回滚边界"
+                "slug": "early-cycle-reset-disputes-limits"
               },
               {
                 "title": "遭遇恶意清零时工单维权与外部曝光怎么对比？保存证据与挽回损失实操",
@@ -4911,7 +4911,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "异常清零申诉与止损策略比对",
                 "status": "planned",
-                "slug": "遭遇恶意清零时工单维权与外部曝光怎么对比-保存证据与挽回损失实操"
+                "slug": "early-cycle-reset-disputes-comparison"
               }
             ]
           }
@@ -4934,7 +4934,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "隐性连接数限制指标量化定义",
                 "status": "planned",
-                "slug": "隐性连接数硬截断指标怎么测-单IP并发TCP连接数上限的技术检测口径"
+                "slug": "connection-throttling-policy-guide"
               },
               {
                 "title": "单并发连接在达到多少线程时会被节点直接RST重置？防火墙限流策略边界",
@@ -4945,7 +4945,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "触发防火墙硬阻断的并发阈值边界",
                 "status": "planned",
-                "slug": "单并发连接在达到多少线程时会被节点直接RST重置-防火墙限流策略边界"
+                "slug": "connection-throttling-policy-limits"
               },
               {
                 "title": "标榜不限设备但在实测中被掐断怎么对比？使用多端测试揭穿假宣传",
@@ -4956,7 +4956,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "宣传不限设备与实测并发封顶对比",
                 "status": "planned",
-                "slug": "标榜不限设备但在实测中被掐断怎么对比-使用多端测试揭穿假宣传"
+                "slug": "connection-throttling-policy-comparison"
               }
             ]
           },
@@ -4973,7 +4973,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "节点协议审查与端口封锁定义规范",
                 "status": "planned",
-                "slug": "特定端口审查与屏蔽规则口径是什么-BitTorrent-邮件25端口封禁界定"
+                "slug": "protocol-filtering-censorship-guide"
               },
               {
                 "title": "误开P2P下载在什么条件下会导致账号被立即无退款封禁？商户滥用规则边界",
@@ -4984,7 +4984,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "违规下载触发极刑封号的边界判断",
                 "status": "planned",
-                "slug": "误开P2P下载在什么条件下会导致账号被立即无退款封禁-商户滥用规则边界"
+                "slug": "protocol-filtering-censorship-limits"
               },
               {
                 "title": "完全无审查节点与严管滥用节点怎么对比？速度稳定性与被封号风险权衡",
@@ -4995,7 +4995,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "严管节点与无管节点优缺点深度对比",
                 "status": "planned",
-                "slug": "完全无审查节点与严管滥用节点怎么对比-速度稳定性与被封号风险权衡"
+                "slug": "protocol-filtering-censorship-comparison"
               }
             ]
           }
@@ -5018,7 +5018,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "永久套餐庞氏模型精算判定口径",
                 "status": "planned",
-                "slug": "终身-永久套餐庞氏骗局模型口径是什么-后续新客资金填补老客带宽亏损"
+                "slug": "three-year-plan-fatality-guide"
               },
               {
                 "title": "推出三年付甚至永久套餐的机场在什么时间窗口极大概率关网跑路？半年周期边界",
@@ -5029,7 +5029,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "大促收割后失联时间窗口边界",
                 "status": "planned",
-                "slug": "推出三年付甚至永久套餐的机场在什么时间窗口极大概率关网跑路-半年周期边界"
+                "slug": "three-year-plan-fatality-limits"
               },
               {
                 "title": "永久套餐省钱幻想与按月买真实支出怎么对比？血泪教训历史数据复盘",
@@ -5040,7 +5040,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "永久买断幻想与月付理性支出对比",
                 "status": "planned",
-                "slug": "永久套餐省钱幻想与按月买真实支出怎么对比-血泪教训历史数据复盘"
+                "slug": "three-year-plan-fatality-comparison"
               }
             ]
           },
@@ -5057,7 +5057,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "域名被墙与官方入口失联指标",
                 "status": "planned",
-                "slug": "官网域名被污染失联指标口径是什么-DNS污染-证书吊销与入口失效判定"
+                "slug": "domain-hijacking-and-loss-guide"
               },
               {
                 "title": "官网打不开且无备用发布页在什么情况下意味着彻底跑路？电报群解散边界",
@@ -5068,7 +5068,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "临时换域名与彻底失联跑路边界",
                 "status": "planned",
-                "slug": "官网打不开且无备用发布页在什么情况下意味着彻底跑路-电报群解散边界"
+                "slug": "domain-hijacking-and-loss-limits"
               },
               {
                 "title": "依赖单一域名与保存发布页渠道怎么对比？防失联应急通信录建立实操",
@@ -5079,7 +5079,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "防失联渠道储备与单点失效对比",
                 "status": "planned",
-                "slug": "依赖单一域名与保存发布页渠道怎么对比-防失联应急通信录建立实操"
+                "slug": "domain-hijacking-and-loss-comparison"
               }
             ]
           }
@@ -5102,7 +5102,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "虚拟网络服务退款条款法律界定",
                 "status": "planned",
-                "slug": "售出不退免责声明合法性口径怎么定-虚拟商品不适用无理由退货的适用标准"
+                "slug": "no-refund-clause-dissection-guide"
               },
               {
                 "title": "购买后完全无法连接在什么条件下可以强制发起支付争议？未履约申诉边界",
@@ -5113,7 +5113,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "服务完全不可用发起争议的边界",
                 "status": "planned",
-                "slug": "购买后完全无法连接在什么条件下可以强制发起支付争议-未履约申诉边界"
+                "slug": "no-refund-clause-dissection-limits"
               },
               {
                 "title": "商家无理由拒绝与通过支付网关调解怎么对比？成功追回款项的操作流程",
@@ -5124,7 +5124,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "平台内工单沟通与渠道申诉对比实操",
                 "status": "planned",
-                "slug": "商家无理由拒绝与通过支付网关调解怎么对比-成功追回款项的操作流程"
+                "slug": "no-refund-clause-dissection-comparison"
               }
             ]
           },
@@ -5141,7 +5141,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "售后客服响应反差指标体系",
                 "status": "planned",
-                "slug": "售前售后响应反差比指标怎么算-售前咨询回复秒数与售后故障工单等待时长口径"
+                "slug": "ticket-ghosting-warning-guide"
               },
               {
                 "title": "工单超过72小时未响应在什么情况下说明技术人员已弃盘？系统瘫痪边界",
@@ -5152,7 +5152,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "工单装死与事实弃盘的临界边界",
                 "status": "planned",
-                "slug": "工单超过72小时未响应在什么情况下说明技术人员已弃盘-系统瘫痪边界"
+                "slug": "ticket-ghosting-warning-limits"
               },
               {
                 "title": "买前先发测试工单探虚实与直接付款怎么对比？筛选可靠商家的避坑技巧",
@@ -5163,7 +5163,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "售前探针测试与盲目下单风险对比",
                 "status": "planned",
-                "slug": "买前先发测试工单探虚实与直接付款怎么对比-筛选可靠商家的避坑技巧"
+                "slug": "ticket-ghosting-warning-comparison"
               }
             ]
           }
@@ -5186,7 +5186,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "定制专有客户端木马与隐私风险定义",
                 "status": "planned",
-                "slug": "专有定制客户端安全隐患认定口径是什么-加壳木马-后门与证书篡改标准"
+                "slug": "custom-client-trojan-risk-guide"
               },
               {
                 "title": "专有客户端在什么杀毒软件报毒下坚决不要运行？木马注入与键盘记录边界",
@@ -5197,7 +5197,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "定制客户端报毒红线安全边界",
                 "status": "planned",
-                "slug": "专有客户端在什么杀毒软件报毒下坚决不要运行-木马注入与键盘记录边界"
+                "slug": "custom-client-trojan-risk-limits"
               },
               {
                 "title": "使用机场专有客户端与开源内核通用客户端怎么对比？安全风险与使用成本",
@@ -5208,7 +5208,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "定制客户端与标准开源客户端对比",
                 "status": "planned",
-                "slug": "使用机场专有客户端与开源内核通用客户端怎么对比-安全风险与使用成本"
+                "slug": "custom-client-trojan-risk-comparison"
               }
             ]
           },
@@ -5225,7 +5225,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "订阅凭据泄露与盗刷流量标准定义",
                 "status": "planned",
-                "slug": "订阅Token泄露盗刷口径怎么判定-异常IP请求日志与流量非正常消耗口径"
+                "slug": "subscription-token-exposure-guide"
               },
               {
                 "title": "公开截图在什么情况下会导致订阅URL直接暴露？二维码与完整链接泄露边界",
@@ -5236,7 +5236,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "信息无意泄露被爬取盗刷边界",
                 "status": "planned",
-                "slug": "公开截图在什么情况下会导致订阅URL直接暴露-二维码与完整链接泄露边界"
+                "slug": "subscription-token-exposure-limits"
               },
               {
                 "title": "明文订阅链接直连与通过本地订阅转换加密怎么对比？安全防盗刷实操",
@@ -5247,7 +5247,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "明文暴露与私有化加密转换对比指南",
                 "status": "planned",
-                "slug": "明文订阅链接直连与通过本地订阅转换加密怎么对比-安全防盗刷实操"
+                "slug": "subscription-token-exposure-comparison"
               }
             ]
           }
@@ -5270,7 +5270,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "虚假跑分与白名单欺诈技术定义",
                 "status": "planned",
-                "slug": "测速节点白名单欺骗口径怎么判定-Speedtest放行千兆而真实下载限速标准"
+                "slug": "speedtest-whitelist-cheat-guide"
               },
               {
                 "title": "跑分图极其绚丽在什么真实业务下会立刻原形毕露？大文件直链下载与4K播放边界",
@@ -5281,7 +5281,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "假测速无法支撑真实大流量的边界",
                 "status": "planned",
-                "slug": "跑分图极其绚丽在什么真实业务下会立刻原形毕露-大文件直链下载与4K播放边界"
+                "slug": "speedtest-whitelist-cheat-limits"
               },
               {
                 "title": "单一Speedtest测速与Fast/YouTube真实吞吐怎么对比？撕开虚标假面具",
@@ -5292,7 +5292,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "专业测速工具与真实场景吞吐对比",
                 "status": "planned",
-                "slug": "单一Speedtest测速与Fast-YouTube真实吞吐怎么对比-撕开虚标假面具"
+                "slug": "speedtest-whitelist-cheat-comparison"
               }
             ]
           },
@@ -5309,7 +5309,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "流媒体解锁有效率与时效指标定义",
                 "status": "planned",
-                "slug": "流媒体解锁有效率计算口径是什么-检测脚本结果与真实客户端播放标准"
+                "slug": "transient-streaming-unlock-guide"
               },
               {
                 "title": "原生解锁节点在流媒体平台大规模更新IP库时什么时候必然失效？封锁周期边界",
@@ -5320,7 +5320,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "平台封控反制导致失效的规律边界",
                 "status": "planned",
-                "slug": "原生解锁节点在流媒体平台大规模更新IP库时什么时候必然失效-封锁周期边界"
+                "slug": "transient-streaming-unlock-limits"
               },
               {
                 "title": "商家宣传全解锁与真实自备测试脚本验证怎么对比？实操自测排坑指南",
@@ -5331,7 +5331,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "宣传文案与自动化检测工具对比实操",
                 "status": "planned",
-                "slug": "商家宣传全解锁与真实自备测试脚本验证怎么对比-实操自测排坑指南"
+                "slug": "transient-streaming-unlock-comparison"
               }
             ]
           }
@@ -5354,7 +5354,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "异常维护频次与跑路风险关联指标",
                 "status": "planned",
-                "slug": "异常维护频率红线指标怎么界定-单月无预警维护超过3次与总停机时间口径"
+                "slug": "maintenance-window-frequency-guide"
               },
               {
                 "title": "频繁声称'被DDoS攻击'或'上游拔线'在什么情况下属于跑路借口？演戏跑路边界",
@@ -5365,7 +5365,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "虚构故障与卷款跑路借口识别边界",
                 "status": "planned",
-                "slug": "频繁声称'被DDoS攻击'或'上游拔线'在什么情况下属于跑路借口-演戏跑路边界"
+                "slug": "maintenance-window-frequency-limits"
               },
               {
                 "title": "正常技术升级维护与异常跑路前兆怎么对比？通过节点存活与通告透明度鉴别",
@@ -5376,7 +5376,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "真实技术运维与跑路前戏特征对比",
                 "status": "planned",
-                "slug": "正常技术升级维护与异常跑路前兆怎么对比-通过节点存活与通告透明度鉴别"
+                "slug": "maintenance-window-frequency-comparison"
               }
             ]
           },
@@ -5393,7 +5393,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "社区封嘴与舆情崩溃指标规范",
                 "status": "planned",
-                "slug": "社群舆情恶化度指标怎么统计-官方交流群全员禁言与大量踢人封禁口径"
+                "slug": "community-sentiment-tracking-guide"
               },
               {
                 "title": "官方群突然开启全员禁言在什么情况下意味着已卷款跑路？管理团队失联边界",
@@ -5404,7 +5404,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "禁言封群作为跑路既成事实的边界",
                 "status": "planned",
-                "slug": "官方群突然开启全员禁言在什么情况下意味着已卷款跑路-管理团队失联边界"
+                "slug": "community-sentiment-tracking-limits"
               },
               {
                 "title": "观察官方社群活跃度与只看官网公告怎么对比？最快速感知风险的操作指南",
@@ -5415,7 +5415,7 @@
                 "pillarId": "avoid",
                 "primaryIntent": "社群风向与被动公告的敏锐度对比",
                 "status": "planned",
-                "slug": "观察官方社群活跃度与只看官网公告怎么对比-最快速感知风险的操作指南"
+                "slug": "community-sentiment-tracking-comparison"
               }
             ]
           }

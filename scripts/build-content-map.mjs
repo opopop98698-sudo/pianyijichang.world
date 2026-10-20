@@ -1609,14 +1609,11 @@ for (const p of pillars) {
         a.pillarId = p.id;
         a.primaryIntent = a.intent;
         a.status = "planned";
-        // Create clean slug
-        const slug = a.title
-          .replace(/%/g, '百分之')
-          .replace(/\+/g, '加')
-          .replace(/[？。，、！\s\/\\#&=]/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, '');
-        a.slug = slug;
+        // Create clean, lowercase English slug
+        let suffix = 'guide';
+        if (a.type === 'condition') suffix = 'limits';
+        else if (a.type === 'comparison') suffix = 'comparison';
+        a.slug = `${c.id}-${suffix}`.toLowerCase();
       }
     }
   }

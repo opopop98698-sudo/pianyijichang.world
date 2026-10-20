@@ -18,7 +18,17 @@ const validRoutes = new Set([
   '/avoid/',
   '/about/',
   '/search/',
+  '/privacy/',
+  '/terms/',
+  '/vpn/',
+  '/jichang/',
+  '/clash/',
+  '/nodes/',
+  '/tizi/',
+  '/tutorial/',
+  '/brands/',
   '/404.html',
+  '/sitemap.xml',
   '/sitemap-index.xml',
   '/robots.txt'
 ]);

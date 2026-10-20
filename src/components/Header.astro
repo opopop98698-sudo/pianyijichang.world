@@ -3,14 +3,14 @@ const pathname = Astro.url.pathname;
 
 const navItems = [
   { name: '首页', href: '/' },
-  { name: '机场推荐', href: '/recommend/' },
+  { name: '机场推荐', href: '/jichang/' },
   { name: '便宜机场', href: '/cheap/' },
-  { name: '免费机场', href: '/free/' },
-  { name: '性价比机场', href: '/value/' },
-  { name: '流量套餐', href: '/plans/' },
   { name: '月付机场', href: '/monthly/' },
-  { name: '价格对比', href: '/compare/' },
-  { name: '机场避坑', href: '/avoid/' }
+  { name: 'VPN专区', href: '/vpn/' },
+  { name: 'Clash配置', href: '/clash/' },
+  { name: '节点测速', href: '/nodes/' },
+  { name: '梯子防坑', href: '/tizi/' },
+  { name: '品牌库', href: '/brands/' }
 ];
 
 const isActive = (href: string) => {
@@ -100,7 +100,7 @@ const isActive = (href: string) => {
       {navItems.map((item) => (
         <a
           href={item.href}
-          class={`px-3 py-3 rounded-xl text-sm font-bold text-center transition-colors ${
+          class={`px-3 py-2.5 rounded-xl text-sm font-bold text-center transition-colors ${
             isActive(item.href)
               ? 'bg-blue-600 !text-white font-bold shadow-sm'
               : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
@@ -110,6 +110,15 @@ const isActive = (href: string) => {
           {item.name}
         </a>
       ))}
+      <a href="/free/" class="px-3 py-2.5 rounded-xl text-sm font-bold text-center bg-slate-50 text-slate-700 hover:bg-slate-100">
+        免费资源
+      </a>
+      <a href="/tutorial/" class="px-3 py-2.5 rounded-xl text-sm font-bold text-center bg-slate-50 text-slate-700 hover:bg-slate-100">
+        使用教程
+      </a>
+      <a href="/plans/" class="px-3 py-2.5 rounded-xl text-sm font-bold text-center bg-slate-50 text-slate-700 hover:bg-slate-100">
+        流量套餐
+      </a>
     </div>
     <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs sm:text-sm text-slate-500">
       <a href="/about/" class="text-blue-600 hover:underline">关于本站与独立声明</a>

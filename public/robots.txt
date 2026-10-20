@@ -3,6 +3,39 @@ Allow: /
 Disallow: /draft/
 Disallow: /search/
 
+# 搜索引擎主流抓取蜘蛛授权与兼容配置
+User-agent: Googlebot
+Allow: /
+Disallow: /draft/
+Disallow: /search/
+
+User-agent: bingbot
+Allow: /
+Disallow: /draft/
+Disallow: /search/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /draft/
+Disallow: /search/
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /draft/
+Disallow: /search/
+
+# 神马搜索 (UC / 夸克浏览器) 爬虫授权
+User-agent: yisouspider
+Allow: /
+Disallow: /draft/
+Disallow: /search/
+
+User-agent: Yisouspider
+Allow: /
+Disallow: /draft/
+Disallow: /search/
+
+# AI 搜索与知识问答模型爬虫友好授权
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -15,4 +48,6 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+# Sitemap 站点地图统一声明
+Sitemap: https://pianyijichang.world/sitemap.xml
 Sitemap: https://pianyijichang.world/sitemap-index.xml
