@@ -32,7 +32,7 @@ const valueRanked = brandsData
   .sort((a, b) => b.score - a.score);
 ---
 
-<div class="my-8 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+<div class="my-8 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 not-prose">
   <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
     <div>
       <div class="flex items-center gap-2 mb-1">
@@ -107,7 +107,8 @@ const valueRanked = brandsData
                 href={item.registerUrl}
                 target="_blank"
                 rel="nofollow sponsored noopener"
-                class="inline-block px-2.5 py-1 rounded bg-slate-900 hover:bg-blue-600 text-white text-[11px] font-medium transition-colors"
+                class="inline-block px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-blue-600 !text-white text-xs font-bold transition-colors shadow-sm"
+                style="color: #ffffff !important; text-decoration: none !important;"
               >
                 选购 →
               </a>

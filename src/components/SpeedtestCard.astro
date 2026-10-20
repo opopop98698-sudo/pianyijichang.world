@@ -21,11 +21,11 @@ const unlockEvidence = brand.unlockEvidence || [];
 const cardId = `speedtest-modal-${brand.id}`;
 ---
 
-<div class={`bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden p-6 hover:border-blue-300 transition-all ${className}`} id={`brand-evidence-${brand.id}`}>
+<div class={`bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden p-6 hover:border-blue-300 transition-all not-prose ${className}`} id={`brand-evidence-${brand.id}`}>
   <!-- 头部：标题与证据链认证徽章 -->
   <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-slate-100">
     <div class="flex items-center gap-2.5">
-      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-blue-600 text-white text-xs font-bold font-mono shadow-sm">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-blue-600 !text-white text-xs font-bold font-mono shadow-sm" style="color: #ffffff !important;">
         #{brand.rank}
       </span>
       <div>
@@ -77,9 +77,18 @@ const cardId = `speedtest-modal-${brand.id}`;
           <span>暂无当前批次原始截图，展示多方监测平均性能数据</span>
         </div>
       )}
-      <div class="text-[11px] text-slate-400 flex items-center justify-between">
-        <span>* 截图完整包含测试时间戳与节点名称，未作任何涂抹改写</span>
-        <span class="font-mono text-slate-500">1122 × 1402 原尺寸</span>
+      <div class="text-[11px] text-slate-500 flex items-center justify-between pt-1">
+        <span>* 真实节点测速抓包原图，无任何涂抹改写</span>
+        {speedtest?.hasImage && speedtest.image && (
+          <a
+            href={speedtest.image}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 hover:text-blue-800 font-bold underline flex items-center gap-1"
+          >
+            新标签页打开 100% 超清大图 ↗
+          </a>
+        )}
       </div>
     </div>
 
@@ -146,9 +155,11 @@ const cardId = `speedtest-modal-${brand.id}`;
           href={brand.registerUrl}
           target="_blank"
           rel="nofollow sponsored noopener"
-          class="block w-full text-center py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-sm transition-all hover:shadow"
+          class="group block w-full text-center py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 !text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1.5"
+          style="color: #ffffff !important; text-decoration: none !important;"
         >
-          访问 {brand.name} 官网选购 →
+          <span class="!text-white font-bold" style="color: #ffffff !important;">访问 {brand.name} 官网选购</span>
+          <span class="inline-block transition-transform group-hover:translate-x-1 !text-white font-bold" style="color: #ffffff !important;">→</span>
         </a>
         <p class="text-[11px] text-slate-400 text-center mt-1.5">
           含推广链接，通过链接注册可能为本站带来佣金，不影响用户支付价格
@@ -218,10 +229,19 @@ const cardId = `speedtest-modal-${brand.id}`;
           class="max-w-full h-auto rounded-lg shadow"
         />
       </div>
-      <div class="bg-slate-900 px-4 py-3 text-right">
+      <div class="bg-slate-900 px-4 py-3 flex items-center justify-between border-t border-slate-800">
+        <a
+          href={speedtest.image}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs font-bold text-blue-400 hover:text-blue-300 underline flex items-center gap-1"
+        >
+          🔍 在新标签页查看 100% 原始尺寸超清大图 ↗
+        </a>
         <button
           onclick={`document.getElementById('${cardId}').close()`}
-          class="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold"
+          class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 !text-white text-xs font-bold transition-all shadow-sm"
+          style="color: #ffffff !important;"
         >
           关闭窗口
         </button>

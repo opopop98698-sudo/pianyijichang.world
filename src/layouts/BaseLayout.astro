@@ -64,6 +64,38 @@ const pageSchemas = schema
     {pageSchemas.map((s) => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
+
+    <!-- 全局样式加固：彻底杜绝任何 prose 或第三方样式污染导致的文字不可见与低对比度 -->
+    <style is:global>
+      /* 强制所有具有深色背景的按钮文字与图标必须为纯白且高对比度 */
+      a.bg-blue-600,
+      a.bg-blue-700,
+      a.bg-slate-900,
+      a.bg-indigo-600,
+      button.bg-blue-600,
+      button.bg-blue-700,
+      [class*="bg-blue-600"].text-white,
+      [class*="bg-blue-700"].text-white,
+      [class*="bg-indigo-600"].text-white,
+      [class*="bg-slate-900"].text-white,
+      [class*="bg-slate-800"].text-white {
+        color: #ffffff !important;
+        text-decoration: none !important;
+      }
+      /* 确保按钮内的子元素文本与图标同样强制白色 */
+      a.bg-blue-600 *,
+      a.bg-blue-700 *,
+      a.bg-slate-900 *,
+      a.bg-indigo-600 *,
+      button.bg-blue-600 *,
+      button.bg-blue-700 * {
+        color: inherit !important;
+      }
+      /* 移动端与桌面端通用链接平滑过渡 */
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+    </style>
   </head>
   <body class="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
     <Header />

@@ -71,7 +71,7 @@ const tiers = [
 ];
 ---
 
-<div class="my-10 space-y-10">
+<div class="my-10 space-y-10 not-prose">
   <div class="bg-gradient-to-r from-blue-900 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-md">
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/30 text-blue-200 border border-blue-400/30 mb-3">
       全网 348 个套餐多阶梯归集
@@ -134,7 +134,8 @@ const tiers = [
                     href={p.registerUrl}
                     target="_blank"
                     rel="nofollow sponsored noopener"
-                    class="inline-block px-2 py-0.5 rounded bg-slate-900 hover:bg-blue-600 text-white text-[11px] font-medium transition-colors"
+                    class="inline-block px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-blue-600 !text-white text-xs font-bold transition-colors shadow-sm"
+                    style="color: #ffffff !important; text-decoration: none !important;"
                   >
                     开通 →
                   </a>

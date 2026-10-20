@@ -260,12 +260,15 @@ const typeLabel =
               href={`/articles/${sibling.slug}/`}
               class={`p-3.5 rounded-xl border text-xs transition-all flex flex-col justify-between ${
                 sibling.slug === article.slug
-                  ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-sm'
+                  ? 'bg-blue-600 border-blue-600 !text-white font-bold shadow-sm'
                   : 'bg-white border-slate-200 text-slate-700 hover:border-blue-400 hover:shadow-sm'
               }`}
+              style={sibling.slug === article.slug ? 'color: #ffffff !important; text-decoration: none !important;' : ''}
             >
-              <span class="line-clamp-2 mb-2 leading-snug">{sibling.title}</span>
-              <span class={`text-[10px] font-mono ${sibling.slug === article.slug ? 'text-blue-100' : 'text-slate-400'}`}>
+              <span class={`line-clamp-2 mb-2 leading-snug ${sibling.slug === article.slug ? '!text-white font-bold' : ''}`} style={sibling.slug === article.slug ? 'color: #ffffff !important;' : ''}>
+                {sibling.title}
+              </span>
+              <span class={`text-[10px] font-mono ${sibling.slug === article.slug ? '!text-blue-100 font-bold' : 'text-slate-400'}`} style={sibling.slug === article.slug ? 'color: #dbeafe !important;' : ''}>
                 {sibling.type === 'definition' ? '[1.口径与定义]' : sibling.type === 'condition' ? '[2.适用边界]' : '[3.对比与操作]'}
               </span>
             </a>

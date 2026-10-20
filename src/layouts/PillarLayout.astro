@@ -74,7 +74,7 @@ const collectionSchema = generateCollectionPageSchema(
 
     <!-- 首屏推荐品牌网格 (其他栏目展示；首页由专门的 BrandDirectory 结构化呈现) -->
     {frontmatter.id !== 'page-home' && frontmatter.brandRefs && frontmatter.brandRefs.length > 0 && (
-      <section class="mb-10" aria-label="相关代表品牌推荐">
+      <section class="mb-10 not-prose" aria-label="相关代表品牌推荐">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
             <span class="w-2 h-5 bg-blue-600 rounded-full inline-block"></span>
@@ -90,8 +90,8 @@ const collectionSchema = generateCollectionPageSchema(
       </section>
     )}
 
-    <!-- 正文内容 (Markdown / MDX 渲染) -->
-    <article class="prose prose-slate max-w-none prose-headings:font-bold prose-h2:text-xl prose-h2:border-b prose-h2:border-slate-200 prose-h2:pb-2 prose-h2:mt-8 prose-h3:text-lg prose-table:text-xs prose-a:text-blue-600 hover:prose-a:underline">
+    <!-- 正文内容 (Markdown / MDX 渲染与核心组件容器) -->
+    <article class="prose prose-slate max-w-none prose-headings:font-bold prose-h2:text-xl prose-h2:border-b prose-h2:border-slate-200 prose-h2:pb-2 prose-h2:mt-8 prose-h3:text-lg prose-table:text-xs">
       <slot />
     </article>
 

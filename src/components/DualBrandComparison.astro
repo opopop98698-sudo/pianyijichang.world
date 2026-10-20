@@ -35,7 +35,7 @@ const comparisons = [
 const getBrand = (id: string) => brandsData.find((b) => b.id === id);
 ---
 
-<div class="my-10 space-y-10">
+<div class="my-10 space-y-10 not-prose">
   <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
     <div class="flex items-center gap-2 mb-2">
       <span class="w-2.5 h-6 bg-blue-600 rounded-full inline-block"></span>
@@ -83,7 +83,8 @@ const getBrand = (id: string) => brandsData.find((b) => b.id === id);
                   href={bA.registerUrl}
                   target="_blank"
                   rel="nofollow sponsored noopener"
-                  class="block w-full text-center py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition-colors"
+                  class="block w-full text-center py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 !text-white font-bold text-xs transition-colors shadow-sm"
+                  style="color: #ffffff !important; text-decoration: none !important;"
                 >
                   进入 {bA.name} 官网 →
                 </a>
@@ -108,7 +109,8 @@ const getBrand = (id: string) => brandsData.find((b) => b.id === id);
                   href={bB.registerUrl}
                   target="_blank"
                   rel="nofollow sponsored noopener"
-                  class="block w-full text-center py-1.5 px-3 rounded-lg bg-slate-900 hover:bg-indigo-600 text-white font-medium text-xs transition-colors"
+                  class="block w-full text-center py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-indigo-600 !text-white font-bold text-xs transition-colors shadow-sm"
+                  style="color: #ffffff !important; text-decoration: none !important;"
                 >
                   进入 {bB.name} 官网 →
                 </a>
