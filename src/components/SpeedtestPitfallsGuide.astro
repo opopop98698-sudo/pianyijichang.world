@@ -1,0 +1,47 @@
+---
+import brandsData from '../data/brands.json';
+
+const sampleTested = brandsData.filter((b) => b.speedtest?.hasImage).slice(0, 3);
+---
+
+<div class="my-8 bg-white rounded-2xl border border-red-200/80 shadow-sm p-6 sm:p-8">
+  <div class="flex items-center gap-2 mb-2">
+    <span class="w-2.5 h-6 bg-red-600 rounded-full inline-block"></span>
+    <h3 class="text-xl font-extrabold text-slate-900 tracking-tight m-0">
+      实测证据链揭秘：跑分图与真实使用体验的 5 大落差陷阱
+    </h3>
+  </div>
+  <p class="text-xs sm:text-sm text-slate-500 m-0 mb-6 leading-relaxed">
+    很多机场宣传“千兆跑满、秒开 8K”，但为什么买完却频繁卡顿？以下结合实验室抓包测速数据进行避坑拆解：
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+    <div class="bg-red-50/50 border border-red-100 rounded-xl p-4">
+      <h4 class="text-sm font-bold text-red-900 m-0 mb-1.5">陷阱 1：单线程 vs 多线程并发</h4>
+      <p class="text-xs text-slate-600 leading-relaxed m-0">
+        测速工具通常开启 8-16 线程多并发榨干带宽，看起来几百兆甚至千兆；而网页打开、视频握手往往是单线程连接，受单流 TCP 拥塞控制影响极大。
+      </p>
+    </div>
+
+    <div class="bg-amber-50/50 border border-amber-100 rounded-xl p-4">
+      <h4 class="text-sm font-bold text-amber-900 m-0 mb-1.5">陷阱 2：非高峰闲时刷分</h4>
+      <p class="text-xs text-slate-600 leading-relaxed m-0">
+        凌晨或上午骨干网极为空闲，普通公网直连也能跑出靓丽数据。真正的分水岭在 <strong>晚上 20:00 - 23:00</strong> 晚高峰，只有高质量 IEPL/IPLC 专线才能保持低丢包。
+      </p>
+    </div>
+
+    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+      <h4 class="text-sm font-bold text-slate-900 m-0 mb-1.5">陷阱 3：流量倍率暗扣</h4>
+      <p class="text-xs text-slate-600 leading-relaxed m-0">
+        部分机场标称 10 元 200GB，但优质专线节点倍率高达 3x 或 5x，实际看 1GB 视频扣除 3GB 甚至 5GB 额度，有效可用流量直接缩水 60%-80%。
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-slate-900 text-slate-200 rounded-xl p-4 text-xs leading-relaxed">
+    <strong class="text-emerald-400 block mb-1">【避坑终极防御指南】</strong>
+    1. 坚决不预付一年或购买所谓“三年付永久”套餐；<br />
+    2. 首选支持「真月付」或「提供小额试用」的品牌进行第一阶段测试；<br />
+    3. 入手后务必在晚高峰连接常用流媒体或 ChatGPT，实测 Ping 抖动与连接重试率。
+  </div>
+</div>

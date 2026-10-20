@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PillarLayout from '../../layouts/PillarLayout.astro';
+import ValueRatioMatrix from '../../components/ValueRatioMatrix.astro';
 
 const allPages = await getCollection('pages');
 const page = allPages.find((p) => p.slug === 'value' || p.data.id === 'page-value');
@@ -12,5 +13,7 @@ const { Content } = await page.render();
 ---
 
 <PillarLayout frontmatter={page.data}>
+  <!-- 性价比多维评估矩阵 -->
+  <ValueRatioMatrix />
   <Content />
 </PillarLayout>

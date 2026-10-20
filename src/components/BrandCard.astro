@@ -17,12 +17,14 @@ const isVendor = brand.dataStatus === 'vendor';
 const displayHighlights = (brand.highlights || []).map((h) =>
   isVendor && !h.startsWith('品牌资料显示') ? `品牌资料显示：${h}` : h
 );
+const hasSpeedtest = brand.speedtest?.hasImage;
+const plans = brand.plans || [];
 ---
 
-<div class={`bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col justify-between relative ${className}`}>
+<div class={`bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col justify-between relative ${className}`} id={`brand-${brand.id}`}>
   <!-- 顶部状态与商业推广徽章 -->
   <div class="flex items-center justify-between gap-2 mb-3">
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 flex-wrap">
       <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-slate-700 text-xs font-bold font-mono">
         #{brand.rank}
       </span>
@@ -34,6 +36,12 @@ const displayHighlights = (brand.highlights || []).map((h) =>
           核心推荐
         </span>
       )}
+      {hasSpeedtest && (
+        <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          实测测速
+        </span>
+      )}
     </div>
     <span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
       商业推广
@@ -42,9 +50,16 @@ const displayHighlights = (brand.highlights || []).map((h) =>
 
   <!-- 价格与基本属性 -->
   <div class="mb-4">
-    <div class="flex items-baseline gap-2 mb-2">
-      <span class="text-xs text-slate-500">起步价格</span>
-      <span class="text-xl font-extrabold text-blue-600 font-mono">{brand.priceFrom}</span>
+    <div class="flex items-baseline justify-between mb-2">
+      <div>
+        <span class="text-xs text-slate-500 block">起步付款</span>
+        <span class="text-xl font-extrabold text-blue-600 font-mono">{brand.priceFrom}</span>
+      </div>
+      {plans.length > 1 && (
+        <span class="text-xs text-slate-400 font-mono">
+          包含 {plans.length} 档套餐
+        </span>
+      )}
     </div>
 
     <!-- 线路与协议标签 -->
@@ -66,12 +81,44 @@ const displayHighlights = (brand.highlights || []).map((h) =>
       )}
     </div>
 
+    <!-- 解锁能力标签 -->
+    {brand.unlock && (
+      <div class="flex flex-wrap gap-1 mb-2.5">
+        {(brand.unlock.support || []).slice(0, 4).map((srv) => (
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 font-mono">
+            ✓ {srv}
+          </span>
+        ))}
+      </div>
+    )}
+
     <!-- 宣称亮点 (遵从合规前缀) -->
     <ul class="text-xs text-slate-600 space-y-1 mb-2 list-disc list-inside">
       {displayHighlights.map((hl) => (
         <li class="line-clamp-1">{hl}</li>
       ))}
     </ul>
+
+    <!-- 折叠多档在售套餐列表 -->
+    {plans.length > 0 && (
+      <details class="group mt-2 border border-slate-200 rounded-lg text-xs overflow-hidden">
+        <summary class="px-2.5 py-1.5 bg-slate-50 cursor-pointer font-medium text-slate-700 flex items-center justify-between hover:bg-slate-100 transition-colors select-none">
+          <span>查看全部 {plans.length} 档套餐明细</span>
+          <span class="text-[10px] text-slate-400 group-open:rotate-180 transition-transform">▼</span>
+        </summary>
+        <div class="p-2 space-y-1.5 bg-white divide-y divide-slate-100">
+          {plans.map((p) => (
+            <div class="pt-1.5 first:pt-0 flex items-center justify-between text-[11px]">
+              <span class="font-medium text-slate-800 truncate max-w-[130px]">{p.name}</span>
+              <div class="flex items-center gap-2 font-mono">
+                <span class="text-slate-500">{p.traffic}</span>
+                <span class="font-bold text-blue-600">{p.priceDisplay}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </details>
+    )}
 
     {brand.promoCode && (
       <div class="mt-2 text-xs bg-amber-50 border border-amber-200 rounded p-1.5 text-amber-900 flex items-center justify-between">
@@ -85,10 +132,10 @@ const displayHighlights = (brand.highlights || []).map((h) =>
   <div class="pt-3 border-t border-slate-100">
     <div class="flex items-center gap-2 mb-2">
       <a
-        href={`/recommend/#brand-${brand.id}`}
+        href={`/recommend/#brand-evidence-${brand.id}`}
         class="flex-1 text-center py-2 px-3 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
       >
-        查看详情
+        {hasSpeedtest ? '查看实测报告' : '查看参数'}
       </a>
       <a
         href={brand.registerUrl}

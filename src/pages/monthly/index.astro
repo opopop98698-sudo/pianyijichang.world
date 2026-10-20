@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PillarLayout from '../../layouts/PillarLayout.astro';
+import TrueMonthlyMatrix from '../../components/TrueMonthlyMatrix.astro';
 
 const allPages = await getCollection('pages');
 const page = allPages.find((p) => p.slug === 'monthly' || p.data.id === 'page-monthly');
@@ -12,5 +13,7 @@ const { Content } = await page.render();
 ---
 
 <PillarLayout frontmatter={page.data}>
+  <!-- 真月付核验全景矩阵 -->
+  <TrueMonthlyMatrix />
   <Content />
 </PillarLayout>

@@ -1,0 +1,79 @@
+---
+import brandsData from '../data/brands.json';
+
+interface Props {
+  brandId: string;
+  class?: string;
+}
+
+const { brandId, class: className = '' } = Astro.props;
+const brand = brandsData.find((b) => b.id === brandId);
+
+if (!brand) {
+  throw new Error(`BrandPlanList: Brand with ID "${brandId}" not found`);
+}
+
+const plans = brand.plans || [];
+---
+
+<div class={`bg-white rounded-xl border border-slate-200 p-4 ${className}`}>
+  <div class="flex items-center justify-between mb-3">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-sm text-slate-800">{brand.name} 完整在售套餐价格表</span>
+      <span class="text-[11px] text-slate-500 font-mono">共 {plans.length} 档</span>
+    </div>
+    <span class="text-[10px] text-slate-400">更新于 2026 年资料库</span>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-xs text-left">
+      <thead class="bg-slate-50 text-slate-500 border-b border-slate-200">
+        <tr>
+          <th class="py-2 px-3">套餐名称</th>
+          <th class="py-2 px-2">计费方式</th>
+          <th class="py-2 px-2">价格</th>
+          <th class="py-2 px-2">每月额度</th>
+          <th class="py-2 px-2">折算月付</th>
+          <th class="py-2 px-3 text-right">属性</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100 font-sans">
+        {plans.map((p) => (
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="py-2.5 px-3 font-semibold text-slate-900">{p.name}</td>
+            <td class="py-2.5 px-2">
+              <span class={`px-1.5 py-0.5 rounded text-[10px] font-medium ${
+                p.billing.includes('月付') ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
+                p.billing.includes('季付') ? 'bg-blue-50 text-blue-700 border border-blue-200' :
+                p.billing.includes('年付') ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' :
+                'bg-amber-50 text-amber-700 border border-amber-200'
+              }`}>
+                {p.billing}
+              </span>
+            </td>
+            <td class="py-2.5 px-2 font-mono font-bold text-blue-600">{p.priceDisplay}</td>
+            <td class="py-2.5 px-2 font-mono text-slate-700">{p.traffic}</td>
+            <td class="py-2.5 px-2 font-mono font-semibold text-slate-800">
+              ¥{p.monthlyEquivalent} <span class="text-[10px] text-slate-400 font-normal">/月</span>
+            </td>
+            <td class="py-2.5 px-3 text-right">
+              {p.isTrueMonthly ? (
+                <span class="inline-block px-1.5 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-800 font-semibold">
+                  真月扣款
+                </span>
+              ) : (
+                <span class="inline-block px-1.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-600">
+                  长周期折算
+                </span>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  
+  <p class="text-[11px] text-slate-400 mt-2.5 mb-0">
+    * 计费口径：真月扣款指每次仅预付 1 个月费用；长周期折算需单次足额支付整周期账单。
+  </p>
+</div>

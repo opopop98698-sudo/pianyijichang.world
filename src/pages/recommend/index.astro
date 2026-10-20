@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import PillarLayout from '../../layouts/PillarLayout.astro';
+import SpeedtestCard from '../../components/SpeedtestCard.astro';
+import brandsData from '../../data/brands.json';
 
 const allPages = await getCollection('pages');
 const page = allPages.find((p) => p.slug === 'recommend' || p.data.id === 'page-recommend');
@@ -9,8 +11,33 @@ if (!page) {
 }
 
 const { Content } = await page.render();
+
+// 获取包含测速实测截图的品牌 (17 家)
+const testedBrands = brandsData.filter((b) => b.speedtest?.hasImage);
 ---
 
 <PillarLayout frontmatter={page.data}>
+  <!-- 核心品牌实测证据专区 -->
+  <section class="my-10 bg-slate-100/70 p-6 sm:p-8 rounded-3xl border border-slate-200" id="speedtest-evidence-vault">
+    <div class="max-w-3xl mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-3">
+        <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+        17 家核心品牌节点并发测速与解锁凭证库
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+        真实节点测速原图与流媒体/AI 解锁现场实测
+      </h2>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        拒绝空泛口头宣称与虚假跑分。以下收录 17 家核心品牌在 2026 年最新抽样抓包的完整节点测速原图（包含 MAI-TEST-BOT 抓包原尺寸截图、测试时间戳与节点名称），以及光速云等核心推荐品牌的 ChatGPT 4o、Claude 3.5 Sonnet 与 Netflix 4K 现场串流证据。点击任意图片可查看单图超清原图：
+      </p>
+    </div>
+
+    <div class="space-y-8">
+      {testedBrands.map((b) => (
+        <SpeedtestCard brandId={b.id} />
+      ))}
+    </div>
+  </section>
+
   <Content />
 </PillarLayout>

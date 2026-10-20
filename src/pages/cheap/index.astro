@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PillarLayout from '../../layouts/PillarLayout.astro';
+import CheapPlansMatrix from '../../components/CheapPlansMatrix.astro';
 
 const allPages = await getCollection('pages');
 const page = allPages.find((p) => p.slug === 'cheap' || p.data.id === 'page-cheap');
@@ -12,5 +13,7 @@ const { Content } = await page.render();
 ---
 
 <PillarLayout frontmatter={page.data}>
+  <!-- 低价套餐全景矩阵 -->
+  <CheapPlansMatrix />
   <Content />
 </PillarLayout>

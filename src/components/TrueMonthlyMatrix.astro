@@ -1,0 +1,124 @@
+---
+import brandsData from '../data/brands.json';
+
+const monthlyPlans: Array<{
+  brandId: string;
+  brandName: string;
+  rank: number;
+  registerUrl: string;
+  promoCode?: string;
+  planName: string;
+  priceDisplay: string;
+  traffic: string;
+  price: number;
+  lineType: string[];
+  protocols: string[];
+  hasSpeedtest: boolean;
+}> = [];
+
+for (const b of brandsData) {
+  for (const p of b.plans || []) {
+    if (p.isTrueMonthly) {
+      monthlyPlans.push({
+        brandId: b.id,
+        brandName: b.name,
+        rank: b.rank,
+        registerUrl: b.registerUrl,
+        promoCode: b.promoCode,
+        planName: p.name,
+        priceDisplay: p.priceDisplay,
+        traffic: p.traffic,
+        price: p.price,
+        lineType: b.lineType,
+        protocols: b.protocols,
+        hasSpeedtest: Boolean(b.speedtest?.hasImage)
+      });
+    }
+  }
+}
+
+// 升序排列
+monthlyPlans.sort((a, b) => a.price - b.price);
+---
+
+<div class="my-8 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
+    <div>
+      <div class="flex items-center gap-2 mb-1">
+        <span class="w-2.5 h-6 bg-blue-600 rounded-full inline-block"></span>
+        <h3 class="text-xl font-extrabold text-slate-900 tracking-tight m-0">
+          全网真月付机场全量清单（单月扣款·免预付绑架）
+        </h3>
+      </div>
+      <p class="text-xs text-slate-500 m-0">
+        以下套餐均支持单次仅支付 1 个月费用，不强制季付或年付预存，随时可停用或迁移：
+      </p>
+    </div>
+    <span class="text-xs font-mono px-3 py-1 bg-blue-50 text-blue-800 rounded-lg border border-blue-200">
+      已核验 {monthlyPlans.length} 档真月付套餐
+    </span>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-xs text-slate-600 border-collapse min-w-[700px]">
+      <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+        <tr>
+          <th class="py-2.5 px-3">品牌</th>
+          <th class="py-2.5 px-3">月付套餐名称</th>
+          <th class="py-2.5 px-3">实扣月费</th>
+          <th class="py-2.5 px-3">单月流量</th>
+          <th class="py-2.5 px-3">专线/物理架构</th>
+          <th class="py-2.5 px-3">测速实测状态</th>
+          <th class="py-2.5 px-3">优惠码</th>
+          <th class="py-2.5 px-3 text-right">首月开通</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        {monthlyPlans.map((item) => (
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="py-2.5 px-3 font-semibold text-slate-900 flex items-center gap-1.5">
+              <span class="text-slate-400 font-mono text-[10px]">#{item.rank}</span>
+              <span>{item.brandName}</span>
+            </td>
+            <td class="py-2.5 px-3 font-medium text-slate-800">{item.planName}</td>
+            <td class="py-2.5 px-3 font-mono font-extrabold text-blue-600 text-sm">
+              {item.priceDisplay}
+            </td>
+            <td class="py-2.5 px-3 font-mono text-slate-700">{item.traffic}</td>
+            <td class="py-2.5 px-3">
+              <span class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px]">
+                {item.lineType[0] || '专线中转'}
+              </span>
+            </td>
+            <td class="py-2.5 px-3 font-mono text-[11px]">
+              {item.hasSpeedtest ? (
+                <a href={`/recommend/#brand-evidence-${item.brandId}`} class="text-emerald-600 hover:underline font-semibold">
+                  ● 包含测速原图
+                </a>
+              ) : (
+                <span class="text-slate-400">常规监控</span>
+              )}
+            </td>
+            <td class="py-2.5 px-3 font-mono text-amber-700">
+              {item.promoCode || '无'}
+            </td>
+            <td class="py-2.5 px-3 text-right">
+              <a
+                href={item.registerUrl}
+                target="_blank"
+                rel="nofollow sponsored noopener"
+                class="inline-block px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-700 text-white font-medium text-[11px] transition-colors"
+              >
+                月付开通 →
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  
+  <p class="text-[11px] text-slate-400 mt-4 m-0 leading-relaxed">
+    * 验收建议：首次选购建议先以真月付套餐使用 2-3 周，重点在晚高峰（20:00 - 23:00）测试常用流媒体与工作连接质量，确认符合需求再考虑是否复购。
+  </p>
+</div>

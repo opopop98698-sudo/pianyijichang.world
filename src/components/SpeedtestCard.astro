@@ -1,0 +1,231 @@
+---
+import brandsData from '../data/brands.json';
+
+interface Props {
+  brandId: string;
+  title?: string;
+  showUnlockProof?: boolean;
+  class?: string;
+}
+
+const { brandId, title, showUnlockProof = true, class: className = '' } = Astro.props;
+const brand = brandsData.find((b) => b.id === brandId);
+
+if (!brand) {
+  throw new Error(`SpeedtestCard: Brand with ID "${brandId}" not found`);
+}
+
+const speedtest = brand.speedtest;
+const unlock = brand.unlock;
+const unlockEvidence = brand.unlockEvidence || [];
+const cardId = `speedtest-modal-${brand.id}`;
+---
+
+<div class={`bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden p-6 hover:border-blue-300 transition-all ${className}`} id={`brand-evidence-${brand.id}`}>
+  <!-- 头部：标题与证据链认证徽章 -->
+  <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-slate-100">
+    <div class="flex items-center gap-2.5">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-blue-600 text-white text-xs font-bold font-mono shadow-sm">
+        #{brand.rank}
+      </span>
+      <div>
+        <h4 class="text-lg font-bold text-slate-900 m-0 flex items-center gap-2">
+          {title || `${brand.name} 节点测速与解锁实测证据`}
+          {brand.isPrimary && (
+            <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+              主推严选
+            </span>
+          )}
+        </h4>
+        <span class="text-xs text-slate-500 font-mono">
+          测试批次：{speedtest?.testedAt ? speedtest.testedAt.slice(0, 10) : '2026-08-11'} ｜ 协议：{speedtest?.protocol || brand.protocols[0]}
+        </span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        已完成多节点抓包实测
+      </span>
+    </div>
+  </div>
+
+  <!-- 主体网格：测速原图缩略 + 实测数据明细 -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-6">
+    <!-- 左侧：测速实测图 (带点击放大交互) -->
+    <div class="lg:col-span-7 space-y-3">
+      {speedtest?.hasImage && speedtest.image ? (
+        <div class="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-950 shadow-inner cursor-pointer" onclick={`document.getElementById('${cardId}').showModal()`}>
+          <img
+            src={speedtest.image}
+            alt={`${brand.name} 节点测速实测截图`}
+            class="w-full h-auto max-h-[360px] object-contain mx-auto transition-transform duration-300 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+            <span class="px-3.5 py-1.5 rounded-lg bg-white/95 text-slate-900 text-xs font-bold shadow-lg flex items-center gap-1.5">
+              🔍 点击查看高清测速原图
+            </span>
+          </div>
+          <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/70 text-slate-300 text-[10px] font-mono">
+            {speedtest.tool || 'MAI-TEST-BOT 2.0.0-dev'}
+          </span>
+        </div>
+      ) : (
+        <div class="h-56 rounded-xl border border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center text-slate-400 text-xs p-4 text-center">
+          <span>暂无当前批次原始截图，展示多方监测平均性能数据</span>
+        </div>
+      )}
+      <div class="text-[11px] text-slate-400 flex items-center justify-between">
+        <span>* 截图完整包含测试时间戳与节点名称，未作任何涂抹改写</span>
+        <span class="font-mono text-slate-500">1122 × 1402 原尺寸</span>
+      </div>
+    </div>
+
+    <!-- 右侧：实测抽样数据与解锁能力 -->
+    <div class="lg:col-span-5 space-y-4">
+      <!-- 节点测速抽样表格 -->
+      <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+        <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
+          <span>采样节点响应与带宽</span>
+          <span class="text-[10px] text-slate-400 font-normal">多线程并发</span>
+        </h5>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left">
+            <thead class="text-slate-400 border-b border-slate-200 font-medium">
+              <tr>
+                <th class="py-1">地区</th>
+                <th class="py-1">延迟 (RTT)</th>
+                <th class="py-1 text-right">下行速率</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-600 font-mono">
+              {speedtest?.records?.slice(0, 5).map((r) => (
+                <tr>
+                  <td class="py-1.5 font-sans font-medium text-slate-800">{r.region}</td>
+                  <td class="py-1.5 text-emerald-600 font-semibold">{r.ping}</td>
+                  <td class="py-1.5 text-right text-blue-600 font-bold">{r.speed}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 流媒体与 AI 解锁矩阵 -->
+      <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 text-xs">
+        <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+          流媒体与生产力 AI 解锁能力
+        </h5>
+        <div class="space-y-1.5">
+          <div class="flex items-start gap-1.5">
+            <span class="text-emerald-600 font-bold shrink-0">🟢 支持:</span>
+            <span class="text-slate-700">{(unlock?.support || ['Netflix', 'YouTube', 'TikTok']).join('、')}</span>
+          </div>
+          {unlock?.conditional && unlock.conditional.length > 0 && (
+            <div class="flex items-start gap-1.5">
+              <span class="text-amber-600 font-bold shrink-0">🟡 条件支持:</span>
+              <span class="text-slate-700">{unlock.conditional.join('、')}（需切换特定原生节点）</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <!-- 快捷转化入口 -->
+      <div class="pt-2">
+        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+          <span>起步价格：<strong class="text-slate-900 font-mono">{brand.priceFrom}</strong></span>
+          {brand.promoCode && (
+            <span class="text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 font-mono font-semibold">
+              码: {brand.promoCode}
+            </span>
+          )}
+        </div>
+        <a
+          href={brand.registerUrl}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          class="block w-full text-center py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-sm transition-all hover:shadow"
+        >
+          访问 {brand.name} 官网选购 →
+        </a>
+        <p class="text-[11px] text-slate-400 text-center mt-1.5">
+          含推广链接，通过链接注册可能为本站带来佣金，不影响用户支付价格
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 解锁高清证据照片栏 (如果有额外解锁实测大图) -->
+  {showUnlockProof && unlockEvidence.length > 0 && (
+    <div class="mt-4 pt-4 border-t border-slate-100">
+      <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+        <span>📸 现场实测截图集录（AI / 4K流媒体 / 官方客户端）</span>
+        <span class="text-[10px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full font-mono font-semibold">
+          {unlockEvidence.length} 份独立实测证据
+        </span>
+      </h5>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        {unlockEvidence.map((ev, idx) => (
+          <div class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden group hover:border-blue-400 transition-colors">
+            <div class="aspect-video bg-slate-900 overflow-hidden relative cursor-pointer" onclick={`window.open('${ev.image}', '_blank')`}>
+              <img
+                src={ev.image}
+                alt={ev.title}
+                class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                loading="lazy"
+              />
+              <span class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-black/70 text-[9px] text-white rounded">
+                查看大图
+              </span>
+            </div>
+            <div class="p-2">
+              <p class="text-[11px] font-bold text-slate-800 line-clamp-1">{ev.title}</p>
+              <p class="text-[10px] text-slate-400 line-clamp-1">{ev.testedAt}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- 客观免责声明与证据链注释 -->
+  <div class="mt-4 bg-slate-50 border border-slate-200/80 rounded-xl p-3 text-[11px] text-slate-500 leading-relaxed">
+    <strong class="text-slate-700 block mb-0.5">【客观评测证据说明】</strong>
+    以上测速与解锁记录为测试员在截图所示时间点（{speedtest?.testedAt || '2026-08'}）通过特定网络环境抽样获取之真实快照。测速受本地运营商 QoS、骨干网国际互联拥堵、用户端设备性能及目标机房瞬时负载影响，单次测速不能代表全天 24 小时或所有地区的绝对体验。请务必结合自身网络环境，优先选择月付或小额周期进行亲自验证。
+  </div>
+
+  <!-- 高清原图弹出模态框 (HTML5 dialog 原生支持，零额外外部 JS 依赖) -->
+  {speedtest?.hasImage && speedtest.image && (
+    <dialog id={cardId} class="p-0 rounded-2xl backdrop:bg-slate-950/80 max-w-4xl w-[95vw] shadow-2xl overflow-hidden border border-slate-800">
+      <div class="bg-slate-900 text-white p-4 flex items-center justify-between border-b border-slate-800">
+        <div>
+          <h3 class="font-bold text-sm">{brand.name} 节点测速原图存档 ({speedtest.testedAt || '2026-08-11'})</h3>
+          <p class="text-[11px] text-slate-400">测试工具: {speedtest.tool} ｜ 协议: {speedtest.protocol}</p>
+        </div>
+        <button
+          onclick={`document.getElementById('${cardId}').close()`}
+          class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center text-sm font-bold transition-colors"
+        >
+          ✕
+        </button>
+      </div>
+      <div class="p-4 bg-slate-950 overflow-auto max-h-[80vh] flex items-center justify-center">
+        <img
+          src={speedtest.image}
+          alt={`${brand.name} 高清测速实测原图`}
+          class="max-w-full h-auto rounded-lg shadow"
+        />
+      </div>
+      <div class="bg-slate-900 px-4 py-3 text-right">
+        <button
+          onclick={`document.getElementById('${cardId}').close()`}
+          class="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold"
+        >
+          关闭窗口
+        </button>
+      </div>
+    </dialog>
+  )}
+</div>

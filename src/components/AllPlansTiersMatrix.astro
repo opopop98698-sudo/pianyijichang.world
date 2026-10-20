@@ -1,0 +1,154 @@
+---
+import brandsData from '../data/brands.json';
+
+// 将所有 348 个套餐按额度智能分组
+type PlanItem = {
+  brandName: string;
+  brandId: string;
+  rank: number;
+  registerUrl: string;
+  name: string;
+  billing: string;
+  priceDisplay: string;
+  traffic: string;
+  monthlyEquivalent: number;
+  isTrueMonthly: boolean;
+};
+
+const tier50Below: PlanItem[] = [];
+const tier50To100: PlanItem[] = [];
+const tier100To200: PlanItem[] = [];
+const tier200To500: PlanItem[] = [];
+const tier500Above: PlanItem[] = [];
+const nonExpiring: PlanItem[] = [];
+
+for (const b of brandsData) {
+  for (const p of b.plans || []) {
+    const item: PlanItem = {
+      brandName: b.name,
+      brandId: b.id,
+      rank: b.rank,
+      registerUrl: b.registerUrl,
+      name: p.name,
+      billing: p.billing,
+      priceDisplay: p.priceDisplay,
+      traffic: p.traffic,
+      monthlyEquivalent: p.monthlyEquivalent,
+      isTrueMonthly: p.isTrueMonthly
+    };
+
+    if (p.billing.includes('一次性') || p.cycle?.includes('不过期') || p.name.includes('永久') || p.name.includes('不限时')) {
+      nonExpiring.push(item);
+      continue;
+    }
+
+    const tLower = p.traffic.toLowerCase();
+    const gNum = parseFloat(tLower.replace(/[^0-9.]/g, '')) || 0;
+    const isTB = tLower.includes('t');
+    const gbEquivalent = isTB ? gNum * 1024 : gNum;
+
+    if (gbEquivalent <= 50) {
+      tier50Below.push(item);
+    } else if (gbEquivalent <= 100) {
+      tier50To100.push(item);
+    } else if (gbEquivalent <= 200) {
+      tier100To200.push(item);
+    } else if (gbEquivalent <= 500) {
+      tier200To500.push(item);
+    } else {
+      tier500Above.push(item);
+    }
+  }
+}
+
+const tiers = [
+  { id: 't-50', title: '50GB 及以下极简轻度档', subtitle: '适合备用保活、单纯收发邮件与轻度移动端推送', data: tier50Below },
+  { id: 't-100', title: '50 - 100GB 日常标准档', subtitle: '适合大多数上班族与学生日常网页、社交媒体与查阅文献', data: tier50To100 },
+  { id: 't-200', title: '100 - 200GB 主力进阶档', subtitle: '可畅享 1080P/4K 日常流媒体、远程开发与多设备挂载', data: tier100To200 },
+  { id: 't-500', title: '200 - 500GB 充沛高频档', subtitle: '家庭共用、长时间 4K 串流与生产力 AI 高频交互', data: tier200To500 },
+  { id: 't-above', title: '500GB 以上至 1TB+ 重度大流量档', subtitle: '海量下载、团队开发协作与外贸跨境大吞吐', data: tier500Above },
+  { id: 't-non', title: '一次性不过期／不限时按量包', subtitle: '不按月清零，买一次用一年甚至永久无忧过期', data: nonExpiring }
+];
+---
+
+<div class="my-10 space-y-10">
+  <div class="bg-gradient-to-r from-blue-900 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-md">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/30 text-blue-200 border border-blue-400/30 mb-3">
+      全网 348 个套餐多阶梯归集
+    </div>
+    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
+      机场流量套餐分档全景索引库
+    </h2>
+    <p class="text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed">
+      根据用户真实月消耗量精准匹配，杜绝为多余流量买单或月中频繁断流：
+    </p>
+  </div>
+
+  {tiers.map((tier) => (
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6" id={tier.id}>
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="text-lg font-bold text-slate-900 m-0 flex items-center gap-2">
+            <span class="w-2 h-4 bg-blue-600 rounded-full inline-block"></span>
+            {tier.title}
+          </h3>
+          <p class="text-xs text-slate-500 m-0 mt-0.5">{tier.subtitle}</p>
+        </div>
+        <span class="text-xs font-mono px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg">
+          收录 {tier.data.length} 款
+        </span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-slate-600 border-collapse min-w-[650px]">
+          <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+            <tr>
+              <th class="py-2 px-3">品牌</th>
+              <th class="py-2 px-3">套餐名称</th>
+              <th class="py-2 px-2">计费方式</th>
+              <th class="py-2 px-2">价格</th>
+              <th class="py-2 px-2">配额</th>
+              <th class="py-2 px-2">折算月付</th>
+              <th class="py-2 px-3 text-right">商户链接</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {tier.data.slice(0, 15).map((p) => (
+              <tr class="hover:bg-slate-50/80 transition-colors">
+                <td class="py-2 px-3 font-semibold text-slate-900">{p.brandName}</td>
+                <td class="py-2 px-3 text-slate-800">{p.name}</td>
+                <td class="py-2 px-2">
+                  <span class={`px-1.5 py-0.5 rounded text-[10px] ${
+                    p.isTrueMonthly ? 'bg-emerald-50 text-emerald-700' : 'bg-slate-100 text-slate-600'
+                  }`}>
+                    {p.billing}
+                  </span>
+                </td>
+                <td class="py-2 px-2 font-mono font-bold text-blue-600">{p.priceDisplay}</td>
+                <td class="py-2 px-2 font-mono text-slate-700">{p.traffic}</td>
+                <td class="py-2 px-2 font-mono text-slate-800">
+                  ¥{p.monthlyEquivalent}/月
+                </td>
+                <td class="py-2 px-3 text-right">
+                  <a
+                    href={p.registerUrl}
+                    target="_blank"
+                    rel="nofollow sponsored noopener"
+                    class="inline-block px-2 py-0.5 rounded bg-slate-900 hover:bg-blue-600 text-white text-[11px] font-medium transition-colors"
+                  >
+                    开通 →
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {tier.data.length > 15 && (
+        <p class="text-[11px] text-slate-400 text-right mt-2 mb-0">
+          * 仅显示前 15 档代表套餐，更多可在单品牌卡片中展开查看
+        </p>
+      )}
+    </div>
+  ))}
+</div>

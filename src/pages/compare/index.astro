@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PillarLayout from '../../layouts/PillarLayout.astro';
+import DualBrandComparison from '../../components/DualBrandComparison.astro';
 
 const allPages = await getCollection('pages');
 const page = allPages.find((p) => p.slug === 'compare' || p.data.id === 'page-compare');
@@ -12,5 +13,7 @@ const { Content } = await page.render();
 ---
 
 <PillarLayout frontmatter={page.data}>
+  <!-- 主流品牌横向直接对比 -->
+  <DualBrandComparison />
   <Content />
 </PillarLayout>

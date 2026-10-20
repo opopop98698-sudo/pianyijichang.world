@@ -1,0 +1,128 @@
+---
+import brandsData from '../data/brands.json';
+
+const comparisons = [
+  {
+    title: '焦点对决 01：光速云 (gsy) vs 飞猫云 (feimao)',
+    tag: '入门极低预算双雄',
+    idA: 'gsy',
+    idB: 'feimao',
+    verdict: '注重多协议与双线路冗余、需要兼顾 ChatGPT/Claude 及 4K 视频的首选光速云；追求下载客户端一键登录、7元极致轻量查资料的首选飞猫云。'
+  },
+  {
+    title: '焦点对决 02：微风网络 (weifeng) vs 暮光加速 (muguang)',
+    tag: '性价比与进阶专线对比',
+    idA: 'weifeng',
+    idB: 'muguang',
+    verdict: '预算严格卡在 10 元以内的轻度用户建议选微风网络；追求 0.5 低倍率大额流量与更丰富节点地区的用户选暮光加速。'
+  },
+  {
+    title: '焦点对决 03：二猫云 (ermao) vs 灵猫网络 (lingmao)',
+    tag: '主力大流量 20元档角逐',
+    idA: 'ermao',
+    idB: 'lingmao',
+    verdict: '二猫云在香港/日本节点延迟表现平稳，多端设备兼容性好；灵猫网络 19元即给到 150GB 额度且含不限时方案，更适合重度下载用户。'
+  },
+  {
+    title: '焦点对决 04：WgetCloud (wgetcloud) vs 隐形人 (yinxingren)',
+    tag: '商务品质与纯净原生 IP 较量',
+    idA: 'wgetcloud',
+    idB: 'yinxingren',
+    verdict: '跨国大吞吐、追求 59 节点全非零测速与高 SLA 选 WgetCloud；对流媒体防风控与原生纯净 IP 有执念的选隐形人。'
+  }
+];
+
+const getBrand = (id: string) => brandsData.find((b) => b.id === id);
+---
+
+<div class="my-10 space-y-10">
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="w-2.5 h-6 bg-blue-600 rounded-full inline-block"></span>
+      <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight m-0">
+        4 组主流机场真实品牌直接横向对比
+      </h2>
+    </div>
+    <p class="text-xs sm:text-sm text-slate-500 m-0 mb-8">
+      基于统一口径的实测下行吞吐、月度实际扣款、流媒体/AI 解锁与协议架构进行硬碰硬对比：
+    </p>
+
+    <div class="space-y-8">
+      {comparisons.map((c) => {
+        const bA = getBrand(c.idA);
+        const bB = getBrand(c.idB);
+        if (!bA || !bB) return null;
+
+        return (
+          <div class="border border-slate-200 rounded-2xl p-5 sm:p-6 bg-slate-50/50 hover:bg-white hover:shadow-md transition-all">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-200">
+              <h3 class="text-base sm:text-lg font-bold text-slate-900 m-0">{c.title}</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                {c.tag}
+              </span>
+            </div>
+
+            <!-- 双方参数对决表格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <!-- A 方 -->
+              <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-bold text-base text-slate-900 m-0 flex items-center gap-1.5">
+                    <span class="text-blue-600 font-mono">#{bA.rank}</span> {bA.name}
+                  </h4>
+                  <span class="text-base font-extrabold text-blue-600 font-mono">{bA.priceFrom}</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-slate-600 mb-3">
+                  <div><strong>线路：</strong>{bA.lineType.join(' / ')}</div>
+                  <div><strong>协议：</strong>{bA.protocols.join(', ')}</div>
+                  <div><strong>在售套餐：</strong>{bA.plans.length} 档阶梯</div>
+                  <div><strong>测速证据：</strong>{bA.speedtest?.hasImage ? '🟢 已收录测速图' : '多方监测'}</div>
+                  <div><strong>AI 支持：</strong>{(bA.unlock?.support || []).join('、')}</div>
+                </div>
+                <a
+                  href={bA.registerUrl}
+                  target="_blank"
+                  rel="nofollow sponsored noopener"
+                  class="block w-full text-center py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition-colors"
+                >
+                  进入 {bA.name} 官网 →
+                </a>
+              </div>
+
+              <!-- B 方 -->
+              <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-bold text-base text-slate-900 m-0 flex items-center gap-1.5">
+                    <span class="text-indigo-600 font-mono">#{bB.rank}</span> {bB.name}
+                  </h4>
+                  <span class="text-base font-extrabold text-indigo-600 font-mono">{bB.priceFrom}</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-slate-600 mb-3">
+                  <div><strong>线路：</strong>{bB.lineType.join(' / ')}</div>
+                  <div><strong>协议：</strong>{bB.protocols.join(', ')}</div>
+                  <div><strong>在售套餐：</strong>{bB.plans.length} 档阶梯</div>
+                  <div><strong>测速证据：</strong>{bB.speedtest?.hasImage ? '🟢 已收录测速图' : '多方监测'}</div>
+                  <div><strong>AI 支持：</strong>{(bB.unlock?.support || []).join('、')}</div>
+                </div>
+                <a
+                  href={bB.registerUrl}
+                  target="_blank"
+                  rel="nofollow sponsored noopener"
+                  class="block w-full text-center py-1.5 px-3 rounded-lg bg-slate-900 hover:bg-indigo-600 text-white font-medium text-xs transition-colors"
+                >
+                  进入 {bB.name} 官网 →
+                </a>
+              </div>
+            </div>
+
+            <!-- 客观裁判结论 -->
+            <div class="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3 text-xs text-amber-900">
+              <strong class="font-semibold block mb-0.5">【本站客观选购裁判】</strong>
+              <p class="m-0 leading-relaxed">{c.verdict}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</div>

@@ -22,11 +22,11 @@ const remainingBrands = brandsData.filter((b) => !primaryIds.includes(b.id) && !
         </h2>
       </div>
       <p class="text-xs sm:text-sm text-slate-500 m-0">
-        所有品牌均已建档核验，按“首推高性价比”、“进阶专线中端”与“大流量品质”结构化分层呈现：
+        所有品牌均已建档核验，包含 348 个具体套餐、17 份多节点测速截图凭证，按“首推高性价比”、“进阶专线中端”与“大流量品质”结构化分层呈现：
       </p>
     </div>
     <span class="hidden sm:inline-block text-xs font-mono text-slate-500 bg-slate-100 px-3 py-1 rounded-lg border border-slate-200">
-      已核验 42 个品牌源
+      已核验 42 个品牌源 ｜ 17 份实测报告
     </span>
   </div>
 
@@ -41,7 +41,7 @@ const remainingBrands = brandsData.filter((b) => !primaryIds.includes(b.id) && !
           核心首推与高性价比代表（单月 5.6 - 8 元）
         </h3>
       </div>
-      <span class="text-xs text-slate-400">含商业推广链接</span>
+      <span class="text-xs text-slate-400">含商业推广链接与多节点测速实测</span>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -67,12 +67,17 @@ const remainingBrands = brandsData.filter((b) => !primaryIds.includes(b.id) && !
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {midTierBrands.map((b) => (
-        <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:border-indigo-300 hover:shadow transition-all flex flex-col justify-between">
+        <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:border-indigo-300 hover:shadow transition-all flex flex-col justify-between" id={`brand-${b.id}`}>
           <div>
             <div class="flex items-center justify-between mb-2">
-              <div class="flex items-center gap-1.5">
+              <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="text-[11px] font-mono text-slate-400 font-bold">#{b.rank}</span>
                 <h4 class="text-sm font-bold text-slate-900 m-0">{b.name}</h4>
+                {b.speedtest?.hasImage && (
+                  <span class="text-[9px] px-1 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    实测图
+                  </span>
+                )}
               </div>
               <span class="text-xs font-mono font-extrabold text-blue-600">{b.priceFrom}</span>
             </div>
@@ -88,6 +93,11 @@ const remainingBrands = brandsData.filter((b) => !primaryIds.includes(b.id) && !
                   {p}
                 </span>
               ))}
+              {b.plans && (
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-100 font-mono">
+                  {b.plans.length}档套餐
+                </span>
+              )}
             </div>
 
             <ul class="text-[11px] text-slate-500 space-y-0.5 list-disc list-inside mb-3">
@@ -97,18 +107,28 @@ const remainingBrands = brandsData.filter((b) => !primaryIds.includes(b.id) && !
             </ul>
           </div>
 
-          <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-[10px] text-slate-400">
+          <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
+            <span class="text-[10px] text-slate-400 truncate">
               {b.promoCode ? `券码: ${b.promoCode}` : "无优惠码"}
             </span>
-            <a
-              href={b.registerUrl}
-              target="_blank"
-              rel="nofollow sponsored noopener"
-              class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-blue-600 text-white text-[11px] font-semibold transition-colors"
-            >
-              访问官网 →
-            </a>
+            <div class="flex items-center gap-1.5">
+              {b.speedtest?.hasImage && (
+                <a
+                  href={`/recommend/#brand-evidence-${b.id}`}
+                  class="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-semibold transition-colors"
+                >
+                  测速图
+                </a>
+              )}
+              <a
+                href={b.registerUrl}
+                target="_blank"
+                rel="nofollow sponsored noopener"
+                class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-blue-600 text-white text-[11px] font-semibold transition-colors"
+              >
+                官网 →
+              </a>
+            </div>
           </div>
         </div>
       ))}
@@ -138,13 +158,14 @@ const remainingBrands = brandsData.filter((b) => !primaryIds.includes(b.id) && !
             <th class="py-2.5 px-3">起步付款</th>
             <th class="py-2.5 px-3">物理线路</th>
             <th class="py-2.5 px-3">支持协议</th>
+            <th class="py-2.5 px-3">实测状态</th>
             <th class="py-2.5 px-3">宣称亮点 (品牌资料显示)</th>
             <th class="py-2.5 px-3 text-right">商户链接</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-100">
           {remainingBrands.map((b) => (
-            <tr class="hover:bg-slate-50 transition-colors">
+            <tr class="hover:bg-slate-50 transition-colors" id={`brand-${b.id}`}>
               <td class="py-2.5 px-3 font-mono text-slate-400 font-bold">#{b.rank}</td>
               <td class="py-2.5 px-3 font-semibold text-slate-900">{b.name}</td>
               <td class="py-2.5 px-3 font-mono font-bold text-blue-600">{b.priceFrom}</td>
@@ -154,6 +175,13 @@ const remainingBrands = brandsData.filter((b) => !primaryIds.includes(b.id) && !
                 </span>
               </td>
               <td class="py-2.5 px-3 font-mono text-slate-500">{b.protocols.join(', ')}</td>
+              <td class="py-2.5 px-3 font-mono">
+                {b.speedtest?.hasImage ? (
+                  <span class="text-[10px] text-emerald-600 font-bold">● 已实测</span>
+                ) : (
+                  <span class="text-[10px] text-slate-400">多方监测</span>
+                )}
+              </td>
               <td class="py-2.5 px-3 text-slate-500 truncate max-w-xs">{b.highlights.join('；')}</td>
               <td class="py-2.5 px-3 text-right">
                 {b.registerUrl !== '#' ? (

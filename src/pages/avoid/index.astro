@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PillarLayout from '../../layouts/PillarLayout.astro';
+import SpeedtestPitfallsGuide from '../../components/SpeedtestPitfallsGuide.astro';
 
 const allPages = await getCollection('pages');
 const page = allPages.find((p) => p.slug === 'avoid' || p.data.id === 'page-avoid');
@@ -12,5 +13,7 @@ const { Content } = await page.render();
 ---
 
 <PillarLayout frontmatter={page.data}>
+  <!-- 实测陷阱剖析 -->
+  <SpeedtestPitfallsGuide />
   <Content />
 </PillarLayout>
