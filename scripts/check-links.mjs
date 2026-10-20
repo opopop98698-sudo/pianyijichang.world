@@ -68,9 +68,10 @@ const checkLinksInFile = (filePath) => {
       continue;
     }
 
-    // 检查是否指向不存在的路由 (要求带结尾斜杠标准格式)
+    // 检查是否指向不存在的路由或 public 静态资源 (要求带结尾斜杠标准格式)
     const normalized = cleanLink.endsWith('/') || cleanLink.includes('.') ? cleanLink : `${cleanLink}/`;
-    if (!validRoutes.has(normalized)) {
+    const publicFilePath = path.resolve('public', cleanLink.replace(/^\//, ''));
+    if (!validRoutes.has(normalized) && !fs.existsSync(publicFilePath)) {
       console.error(`❌ 发现站内死链: "${rawLink}" (规范化: ${normalized}) 在 ${filePath}`);
       errors++;
     }

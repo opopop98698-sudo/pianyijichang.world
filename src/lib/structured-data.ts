@@ -20,7 +20,7 @@ export const generateOrganizationSchema = () => ({
   "@type": "Organization",
   "name": "便宜机场独立评测团队",
   "url": "https://pianyijichang.world",
-  "logo": "https://pianyijichang.world/favicon.svg",
+  "logo": "https://pianyijichang.world/avatar.jpg",
   "description": "独立第三方代理服务选购与套餐资料核查机构，与任何机场品牌无隶属关系。"
 });
 

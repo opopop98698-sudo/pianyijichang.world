@@ -31,12 +31,16 @@ const isActive = (href: string) => {
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <!-- 品牌 Logo -->
+      <!-- 品牌 Logo 与头像 -->
       <div class="flex items-center gap-3">
-        <a href="/" class="flex items-center gap-2 group">
-          <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-extrabold flex items-center justify-center text-lg shadow-sm group-hover:bg-blue-700 transition-colors">
-            便
-          </span>
+        <a href="/" class="flex items-center gap-2.5 group">
+          <img
+            src="/avatar.jpg"
+            alt="便宜机场"
+            class="w-9 h-9 rounded-xl object-cover shadow-sm group-hover:scale-105 transition-transform border border-slate-200"
+            width="36"
+            height="36"
+          />
           <div class="flex flex-col">
             <span class="font-extrabold text-slate-900 text-lg leading-tight tracking-tight group-hover:text-blue-600 transition-colors">
               便宜机场
